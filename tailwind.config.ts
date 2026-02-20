@@ -9,27 +9,28 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: '#D4AF37', // Metallic Gold from Map
+        primary: '#f9d406', // Gold from ui2
         'primary-glow': '#F9E79F',
-        'background-light': '#1a2a40',
-        'background-dark': '#0B1120',
+        'background-light': '#f8f8f5',
+        'background-dark': '#23200f',
+        'navy-deep': '#0f1420',
         'navy-mid': '#152238',
         'navy-light': '#23395d',
-        // Landing specific
-        'landing-primary': '#f9d406',
-        'landing-bg': '#23200f',
+        'navy-overlay': 'rgba(35, 32, 15, 0.85)',
       },
       fontFamily: {
-        sans: ['var(--font-inter)', 'sans-serif'],
-        serif: ['var(--font-playfair)', 'serif'],
-        display: ['var(--font-cinzel)', 'serif'],
-        body: ['var(--font-noto-serif)', 'serif'],
+        sans: ['var(--font-be-vietnam)', 'sans-serif'],
+        display: ['var(--font-noto-serif)', 'serif'],
+        cinzel: ['var(--font-cinzel)', 'serif'],
+        serif: ['var(--font-noto-serif)', 'serif'],
       },
       animation: {
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         float: 'float 6s ease-in-out infinite',
         sparkle: 'sparkle 1.5s linear infinite',
         'pulse-glow': 'pulse-glow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'particle-rise': 'particle-rise 4s linear infinite',
+        shimmer: 'shimmer 2s linear infinite',
       },
       keyframes: {
         float: {
@@ -44,12 +45,21 @@ const config: Config = {
           '0%, 100%': { boxShadow: '0 0 15px 0px rgba(249, 212, 6, 0.3)' },
           '50%': { boxShadow: '0 0 25px 5px rgba(249, 212, 6, 0.6)' },
         },
+        'particle-rise': {
+          '0%': { transform: 'translateY(0) scale(0)', opacity: '0' },
+          '20%': { opacity: '1' },
+          '100%': { transform: 'translateY(-100px) scale(1.5)', opacity: '0' },
+        },
+        shimmer: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(100%)' },
+        },
       },
     },
   },
   plugins: [],
   corePlugins: {
-    preflight: false,
+    preflight: true,
   },
 };
 

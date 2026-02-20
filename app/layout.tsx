@@ -8,6 +8,11 @@ const inter = Inter({
   variable: '--font-inter',
   display: 'swap',
 });
+const beVietnam = Inter({
+  subsets: ['latin', 'vietnamese'],
+  variable: '--font-be-vietnam',
+  display: 'swap',
+});
 const playfair = Playfair_Display({
   subsets: ['latin', 'vietnamese'],
   variable: '--font-playfair',
@@ -23,8 +28,8 @@ const notoSerif = Noto_Serif_Display({
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: 'Hanoi - Pieces of Time',
-  description: 'Explore Hanoi Old Quarter memories via AR interaction',
+  title: 'Giải mã kinh kỳ',
+  description: 'Khám phá bí mật Thăng Long qua tương tác AR',
   other: {
     'cache-control': 'no-cache, no-store, must-revalidate',
     pragma: 'no-cache',
@@ -43,7 +48,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="vi"
-      className={`${inter.variable} ${playfair.variable} ${cinzel.variable} ${notoSerif.variable}`}
+      className={`${inter.variable} ${beVietnam.variable} ${playfair.variable} ${cinzel.variable} ${notoSerif.variable}`}
     >
       <head>
         <link

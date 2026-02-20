@@ -8,9 +8,11 @@ type GameScreen =
   | 'moving'
   | 'arrival'
   | 'scanning'
-  | 'interacting'
+  | 'quiz'
+  | 'fact'
   | 'collected'
-  | 'completion';
+  | 'completion'
+  | 'library';
 
 export interface LocationData {
   id: string;
@@ -32,10 +34,37 @@ interface GameContextType {
 
 const GameContext = createContext<GameContextType | undefined>(undefined);
 
+const STORAGE_KEY = 'hanoi_game_progress';
+
 export function GameProvider({ children }: { children: ReactNode }) {
+  const [isLoaded, setIsLoaded] = React.useState(false);
   const [currentScreen, setCurrentScreen] = useState<GameScreen>('landing');
   const [currentLocationId, setCurrentLocationId] = useState<string | null>(null);
   const [unlockedMemories, setUnlockedMemories] = useState<string[]>([]);
+
+  // Load from LocalStorage on mount
+  React.useEffect(() => {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      try {
+        const { currentScreen, currentLocationId, unlockedMemories } = JSON.parse(saved);
+        setCurrentScreen(currentScreen || 'landing');
+        setCurrentLocationId(currentLocationId || null);
+        setUnlockedMemories(unlockedMemories || []);
+      } catch (e) {
+        console.error('Failed to load game progress', e);
+      }
+    }
+    setIsLoaded(true);
+  }, []);
+
+  // Save to LocalStorage on change
+  React.useEffect(() => {
+    if (isLoaded) {
+      const data = { currentScreen, currentLocationId, unlockedMemories };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
+  }, [currentScreen, currentLocationId, unlockedMemories, isLoaded]);
 
   const unlockMemory = (id: string) => {
     if (!unlockedMemories.includes(id)) {
@@ -53,7 +82,10 @@ export function GameProvider({ children }: { children: ReactNode }) {
     setCurrentScreen('landing');
     setCurrentLocationId(null);
     setUnlockedMemories([]);
+    localStorage.removeItem(STORAGE_KEY);
   };
+
+  if (!isLoaded) return null; // Prevent hydration mismatch
 
   return (
     <GameContext.Provider

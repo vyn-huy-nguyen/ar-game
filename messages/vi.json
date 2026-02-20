@@ -1,7 +1,7 @@
 {
   "app": {
-    "title": "Hà Nội - Những Mảnh Ghép Thời Gian",
-    "subtitle": "Khám phá ký ức phố cổ qua tương tác AR",
+    "title": "Giải mã kinh kỳ",
+    "subtitle": "Khám phá bí mật Thăng Long qua AR",
     "description": "Trò chơi tìm hiểu lịch sử và văn hóa Hà Nội qua công nghệ thực tế ảo tăng cường."
   },
   "language": {
@@ -74,9 +74,42 @@
     }
   },
   "game": {
-    "title": "Trò chơi AR",
-    "description": "Tính năng đang được phát triển. Vui lòng quay lại sau!",
-    "back": "Quay lại",
-    "start": "Chơi Game"
+    "title": "Giải mã",
+    "subtitle": "KINH KỲ",
+    "legend": "HUYỀN SỬ HÀ NỘI",
+    "start": "Bắt đầu hành trình",
+    "historical_puzzle": "Historical Puzzle Game",
+    "credits": "© 2026 Hanoi Memories Studio",
+    "progress": "Hoàn thành",
+    "journey": "Hành trình ký ức",
+    "continue": "Tiếp tục hành trình",
+    "select_location": "Chọn địa điểm",
+    "current_mission": "Nhiệm vụ hiện tại",
+    "mission_desc": "Tìm đến {location} để mở khóa mảnh ký ức tiếp theo.",
+    "distance": "Khoảng cách",
+    "meters": "Mét",
+    "start_walking": "Bắt đầu đi",
+    "current_location_label": "Vị trí hiện tại",
+    "quiz": {
+      "challenge": "Câu hỏi thử thách",
+      "correct": "Chính xác!",
+      "wrong": "Thử lại nhé!"
+    },
+    "fact": {
+      "label": "Kiến thức lịch sử",
+      "add_to_collection": "Bổ sung vào bộ sưu tập"
+    },
+    "arrival": {
+      "title": "Bạn đã đến nơi",
+      "instructions": "Hãy tìm và quét hình ảnh trên trang sách để mở khóa ký ức.",
+      "scan_button": "Quét manh mối"
+    },
+    "completion": {
+      "title": "Hành trình hoàn tất",
+      "subtitle": "Chúc mừng bạn đã hoàn thành",
+      "legend": "Huyền sử Thăng Long",
+      "review_memories": "Xem lại ký ức",
+      "share": "Chia sẻ hành trình"
+    }
   }
 }

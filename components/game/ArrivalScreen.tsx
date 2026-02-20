@@ -2,13 +2,15 @@
 'use client';
 
 import React from 'react';
-import { useGame } from '../GameContext';
+import { useGame } from '@/app/[locale]/game/GameContext';
+import { useTranslations } from 'next-intl';
 
 export default function ArrivalScreen() {
   const { setCurrentScreen, currentLocationId } = useGame();
+  const t = useTranslations('game');
 
   return (
-    <div className="bg-background-light font-display selection:bg-primary dark:bg-background-dark relative h-screen w-full overflow-hidden text-white selection:text-black">
+    <div className="bg-background-light font-display selection:bg-primary dark:bg-background-dark relative h-[100dvh] w-full overflow-hidden text-white selection:text-black">
       {/* Decorative Border Frame */}
       <div className="border-primary/30 pointer-events-none fixed inset-4 z-20 rounded-[2rem] border shadow-[0_0_15px_rgba(249,212,6,0.1)]"></div>
 
@@ -35,9 +37,9 @@ export default function ArrivalScreen() {
       </div>
 
       {/* Main Content Container */}
-      <div className="relative z-10 flex h-full flex-col justify-between p-6 pb-12 pt-8">
+      <div className="relative z-10 flex h-full flex-col justify-between px-6 pb-[calc(env(safe-area-inset-bottom)+1.5rem)] pt-[calc(env(safe-area-inset-top)+1rem)]">
         {/* Header: Navigation Icons */}
-        <div className="flex w-full items-start justify-between px-2 pt-2">
+        <div className="flex w-full items-start justify-between px-2">
           {/* Map Button */}
           <button
             onClick={() => setCurrentScreen('map')}
@@ -77,7 +79,7 @@ export default function ArrivalScreen() {
         </div>
 
         {/* Footer: Primary Action */}
-        <div className="flex w-full flex-col items-center justify-end space-y-6 pb-8">
+        <div className="flex w-full flex-col items-center justify-end space-y-6">
           {/* Scan Button */}
           <button
             onClick={() => setCurrentScreen('scanning')}

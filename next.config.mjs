@@ -27,6 +27,18 @@ const nextConfig = {
       },
     ];
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+      },
+    ],
+  },
   // Enable external scripts for AR.js and A-Frame
   webpack: (config) => {
     config.resolve.fallback = {

@@ -2,7 +2,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useGame } from '../GameContext';
+import { useGame } from '@/app/[locale]/game/GameContext';
 
 export default function ARScreen() {
   const { setCurrentScreen, unlockMemory, currentLocationId, unlockedMemories } = useGame();
@@ -10,16 +10,14 @@ export default function ARScreen() {
 
   const handleObjectClick = () => {
     setIsFound(true);
-    if (currentLocationId) {
-      unlockMemory(currentLocationId);
-    }
+    // Transition to quiz immediately after finding the object
     setTimeout(() => {
-      setCurrentScreen('collected');
-    }, 1500);
+      setCurrentScreen('quiz');
+    }, 1000);
   };
 
   return (
-    <div className="bg-background-light dark:bg-background-dark relative h-screen w-full overflow-hidden font-sans text-white">
+    <div className="bg-background-light dark:bg-background-dark relative h-[100dvh] w-full overflow-hidden font-sans text-white">
       {/* Camera Feed Background */}
       <div
         className="absolute inset-0 h-full w-full bg-cover bg-center"
@@ -34,9 +32,9 @@ export default function ARScreen() {
       </div>
 
       {/* UI Layer */}
-      <div className="safe-area-padding relative z-10 flex h-full w-full flex-col justify-between">
+      <div className="relative z-10 flex h-full w-full flex-col justify-between px-6 pb-[calc(env(safe-area-inset-bottom)+1.5rem)] pt-[calc(env(safe-area-inset-top)+1rem)]">
         {/* Header: Progress & Close */}
-        <div className="flex items-start justify-between p-6 pt-12">
+        <div className="flex items-start justify-between py-2">
           {/* Progress Badge */}
           <div className="border-primary/20 bg-background-dark/90 flex items-center gap-2 rounded-full border px-4 py-2 shadow-lg backdrop-blur-sm">
             <span className="material-symbols-outlined text-primary text-sm">history_edu</span>
@@ -60,17 +58,17 @@ export default function ARScreen() {
           {/* Reticle Container */}
           <div className="relative h-64 w-64 opacity-90 md:h-80 md:w-80">
             {/* Cornerstone Brackets */}
-            <div className="border-primary absolute left-0 top-0 h-12 w-12 rounded-tl-lg border-l-[3px] border-t-[3px] shadow-[0_0_15px_rgba(249,212,6,0.5)]"></div>
-            <div className="border-primary absolute right-0 top-0 h-12 w-12 rounded-tr-lg border-r-[3px] border-t-[3px] shadow-[0_0_15px_rgba(249,212,6,0.5)]"></div>
-            <div className="border-primary absolute bottom-0 left-0 h-12 w-12 rounded-bl-lg border-b-[3px] border-l-[3px] shadow-[0_0_15px_rgba(249,212,6,0.5)]"></div>
-            <div className="border-primary absolute bottom-0 right-0 h-12 w-12 rounded-br-lg border-b-[3px] border-r-[3px] shadow-[0_0_15px_rgba(249,212,6,0.5)]"></div>
+            <div className="border-primary shadow-glow absolute left-0 top-0 h-12 w-12 rounded-tl-lg border-l-[3px] border-t-[3px]"></div>
+            <div className="border-primary shadow-glow absolute right-0 top-0 h-12 w-12 rounded-tr-lg border-r-[3px] border-t-[3px]"></div>
+            <div className="border-primary shadow-glow absolute bottom-0 left-0 h-12 w-12 rounded-bl-lg border-b-[3px] border-l-[3px]"></div>
+            <div className="border-primary shadow-glow absolute bottom-0 right-0 h-12 w-12 rounded-br-lg border-b-[3px] border-r-[3px]"></div>
 
             {/* Animated Scan Line */}
             <div className="animate-scan-move via-primary absolute left-0 h-[2px] w-full bg-gradient-to-r from-transparent to-transparent shadow-[0_0_10px_#f9d406]"></div>
 
             {/* Center Focus Point */}
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="bg-primary h-1 w-1 rounded-full shadow-[0_0_15px_rgba(249,212,6,0.5)]"></div>
+              <div className="bg-primary shadow-glow h-1 w-1 rounded-full"></div>
             </div>
 
             {/* Interactive Object (Hidden/Glowing) - Pointer events auto enabled */}
@@ -79,7 +77,7 @@ export default function ARScreen() {
               onClick={handleObjectClick}
             >
               {/* Visual cue to click - shimmer only, mainly invisible/integrated to environment */}
-              <div className="bg-primary absolute inset-0 animate-pulse rounded-full opacity-0 transition-opacity hover:opacity-20"></div>
+              <div className="bg-primary shadow-glow absolute inset-0 animate-pulse rounded-full opacity-0 transition-opacity hover:opacity-20"></div>
             </div>
 
             {/* Decorative Accents */}
@@ -95,7 +93,7 @@ export default function ARScreen() {
         </div>
 
         {/* Footer: Instructions */}
-        <div className="flex w-full justify-center p-6 pb-12">
+        <div className="flex w-full justify-center">
           <div className="animate-fade-in-up border-primary/30 bg-background-dark/90 w-full max-w-sm rounded-xl border-t p-4 shadow-xl backdrop-blur-md">
             <div className="flex flex-col items-center gap-2 text-center">
               <div className="bg-primary/10 mb-1 flex h-8 w-8 items-center justify-center rounded-full">
@@ -143,6 +141,11 @@ export default function ARScreen() {
         }
         .animate-scan-move {
           animation: scanMove 3s infinite ease-in-out;
+        }
+        .shadow-glow {
+          box-shadow:
+            0 0 15px rgba(249, 212, 6, 0.5),
+            inset 0 0 15px rgba(249, 212, 6, 0.2);
         }
       `}</style>
     </div>

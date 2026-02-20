@@ -1,7 +1,7 @@
 {
   "app": {
-    "title": "Hanoi - Pieces of Time",
-    "subtitle": "Explore Old Quarter memories via AR interaction",
+    "title": "Deciphering the Capital",
+    "subtitle": "Uncover the secrets of Thang Long via AR",
     "description": "Game to explore Hanoi history and culture via Augmented Reality."
   },
   "language": {
@@ -74,9 +74,21 @@
     }
   },
   "game": {
-    "title": "AR Game",
-    "description": "Feature is under development. Please come back later!",
-    "back": "Back",
-    "start": "Play Game"
+    "title": "Decipher",
+    "subtitle": "THE CAPITAL",
+    "legend": "HANOI LEGENDS",
+    "start": "Begin Journey",
+    "historical_puzzle": "Historical Puzzle Game",
+    "credits": "© 2026 Hanoi Memories Studio",
+    "progress": "Complete",
+    "journey": "Memory Journey",
+    "continue": "Continue Journey",
+    "select_location": "Select Location",
+    "current_mission": "Current Mission",
+    "mission_desc": "Find your way to {location} to unlock next memory fragment.",
+    "distance": "Distance",
+    "meters": "Meters",
+    "start_walking": "Start Walking",
+    "current_location_label": "Current Position"
   }
 }
