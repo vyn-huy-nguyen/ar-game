@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Hà Nội – Những Mảnh Ghép Thời Gian - Navigation</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f9d406",
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#131a26", // Deep Navy adjusted from the provided list to match description better, or stick to provided? The prompt said "Dark navy blue". The provided theme has #23200f (dark olive/brown). I will blend the requested navy feel with the provided structure or override locally for the map feel while respecting the theme tokens where possible. Let's use a deep navy for the map specifically, but keep the outer shell theme compliant or modify the config slightly to match "navy" if permitted. 
+                        // Actually, the prompt explicitly asks to reuse the style/properties but allows modifying colors to match the user's request. 
+                        // I will override background-dark to a deep navy for this specific design requirement while keeping the key names.
+                        "navy-dark": "#0f172a", 
+                        "navy-light": "#1e293b",
+                    },
+                    fontFamily: {
+                        "display": ["Noto Serif", "serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem", 
+                        "lg": "0.5rem", 
+                        "xl": "0.75rem", 
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                    boxShadow: {
+                        "glow": "0 0 15px rgba(249, 212, 6, 0.4)",
+                        "glow-strong": "0 0 25px rgba(249, 212, 6, 0.6)",
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom map pattern styling */
+        .map-grid {
+            background-image: 
+                linear-gradient(rgba(30, 41, 59, 0.8) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(30, 41, 59, 0.8) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        
+        .walking-path {
+            background-image: radial-gradient(#f9d406 20%, transparent 20%);
+            background-position: 0 0;
+            background-size: 10px 10px;
+            height: 4px;
+        }
+
+        .pulse-ring {
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                transform: scale(0.33);
+                opacity: 0.8; 
+            }
+            80%, 100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-navy-dark dark:bg-navy-dark text-white font-display h-screen w-full overflow-hidden flex flex-col relative">
+<!-- Top Navigation Bar -->
+<div class="absolute top-0 left-0 w-full z-20 flex items-center justify-between p-4 bg-gradient-to-b from-navy-dark/90 to-transparent">
+<button class="flex items-center justify-center w-10 h-10 rounded-full bg-navy-light/50 backdrop-blur-md text-white hover:bg-navy-light/80 transition-colors border border-white/10">
+<span class="material-symbols-outlined text-2xl">arrow_back</span>
+</button>
+<div class="flex items-center gap-2 px-3 py-1 rounded-full bg-navy-light/50 backdrop-blur-md border border-white/10">
+<span class="text-primary text-xs font-bold uppercase tracking-widest">Khu Phố Cổ</span>
+</div>
+<button class="flex items-center justify-center w-10 h-10 rounded-full bg-navy-light/50 backdrop-blur-md text-primary hover:bg-navy-light/80 transition-colors border border-white/10">
+<span class="material-symbols-outlined text-2xl">settings</span>
+</button>
+</div>
+<!-- Main Map Area -->
+<div class="relative w-full h-full bg-navy-dark overflow-hidden map-grid group/map">
+<!-- Abstract Map Streets (SVG illustration) -->
+<div class="absolute inset-0 opacity-30">
+<svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<pattern height="100" id="grid" patternunits="userSpaceOnUse" width="100">
+<path d="M 100 0 L 0 0 0 100" fill="none" stroke="currentColor" stroke-width="0.5"></path>
+</pattern>
+</defs>
+<!-- Stylized Streets -->
+<path d="M-10,300 Q150,280 200,450 T450,550" fill="none" stroke="#334155" stroke-width="20"></path>
+<path d="M180,0 L220,900" fill="none" stroke="#334155" stroke-width="15"></path>
+<path d="M0,500 L500,450" fill="none" stroke="#334155" stroke-width="12"></path>
+<path d="M300,100 C350,200 450,250 500,280" fill="none" stroke="#334155" stroke-width="18"></path>
+<!-- River or Lake shape -->
+<path d="M350,650 Q450,600 550,700 T750,800" fill="none" stroke="#1e293b" stroke-linecap="round" stroke-width="60"></path>
+</svg>
+</div>
+<!-- Compass -->
+<div class="absolute top-20 right-4 w-16 h-16 opacity-80 pointer-events-none">
+<div class="relative w-full h-full flex items-center justify-center border-2 border-white/10 rounded-full bg-navy-light/30 backdrop-blur-sm">
+<span class="font-bold text-[10px] text-white/50 absolute top-1">N</span>
+<span class="font-bold text-[10px] text-white/50 absolute bottom-1">S</span>
+<span class="font-bold text-[10px] text-white/50 absolute left-1">W</span>
+<span class="font-bold text-[10px] text-white/50 absolute right-1">E</span>
+<!-- Needle -->
+<div class="w-1 h-8 bg-gradient-to-t from-white/20 to-primary absolute rounded-full rotate-45 origin-center shadow-glow"></div>
+</div>
+</div>
+<!-- Destination Marker (Bach Ma Temple) -->
+<div class="absolute top-[35%] left-[65%] flex flex-col items-center transform -translate-x-1/2 -translate-y-1/2 z-10">
+<div class="relative">
+<div class="absolute inset-0 rounded-full bg-primary blur-lg opacity-40 animate-pulse"></div>
+<div class="relative bg-navy-dark border-2 border-primary rounded-full p-2 shadow-glow-strong">
+<span class="material-symbols-outlined text-primary text-3xl">temple_buddhist</span>
+</div>
+</div>
+<div class="mt-2 bg-black/60 backdrop-blur-sm px-3 py-1 rounded text-primary text-xs font-bold border border-primary/30 shadow-lg whitespace-nowrap">
+                Đền Bạch Mã
+            </div>
+</div>
+<!-- Walking Path (Dotted Line) -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none z-0" style="filter: drop-shadow(0 0 4px rgba(249, 212, 6, 0.5));">
+<!-- Path from user to temple -->
+<path class="animate-dash" d="M120,620 Q180,580 250,600 T350,500 T265,310" fill="none" stroke="#f9d406" stroke-dasharray="6 8" stroke-linecap="round" stroke-width="3"></path>
+</svg>
+<!-- Current Location (User) -->
+<div class="absolute bottom-[20%] left-[25%] transform -translate-x-1/2 -translate-y-1/2 z-10">
+<div class="relative flex items-center justify-center">
+<div class="absolute w-12 h-12 bg-blue-500 rounded-full opacity-30 pulse-ring"></div>
+<div class="w-4 h-4 bg-blue-400 border-2 border-white rounded-full shadow-[0_0_10px_rgba(59,130,246,0.8)] z-10"></div>
+<!-- Direction Cone -->
+<div class="absolute w-16 h-16 bg-gradient-to-t from-blue-500/20 to-transparent rounded-full transform -rotate-45 -translate-y-4 clip-path-cone" style="clip-path: polygon(50% 0%, 0% 100%, 100% 100%);"></div>
+</div>
+</div>
+<!-- Map Controls (Zoom) -->
+<div class="absolute right-4 bottom-52 flex flex-col gap-2 z-20">
+<button class="w-10 h-10 bg-navy-light/80 backdrop-blur-md rounded-lg flex items-center justify-center text-white border border-white/10 hover:bg-navy-light transition-colors shadow-lg">
+<span class="material-symbols-outlined">add</span>
+</button>
+<button class="w-10 h-10 bg-navy-light/80 backdrop-blur-md rounded-lg flex items-center justify-center text-white border border-white/10 hover:bg-navy-light transition-colors shadow-lg">
+<span class="material-symbols-outlined">remove</span>
+</button>
+<button class="w-10 h-10 bg-navy-light/80 backdrop-blur-md rounded-lg flex items-center justify-center text-primary border border-white/10 hover:bg-navy-light transition-colors shadow-lg mt-2">
+<span class="material-symbols-outlined">my_location</span>
+</button>
+</div>
+</div>
+<!-- Mission Control Panel -->
+<div class="absolute bottom-0 w-full z-30 p-4 pb-6 bg-gradient-to-t from-black via-navy-dark/95 to-transparent">
+<div class="w-full max-w-md mx-auto bg-navy-light/40 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl overflow-hidden ring-1 ring-white/5">
+<!-- Decorative top border -->
+<div class="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50"></div>
+<div class="p-5 flex flex-col gap-3">
+<div class="flex items-start justify-between gap-4">
+<div class="flex-1">
+<h2 class="text-primary/90 text-xs font-bold uppercase tracking-widest mb-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">history_edu</span>
+                            Nhiệm vụ hiện tại
+                        </h2>
+<p class="text-white text-lg font-medium leading-relaxed font-display">
+                            Tìm đến <span class="text-primary border-b border-primary/30 pb-0.5">đền Bạch Mã</span> để mở khóa mảnh ký ức tiếp theo.
+                        </p>
+</div>
+<!-- Distance Badge -->
+<div class="flex flex-col items-center justify-center bg-navy-dark/50 rounded-lg p-2 border border-white/5 min-w-[60px]">
+<span class="text-xl font-bold text-white">350</span>
+<span class="text-[10px] text-gray-400 uppercase">Mét</span>
+</div>
+</div>
+<div class="flex gap-3 mt-2">
+<button class="flex-1 bg-primary text-navy-dark font-bold py-2.5 px-4 rounded-lg text-sm hover:bg-yellow-400 transition-colors flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(249,212,6,0.15)]">
+<span>Bắt đầu đi</span>
+<span class="material-symbols-outlined text-lg">navigation</span>
+</button>
+<button class="px-4 py-2.5 rounded-lg border border-primary/30 text-primary bg-primary/5 hover:bg-primary/10 transition-colors text-sm font-semibold flex items-center justify-center">
+<span class="material-symbols-outlined text-lg">lightbulb</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Grain Overlay for Vintage Feel -->
+<div class="absolute inset-0 pointer-events-none opacity-[0.03] z-50 mix-blend-overlay" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noise%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noise)%22 opacity=%221%22/%3E%3C/svg%3E');">
+</div>
+</body></html>

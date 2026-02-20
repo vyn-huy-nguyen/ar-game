@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Hà Nội – Những Mảnh Ghép Thời Gian</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f9d406",
+                        "primary-dark": "#cdae05", // Slightly darker shade for gradients/borders
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#23200f", // Dark olive/brown tone from theme
+                        "navy-overlay": "#0f172a", // Custom navy for the requested atmospheric overlay if needed, blending with theme
+                    },
+                    fontFamily: {
+                        "display": ["Noto Serif", "serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                    animation: {
+                        'pulse-glow': 'pulse-glow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        'pulse-glow': {
+                            '0%, 100%': { boxShadow: '0 0 15px 0px rgba(249, 212, 6, 0.3)' },
+                            '50%': { boxShadow: '0 0 25px 5px rgba(249, 212, 6, 0.6)' },
+                        },
+                        'float': {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom particle effect simulation with CSS gradients */
+        .particle-bg {
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(249, 212, 6, 0.08) 0%, transparent 20%),
+                radial-gradient(circle at 85% 30%, rgba(249, 212, 6, 0.05) 0%, transparent 25%),
+                radial-gradient(circle at 50% 80%, rgba(249, 212, 6, 0.06) 0%, transparent 30%);
+        }
+        
+        .dust-speck {
+            position: absolute;
+            background: #f9d406;
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: float 10s infinite linear;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-white overflow-hidden h-screen w-full relative selection:bg-primary selection:text-background-dark">
+<!-- Cinematic Background Wrapper -->
+<!-- Note: Combining theme background color with a navy gradient overlay to meet the "deep navy" request while respecting theme config structure -->
+<div class="absolute inset-0 z-0 bg-background-dark bg-gradient-to-b from-[#1a1c2e] to-background-dark mix-blend-multiply opacity-90"></div>
+<div class="absolute inset-0 z-0 particle-bg pointer-events-none"></div>
+<!-- Dust Particles (Decorative) -->
+<div class="dust-speck w-1 h-1 top-[20%] left-[10%] opacity-20 animate-float" style="animation-duration: 8s;"></div>
+<div class="dust-speck w-0.5 h-0.5 top-[60%] left-[80%] opacity-30 animate-float" style="animation-duration: 12s; animation-delay: 1s;"></div>
+<div class="dust-speck w-1.5 h-1.5 top-[40%] left-[60%] opacity-10 animate-float" style="animation-duration: 15s; animation-delay: 2s;"></div>
+<div class="dust-speck w-1 h-1 top-[80%] left-[20%] opacity-25 animate-float" style="animation-duration: 9s; animation-delay: 0.5s;"></div>
+<!-- Content Container -->
+<div class="relative z-10 flex flex-col h-full w-full max-w-md mx-auto p-6 justify-between">
+<!-- Header: Utilities -->
+<header class="flex justify-between items-center py-4 opacity-80 hover:opacity-100 transition-opacity">
+<button class="text-sm font-bold tracking-widest text-primary/80 hover:text-primary transition-colors uppercase border-b border-transparent hover:border-primary pb-0.5">
+                EN / VN
+            </button>
+<button class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-white/5 transition-colors text-primary/80 hover:text-primary">
+<span class="material-symbols-outlined text-2xl">volume_up</span>
+</button>
+</header>
+<!-- Main Content: Title & Imagery -->
+<main class="flex-grow flex flex-col items-center justify-center text-center space-y-12">
+<!-- Decorative Icon/Graphic above title -->
+<div class="w-16 h-16 mb-4 rounded-full border border-primary/20 flex items-center justify-center bg-primary/5 backdrop-blur-sm animate-float">
+<span class="material-symbols-outlined text-primary text-3xl">hourglass_empty</span>
+</div>
+<div class="space-y-4">
+<h1 class="text-5xl md:text-6xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-[#fffbe6] to-[#d4d4d4] drop-shadow-lg leading-none">
+                    Hà Nội
+                </h1>
+<div class="flex items-center justify-center gap-4 px-8">
+<div class="h-[1px] w-12 bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
+<div class="w-1.5 h-1.5 rotate-45 bg-primary"></div>
+<div class="h-[1px] w-12 bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
+</div>
+<h2 class="text-lg md:text-xl font-medium tracking-widest text-gray-300/90 uppercase leading-relaxed">
+                    Những Mảnh Ghép<br/><span class="text-primary/80">Thời Gian</span>
+</h2>
+</div>
+</main>
+<!-- Footer: CTA & Info -->
+<footer class="flex flex-col items-center space-y-8 pb-8">
+<!-- Primary CTA Button -->
+<button class="group relative w-full max-w-[320px] h-14 overflow-hidden rounded-lg bg-primary text-background-dark shadow-lg shadow-primary/20 transition-all hover:scale-[1.02] active:scale-[0.98] animate-pulse-glow">
+<div class="absolute inset-0 flex items-center justify-center bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-150%] group-hover:translate-x-[150%] transition-transform duration-700 ease-in-out"></div>
+<div class="relative flex items-center justify-center gap-3 font-bold text-lg tracking-wide uppercase">
+<span>Bắt đầu hành trình</span>
+<span class="material-symbols-outlined text-xl transition-transform group-hover:translate-x-1">arrow_forward</span>
+</div>
+</button>
+<!-- Bottom Credits -->
+<div class="text-[10px] text-gray-500/60 uppercase tracking-[0.2em] font-medium">
+                © 2024 Hanoi Memories Studio
+            </div>
+</footer>
+</div>
+</body></html>

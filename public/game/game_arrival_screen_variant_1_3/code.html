@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html class="dark" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Hanoi Memory Journal Screen</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f9d406",
+                        "primary-dim": "#bfa304",
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#23200f",
+                        "navy-deep": "#0f1420", 
+                        "navy-light": "#1a2236",
+                        "sepia-overlay": "rgba(66, 50, 20, 0.4)",
+                    },
+                    fontFamily: {
+                        "display": ["Noto Serif", "serif"],
+                        "sans": ["Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                    backgroundImage: {
+                        'radial-glow': 'radial-gradient(circle at center, rgba(249, 212, 6, 0.05) 0%, rgba(15, 20, 32, 0) 70%)',
+                    },
+                    aspectRatio: {
+                        '16/9': '16 / 9',
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            min-height: 100vh;}
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .sepia-filter {
+            filter: sepia(0.8) contrast(1.1) brightness(0.9);
+        }
+        .glass-panel {
+            background: rgba(15, 20, 32, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(249, 212, 6, 0.15);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-navy-deep text-white font-display overflow-hidden h-screen w-screen relative selection:bg-primary selection:text-black flex items-center justify-center">
+<div class="absolute inset-0 z-0 bg-navy-deep">
+<div class="absolute inset-0 bg-radial-glow pointer-events-none"></div>
+<div class="absolute top-[10%] left-[5%] w-1 h-1 bg-primary/40 rounded-full blur-[1px]"></div>
+<div class="absolute bottom-[20%] right-[10%] w-2 h-2 bg-primary/20 rounded-full blur-[2px]"></div>
+</div>
+<div class="relative w-full h-full max-w-[900px] max-h-[506px] md:aspect-[16/9] flex flex-col md:flex-row bg-navy-deep md:border md:border-primary/20 md:rounded-[2rem] md:shadow-2xl overflow-hidden z-10">
+<div class="absolute top-0 left-0 right-0 z-30 flex justify-between items-center p-4 md:p-6 pointer-events-none">
+<button class="pointer-events-auto flex items-center justify-center w-10 h-10 rounded-full bg-navy-light/80 text-primary border border-primary/20 hover:bg-primary hover:text-navy-deep transition-colors backdrop-blur-sm">
+<span class="material-symbols-outlined text-[20px]">arrow_back</span>
+</button>
+<button class="pointer-events-auto flex items-center justify-center w-10 h-10 rounded-full bg-navy-light/80 text-primary border border-primary/20 hover:bg-primary hover:text-navy-deep transition-colors backdrop-blur-sm">
+<span class="material-symbols-outlined text-[20px]">map</span>
+</button>
+</div>
+<div class="w-full md:w-[35%] h-[40%] md:h-full flex flex-col border-b md:border-b-0 md:border-r border-primary/10 bg-navy-deep/50 relative">
+<div class="pt-16 px-6 pb-2 md:pt-20 md:px-6">
+<h2 class="text-primary text-sm font-sans tracking-[0.2em] uppercase opacity-70 mb-1">Nhật Ký</h2>
+<h1 class="text-2xl font-bold text-white mb-4">Ký ức Hà Nội</h1>
+</div>
+<div class="flex-1 overflow-y-auto scrollbar-hide px-4 pb-4 space-y-2">
+<button class="w-full text-left p-3 rounded-xl bg-primary/10 border border-primary/30 flex items-center gap-3 transition-all group">
+<div class="w-10 h-10 rounded-lg overflow-hidden shrink-0 border border-primary/20 relative">
+<img alt="Thumbnail" class="w-full h-full object-cover sepia-filter opacity-80 group-hover:opacity-100 transition-opacity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZJuq9blGt3takMBu46XsYQsMpAXfGXAeug6deuDcPcUN5xofNs_o05JZrRXvz5jKk_I2TBy4r-ZykzAchSngx5K1zXE3tly9g807aqSPuWK83CBLDcJRFhJcqFBTn5pKhpSd2BZ38vkfUJUwB_QlHl8I2KVG0PvABZSsi_V_ttEeV2l_Pncrr2cmcvxQEWo3rPaZt4C5cMtB-YP8YTXUW505u--zp_x_jbzH3bjVzLY3cQPh-PDUKh0l7rfMEM7NgQLLwpuZRAl8h"/>
+</div>
+<div>
+<div class="text-primary font-bold text-sm">Ô Quan Chưởng</div>
+<div class="text-[10px] text-primary/60 font-sans uppercase tracking-wider">Đã mở khóa</div>
+</div>
+<span class="material-symbols-outlined text-primary ml-auto text-lg opacity-100">lock_open</span>
+</button>
+<button class="w-full text-left p-3 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 flex items-center gap-3 transition-all group opacity-60 hover:opacity-100">
+<div class="w-10 h-10 rounded-lg overflow-hidden shrink-0 bg-black/40 relative flex items-center justify-center">
+<span class="material-symbols-outlined text-white/30 text-lg">history_edu</span>
+</div>
+<div>
+<div class="text-white group-hover:text-primary transition-colors font-medium text-sm">Hàng Ngang</div>
+<div class="text-[10px] text-white/40 font-sans uppercase tracking-wider">1946</div>
+</div>
+</button>
+<button class="w-full text-left p-3 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 flex items-center gap-3 transition-all group opacity-60 hover:opacity-100">
+<div class="w-10 h-10 rounded-lg overflow-hidden shrink-0 bg-black/40 relative flex items-center justify-center">
+<span class="material-symbols-outlined text-white/30 text-lg">history_edu</span>
+</div>
+<div>
+<div class="text-white group-hover:text-primary transition-colors font-medium text-sm">Cầu Long Biên</div>
+<div class="text-[10px] text-white/40 font-sans uppercase tracking-wider">Chưa mở</div>
+</div>
+<span class="material-symbols-outlined text-white/30 ml-auto text-lg">lock</span>
+</button>
+<button class="w-full text-left p-3 rounded-xl hover:bg-white/5 border border-transparent hover:border-white/10 flex items-center gap-3 transition-all group opacity-60 hover:opacity-100">
+<div class="w-10 h-10 rounded-lg overflow-hidden shrink-0 bg-black/40 relative flex items-center justify-center">
+<span class="material-symbols-outlined text-white/30 text-lg">history_edu</span>
+</div>
+<div>
+<div class="text-white group-hover:text-primary transition-colors font-medium text-sm">Nhà Hát Lớn</div>
+<div class="text-[10px] text-white/40 font-sans uppercase tracking-wider">Chưa mở</div>
+</div>
+<span class="material-symbols-outlined text-white/30 ml-auto text-lg">lock</span>
+</button>
+</div>
+<div class="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-navy-deep to-transparent pointer-events-none"></div>
+</div>
+<div class="w-full md:w-[65%] h-[60%] md:h-full relative overflow-y-auto md:overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img alt="Background" class="w-full h-full object-cover opacity-20 blur-sm mix-blend-luminosity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnaEFHIzFaAApnJId-V3DLlc8ybyw8LRLYCBiiaUYyvxwBv-VvFxoOpz-1EoWQuiklqskCyC6vLZyOu5cfEUUOi8eM-CiLWJaG3ACSGCXT33Bh1J_d2t-lO6VdsJ7UwreE3mWlRqNqlzeSLQe6FJ9Auti43lfWTB6OeA5Nl6k-d6Tv2kpy58y-JMNmRLx_l0P6kielL3_IkABfQEwFo1uYkdtOJKv_slWGJl0k5v2B7jH0PM-nLEza7yb6-TxtNL5M42PjbO9RkDjd"/>
+<div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-l from-navy-deep via-navy-deep/80 to-navy-deep/40"></div>
+</div>
+<div class="relative z-10 h-full flex flex-col md:flex-row items-end md:items-center p-6 md:p-8 gap-6 md:gap-8">
+<div class="w-full md:w-1/2 shrink-0 self-center md:self-center transform rotate-[-2deg] transition-transform hover:rotate-0 duration-500">
+<div class="bg-[#f2f0e4] p-3 pb-8 shadow-2xl rounded-sm relative">
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-6 bg-white/20 backdrop-blur-sm rotate-1 shadow-sm border border-white/10 z-20"></div>
+<div class="relative overflow-hidden aspect-[4/3] bg-[#2a2a2a] shadow-inner">
+<img alt="Ô Quan Chưởng Historical Photo" class="w-full h-full object-cover sepia-filter opacity-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiwN5uhZGlq_ZLIfRjwgnr5GY5zBGyAXnD5Ik8kLik-EL5eifDaRltNyhVqV554V4Nf29gQ8HaLmSjrZ2iRp07SZZ9HuPFrZ_sG04WgBZjvfpYrhP_sG8OICtrMUeZHbGMwZSCTuPRhWklKh07nLJIeux1Eur_YrKnJ9VVBtt_ZeLBksHBHXbfN_6_MyBCzot_zVtrYMnwr8qeFjXMpcmDEa7zMGl3gXlCgZpuZBhInIgIl1qGlLupjDDUU1tp7E-dQ8x5sJTa4sM4"/>
+<div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/dust.png')] opacity-30 mix-blend-overlay"></div>
+</div>
+<div class="mt-4 flex justify-between items-end">
+<div class="font-handwriting text-navy-deep opacity-80 text-sm italic font-serif">Hanoi, 1900s</div>
+<div class="w-8 h-8 rounded-full border border-navy-deep/20 flex items-center justify-center opacity-50">
+<span class="material-symbols-outlined text-navy-deep text-sm">bookmark</span>
+</div>
+</div>
+</div>
+</div>
+<div class="w-full md:w-1/2 flex flex-col justify-center pb-8 md:pb-0">
+<div class="w-12 h-1 bg-primary mb-6 opacity-60"></div>
+<h2 class="text-3xl text-primary font-bold mb-4 drop-shadow-md">Ô Quan Chưởng</h2>
+<div class="space-y-4">
+<p class="text-gray-200 text-sm md:text-base leading-relaxed font-light italic opacity-90">
+                            "Cổng thành xưa rêu phong phủ kín,<br/>
+                            Dấu thời gian in đậm đá xây.<br/>
+                            Mái vòm cong che chở tháng ngày,<br/>
+                            Vọng tiếng súng hay tiếng rao đêm vắng?"
+                        </p>
+<p class="text-white/60 text-xs md:text-sm font-sans leading-relaxed text-justify mt-4">
+                            Ô Quan Chưởng, hay còn gọi là ô Đông Hà, là cửa ô duy nhất còn sót lại của kinh thành Thăng Long xưa. Được xây dựng vào năm Cảnh Hưng thứ 10 (1749), nơi đây ghi dấu biết bao thăng trầm của lịch sử, là chứng nhân lặng lẽ của một Hà Nội hào hùng và cổ kính.
+                        </p>
+</div>
+<div class="mt-6 flex items-center gap-4">
+<button class="px-5 py-2 rounded-full border border-primary/30 text-primary text-xs uppercase tracking-widest hover:bg-primary hover:text-navy-deep transition-all">
+                            Xem chi tiết
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</body></html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html class="dark" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AR Scan Interface - Hà Nội – Những Mảnh Ghép Thời Gian</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f9d406",
+                        "navy-deep": "#0f1420", 
+                        "navy-transparent": "rgba(15, 20, 32, 0.6)"
+                    },
+                    fontFamily: {
+                        "display": ["Noto Serif", "serif"],
+                        "sans": ["Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'scan-line': 'scan 3s linear infinite'
+                    },
+                    keyframes: {
+                        scan: {
+                            '0%': { top: '0%', opacity: '0' },
+                            '10%': { opacity: '1' },
+                            '90%': { opacity: '1' },
+                            '100%': { top: '100%', opacity: '0' },
+                        }
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+        .scan-corner {
+            position: absolute;
+            width: 2rem;
+            height: 2rem;
+            border-color: #f9d406;
+            border-style: solid;
+        }
+        .scan-corner-tl { border-width: 2px 0 0 2px; top: -1px; left: -1px; border-top-left-radius: 1rem; }
+        .scan-corner-tr { border-width: 2px 2px 0 0; top: -1px; right: -1px; border-top-right-radius: 1rem; }
+        .scan-corner-bl { border-width: 0 0 2px 2px; bottom: -1px; left: -1px; border-bottom-left-radius: 1rem; }
+        .scan-corner-br { border-width: 0 2px 2px 0; bottom: -1px; right: -1px; border-bottom-right-radius: 1rem; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-black text-white font-display overflow-hidden h-screen w-screen relative selection:bg-primary selection:text-black">
+<div class="absolute inset-0 z-0 bg-gray-800">
+<img alt="Camera View" class="w-full h-full object-cover opacity-80 mix-blend-overlay" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7YGlwOlqUxdsMWxktgz2Q6NrKcpgMFtXnpKhmC4nJZsCmEUpDLlIVZL_7mRJSKORLbYp8IJVMmW1OWd70aneba62KbFI_-z8kBm2gYn85RbySsELIIRfuV7qHOzxW3ugDx79kfNHguYmTgXtM8v_64FTN44ol3-PzQODJtjRqhEnAFrZH9V29k1QEA1-zVfYqG4E7fBQIQFKZEgA01FN-nJipNQmm_Y1e3Zp2SxuBDQzvpxNg47PkspXYE61uIDfZHvCvhmfZfV63"/>
+<div class="absolute inset-0 bg-navy-deep/20 backdrop-grayscale-[30%]"></div>
+</div>
+<div class="relative z-10 flex flex-col h-full justify-between p-6 pb-8 pt-10">
+<div class="flex items-start justify-between w-full px-2 pt-2">
+<button class="group flex size-10 items-center justify-center rounded-full bg-navy-transparent border border-primary/30 text-primary backdrop-blur-md hover:bg-primary hover:text-navy-deep transition-all duration-300">
+<span class="material-symbols-outlined !text-[20px]">arrow_back</span>
+</button>
+<button class="group flex size-10 items-center justify-center rounded-full bg-navy-transparent border border-primary/30 text-white/80 backdrop-blur-md hover:bg-white hover:text-navy-deep transition-all duration-300">
+<span class="material-symbols-outlined !text-[20px]">flash_on</span>
+</button>
+</div>
+<div class="flex-1 flex flex-col items-center justify-center relative">
+<div class="relative w-64 h-64 md:w-80 md:h-80 border border-primary/20 rounded-2xl shadow-[0_0_50px_rgba(249,212,6,0.15)]">
+<div class="scan-corner scan-corner-tl shadow-[0_0_10px_rgba(249,212,6,0.5)]"></div>
+<div class="scan-corner scan-corner-tr shadow-[0_0_10px_rgba(249,212,6,0.5)]"></div>
+<div class="scan-corner scan-corner-bl shadow-[0_0_10px_rgba(249,212,6,0.5)]"></div>
+<div class="scan-corner scan-corner-br shadow-[0_0_10px_rgba(249,212,6,0.5)]"></div>
+<div class="absolute w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50 blur-[2px] animate-scan-line"></div>
+<div class="absolute inset-0 flex items-center justify-center opacity-30">
+<div class="w-4 h-4 border border-primary rotate-45"></div>
+</div>
+</div>
+<div class="mt-6 px-4 py-2 bg-navy-deep/60 backdrop-blur-sm rounded-full border border-white/10">
+<p class="text-xs text-primary/90 font-sans tracking-wider uppercase flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                    Đang quét...
+                </p>
+</div>
+</div>
+<div class="relative w-full flex flex-col items-center justify-end space-y-4">
+<div class="absolute right-0 bottom-[100%] mb-2 mr-2 animate-pulse-slow">
+<div class="relative w-20 h-24">
+<div class="absolute bottom-0 right-4 w-12 h-16 bg-green-500 rounded-full border-2 border-white shadow-lg z-10"></div>
+<div class="absolute bottom-12 right-2 w-10 h-10 bg-red-500 rounded-full border-2 border-white z-20"></div>
+<div class="absolute bottom-8 right-10 w-6 h-6 bg-yellow-400 rounded-full border border-white z-0"></div>
+<div class="absolute top-4 -left-2 w-8 h-8 rounded-full border-4 border-gray-300 bg-blue-200/50 backdrop-blur-sm z-30 rotate-12"></div>
+<div class="absolute top-10 left-4 w-1 h-8 bg-amber-700 -rotate-45 z-20"></div>
+<div class="absolute bottom-16 right-5 w-1 h-1 bg-black rounded-full z-30"></div>
+<div class="absolute bottom-16 right-8 w-1 h-1 bg-black rounded-full z-30"></div>
+<div class="absolute bottom-14 right-6 w-2 h-1 bg-black/50 rounded-b-full z-30"></div>
+</div>
+</div>
+<div class="w-full bg-gradient-to-t from-navy-deep via-navy-deep/80 to-transparent pt-12 pb-6 px-4 text-center">
+<p class="text-white text-lg font-display font-medium drop-shadow-md">
+                    Di chuyển camera để tìm vật phẩm cổ
+                </p>
+<div class="mt-3 flex justify-center gap-1 opacity-50">
+<div class="w-1 h-1 rounded-full bg-white"></div>
+<div class="w-1 h-1 rounded-full bg-white"></div>
+<div class="w-1 h-1 rounded-full bg-white"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pointer-events-none absolute inset-0 z-20 bg-[linear-gradient(rgba(18,16,11,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] z-[5] bg-[length:100%_4px,6px_100%] pointer-events-none"></div>
+
+</body></html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Hành trình hoàn tất - Hà Nội – Những Mảnh Ghép Thời Gian</title>
+<!-- Google Fonts & Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#f4c025",
+              "background-light": "#f8f8f5",
+              "background-dark": "#221e10", // Dark warm tone as per config
+              "deep-navy": "#1a1f2e", // Custom deep navy for the map/cinematic feel requested
+              "gold-glow": "rgba(244, 192, 37, 0.5)",
+            },
+            fontFamily: {
+              "display": ["Noto Serif", "serif"]
+            },
+            backgroundImage: {
+              'gold-gradient': 'linear-gradient(135deg, #f4c025 0%, #d4a015 100%)',
+              'dust-pattern': 'url("data:image/svg+xml,%3Csvg width=\'100\' height=\'100\' viewBox=\'0 0 100 100\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z\' fill=\'%23f4c025\' fill-opacity=\'0.15\' fill-rule=\'evenodd\'/%3E%3C/svg%3E")',
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+            animation: {
+              'pulse-glow': 'pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'draw-path': 'draw-path 3s ease-out forwards',
+              'fade-in': 'fade-in 1s ease-out 2s forwards',
+            },
+            keyframes: {
+              'pulse-glow': {
+                '0%, 100%': { opacity: '1', transform: 'scale(1)' },
+                '50%': { opacity: '.8', transform: 'scale(1.1)' },
+              },
+              'draw-path': {
+                '0%': { strokeDasharray: '0, 1000' },
+                '100%': { strokeDasharray: '1000, 0' },
+              },
+              'fade-in': {
+                '0%': { opacity: '0', transform: 'translateY(10px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              }
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: "Noto Serif", serif;
+        }
+        .map-glow-filter {
+            filter: drop-shadow(0 0 10px rgba(244, 192, 37, 0.6));
+        }
+        .text-glow {
+            text-shadow: 0 0 20px rgba(244, 192, 37, 0.4);
+        }
+        /* Custom scrollbar hide for clean look */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-white h-screen w-full overflow-hidden relative font-display flex flex-col justify-between">
+<!-- Atmospheric Background Overlay (Dust/Texture) -->
+<div class="absolute inset-0 pointer-events-none opacity-40 bg-dust-pattern z-0 mix-blend-overlay"></div>
+<!-- Top Gradient for Depth -->
+<div class="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-black/80 to-transparent z-10 pointer-events-none"></div>
+<!-- Header Section -->
+<header class="relative z-20 w-full flex flex-col items-center justify-center pt-8 pb-4">
+<div class="w-12 h-1 bg-primary/30 rounded-full mb-6"></div>
+<h1 class="text-primary text-3xl md:text-4xl font-bold tracking-wide text-center text-glow uppercase leading-tight px-6 opacity-0 animate-[fade-in_1s_ease-out_0.5s_forwards]">
+            Hành trình<br/>hoàn tất
+        </h1>
+<p class="text-white/70 text-sm mt-2 font-italic tracking-wider opacity-0 animate-[fade-in_1s_ease-out_1s_forwards]">
+            Hà Nội – Những Mảnh Ghép Thời Gian
+        </p>
+</header>
+<!-- Main Content: Cinematic Map -->
+<main class="flex-1 w-full relative z-10 flex items-center justify-center px-0 sm:px-4">
+<!-- Cinematic Container 16:9 Aspect Ratio -->
+<div class="relative w-full aspect-video max-w-2xl bg-deep-navy/90 rounded-none sm:rounded-xl shadow-2xl overflow-hidden border-y sm:border border-primary/20 ring-1 ring-primary/10">
+<!-- Map Background Image (Stylized Dark Map) -->
+<div class="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-luminosity hover:mix-blend-normal transition-all duration-1000" data-alt="Abstract dark stylized map background of Hanoi streets" data-location="Hanoi, Vietnam" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAEtmxBUBDmMANPRdUF2iFToDPGDZ4V_Db0RRgJ5fe2SWSLw4jjCgfj-tQUf-Op20wRS041nokZ6EaypA4-colRmO4cnSVNg9OB5GvEEis1MXSZVVGm86FQX8oZpXZG-kFt3tfdME6vilpzYfsT4xqICHRzgArl6toVNJkpH9B4OWq4wcAVOZBZsDr26Ochi0XMJMM02lnvAL0pvH7M9Pu6H4bD38S-UYJe32x_8WWh-E04J1a6OOt-OYx5nHqLn0hZlPp-nlDm0tnN');">
+</div>
+<!-- Map Vector Overlay Layer -->
+<div class="absolute inset-0 flex items-center justify-center p-8">
+<svg class="w-full h-full drop-shadow-2xl" viewbox="0 0 400 225">
+<!-- Lake Outline (Hoan Kiem Lake approximate shape) -->
+<path d="M180,110 C160,100 150,130 170,140 C190,150 220,140 230,120 C240,100 210,90 180,110 Z" fill="#0f172a" opacity="0.5" stroke="#f4c025" stroke-width="0.5"></path>
+<!-- Walking Route (The Completed Path) -->
+<path class="map-glow-filter animate-[draw-path_2s_ease-out_forwards]" d="M140,80 L260,80 L280,110 L260,160 L140,160 L120,110 Z" fill="none" stroke="#f4c025" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="stroke-dasharray: 600; stroke-dashoffset: 0;"></path>
+<!-- Waypoints/Landmarks -->
+<!-- 1. Turtle Tower (Center Lake) -->
+<g class="animate-[pulse-glow_3s_infinite] origin-center" style="transform-box: fill-box;">
+<circle class="map-glow-filter" cx="200" cy="120" fill="#f4c025" r="4"></circle>
+<text class="font-bold opacity-80" fill="#f4c025" font-family="Noto Serif" font-size="6" text-anchor="middle" x="200" y="135">Tháp Rùa</text>
+</g>
+<!-- 2. Opera House (Right) -->
+<g class="animate-[pulse-glow_3s_infinite_0.5s] origin-center" style="transform-box: fill-box;">
+<circle cx="280" cy="110" fill="#f4c025" r="3"></circle>
+<text fill="#e2e8f0" font-family="Noto Serif" font-size="5" text-anchor="start" x="290" y="112">Nhà Hát Lớn</text>
+</g>
+<!-- 3. St. Joseph's Cathedral (Left) -->
+<g class="animate-[pulse-glow_3s_infinite_1s] origin-center" style="transform-box: fill-box;">
+<circle cx="120" cy="110" fill="#f4c025" r="3"></circle>
+<text fill="#e2e8f0" font-family="Noto Serif" font-size="5" text-anchor="end" x="110" y="112">Nhà Thờ Lớn</text>
+</g>
+<!-- 4. Post Office (Bottom Right) -->
+<g class="animate-[pulse-glow_3s_infinite_1.5s] origin-center" style="transform-box: fill-box;">
+<circle cx="260" cy="160" fill="#f4c025" r="3"></circle>
+</g>
+<!-- 5. Ly Thai To Statue (Top Right) -->
+<g class="animate-[pulse-glow_3s_infinite_2s] origin-center" style="transform-box: fill-box;">
+<circle cx="260" cy="80" fill="#f4c025" r="3"></circle>
+</g>
+<!-- 6. Pen Tower (Center Top) -->
+<g class="animate-[pulse-glow_3s_infinite_0.2s] origin-center" style="transform-box: fill-box;">
+<circle cx="190" cy="70" fill="#f4c025" r="3"></circle>
+<text fill="#e2e8f0" font-family="Noto Serif" font-size="5" text-anchor="middle" x="190" y="65">Tháp Bút</text>
+</g>
+<!-- 7. Dong Kinh Nghia Thuc Square (Top Left) -->
+<g class="animate-[pulse-glow_3s_infinite_0.7s] origin-center" style="transform-box: fill-box;">
+<circle cx="140" cy="80" fill="#f4c025" r="3"></circle>
+</g>
+<!-- 8. Ba Kieu Temple (Bottom Left) -->
+<g class="animate-[pulse-glow_3s_infinite_1.2s] origin-center" style="transform-box: fill-box;">
+<circle cx="140" cy="160" fill="#f4c025" r="3"></circle>
+</g>
+</svg>
+</div>
+<!-- Vignette for cinematic look -->
+<div class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(10,10,20,0.8)_100%)] pointer-events-none"></div>
+</div>
+<!-- Celebration Particles (Simulated with simple divs for CSS-only solution) -->
+<div class="absolute inset-0 pointer-events-none overflow-hidden">
+<div class="absolute top-1/4 left-1/4 w-1 h-1 bg-primary rounded-full animate-[pulse_2s_infinite] opacity-60"></div>
+<div class="absolute top-1/3 right-1/4 w-2 h-2 bg-primary rounded-full animate-[bounce_4s_infinite] opacity-40"></div>
+<div class="absolute bottom-1/3 left-1/3 w-1.5 h-1.5 bg-primary rounded-full animate-[pulse_3s_infinite] opacity-50"></div>
+<div class="absolute top-1/2 right-1/3 w-1 h-1 bg-primary rounded-full animate-[ping_3s_infinite] opacity-30"></div>
+</div>
+</main>
+<!-- Bottom Actions Section -->
+<footer class="relative z-20 w-full px-6 pb-10 pt-6 bg-gradient-to-t from-background-dark via-background-dark to-transparent">
+<div class="flex flex-col items-center gap-4 max-w-md mx-auto opacity-0 animate-[fade-in_1s_ease-out_2s_forwards]">
+<!-- Congrats Text -->
+<p class="text-white text-base text-center leading-relaxed font-light mb-2">
+                Chúc mừng bạn đã hoàn thành chuyến đi lịch sử<br/>vòng quanh Hồ Gươm.
+            </p>
+<!-- Primary Action Button -->
+<button class="group w-full relative overflow-hidden rounded-xl bg-gold-gradient p-[1px] shadow-[0_0_20px_rgba(244,192,37,0.3)] transition-all hover:shadow-[0_0_30px_rgba(244,192,37,0.5)] active:scale-95">
+<div class="relative flex items-center justify-center gap-2 w-full h-14 bg-primary rounded-xl transition-all group-hover:bg-[#ffcc33]">
+<span class="material-symbols-outlined text-background-dark">history_edu</span>
+<span class="text-background-dark text-lg font-bold tracking-wide uppercase">Xem lại ký ức</span>
+</div>
+<!-- Shine effect -->
+<div class="absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-gradient-to-r from-transparent to-white opacity-40 group-hover:animate-[shimmer_1s_infinite]"></div>
+</button>
+<!-- Secondary Action Link -->
+<button class="flex items-center gap-2 text-primary/80 hover:text-primary transition-colors text-sm font-medium tracking-wider uppercase py-2">
+<span class="material-symbols-outlined text-[18px]">share</span>
+<span>Chia sẻ hành trình</span>
+</button>
+</div>
+<!-- Decorative bottom line -->
+<div class="w-24 h-1 bg-primary/20 mx-auto mt-6 rounded-full"></div>
+</footer>
+<!-- CSS Animation Keyframes for shimmer -->
+<style>
+        @keyframes shimmer {
+            100% {
+                left: 125%;
+            }
+        }
+    </style>
+</body></html>
