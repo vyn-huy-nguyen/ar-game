@@ -1,218 +1,210 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 
 import React from 'react';
 import { useGame } from '@/app/[locale]/game/GameContext';
-import { useTranslations } from 'next-intl';
 
 export default function CompletionScreen() {
   const { setCurrentScreen } = useGame();
-  const t = useTranslations('game');
 
   return (
-    <div className="bg-background-dark font-display relative flex h-[100dvh] w-full flex-col justify-between overflow-hidden text-white">
-      {/* Cinematic Background Wrapper */}
-      <div className="bg-background-dark to-background-dark absolute inset-0 z-0 bg-gradient-to-b from-[#1a1c2e] opacity-95 mix-blend-multiply"></div>
+    <div className="text-paper relative flex h-[100dvh] w-full flex-col items-center overflow-hidden bg-navy-deep font-serif">
+      {/* Background Decorative SVG */}
+      <div className="pointer-events-none absolute inset-0 z-0 opacity-20">
+        <svg
+          className="h-full w-full"
+          preserveAspectRatio="xMidYMid slice"
+          viewBox="0 0 400 800"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <linearGradient id="goldGradient" x1="0%" x2="100%" y1="0%" y2="100%">
+              <stop offset="0%" style={{ stopColor: '#aa8c2c', stopOpacity: 1 }}></stop>
+              <stop offset="100%" style={{ stopColor: '#fceda3', stopOpacity: 1 }}></stop>
+            </linearGradient>
+          </defs>
+          <path d="M150 550 L250 550 L240 500 L160 500 Z" fill="url(#goldGradient)"></path>
+          <path
+            d="M170 500 L230 500 L225 470 L175 470 Z"
+            fill="url(#goldGradient)"
+            opacity="0.8"
+          ></path>
+          <circle cx="50" cy="100" fill="url(#goldGradient)" opacity="0.05" r="80"></circle>
+          <circle cx="350" cy="150" fill="url(#goldGradient)" opacity="0.05" r="60"></circle>
+        </svg>
+      </div>
 
-      {/* Particle System Layer */}
-      <div className="pointer-events-none absolute inset-0 z-10 overflow-hidden">
-        {[...Array(12)].map((_, i) => (
+      <div className="pointer-events-none absolute inset-0 z-0">
+        {[...Array(6)].map((_, i) => (
           <div
             key={i}
-            className="animate-particle-rise bg-primary absolute rounded-full blur-[1px]"
+            className="sparkle absolute h-1 w-1 rounded-full bg-white opacity-0"
             style={{
-              width: `${Math.random() * 3 + 1}px`,
-              height: `${Math.random() * 3 + 1}px`,
-              left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              animationDuration: `${Math.random() * 4 + 3}s`,
-              animationDelay: `${Math.random() * 5}s`,
-              opacity: 0.4,
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 2}s`,
             }}
           ></div>
         ))}
       </div>
 
-      {/* Header Section */}
-      <header className="relative z-20 flex w-full flex-col items-center justify-center pb-4 pt-[calc(env(safe-area-inset-top)+1.5rem)]">
-        <div className="bg-primary/50 animate-pulse-glow mb-6 h-1 w-16 rounded-full"></div>
-        <h1
-          className="animate-fade-in text-glow text-primary font-cinzel px-6 text-center text-4xl font-black uppercase leading-tight tracking-[0.2em] opacity-0"
-          style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}
-        >
-          {t('completion.title').split(' ')[0]}
-          <br />
-          {t('completion.title').split(' ').slice(1).join(' ')}
-        </h1>
-        <p
-          className="animate-fade-in font-display mt-4 text-xs font-medium uppercase tracking-[0.4em] text-white/50 opacity-0"
-          style={{ animationDelay: '1s', animationFillMode: 'forwards' }}
-        >
-          {t('completion.legend')}
-        </p>
-      </header>
-
-      {/* Main Content: Cinematic Map */}
-      <main className="relative z-10 flex w-full flex-1 items-center justify-center px-0 sm:px-4">
-        {/* Cinematic Container 16:9 */}
-        <div className="glass-panel group relative aspect-video w-full max-w-2xl overflow-hidden border-white/10 shadow-2xl transition-all duration-700 sm:rounded-2xl sm:border">
-          {/* Map Background */}
-          <div
-            className="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-luminosity grayscale transition-all duration-1000 group-hover:opacity-50 group-hover:mix-blend-normal group-hover:grayscale-0"
-            style={{
-              backgroundImage:
-                'url(https://lh3.googleusercontent.com/aida-public/AB6AXuAEtmxBUBDmMANPRdUF2iFToDPGDZ4V_Db0RRgJ5fe2SWSLw4jjCgfj-tQUf-Op20wRS041nokZ6EaypA4-colRmO4cnSVNg9OB5GvEEis1MXSZVVGm86FQX8oZpXZG-kFt3tfdME6vilpzYfsT4xqICHRzgArl6toVNJkpH9B4OWq4wcAVOZBZsDr26Ochi0XMJMM02lnvAL0pvH7M9Pu6H4bD38S-UYJe32x_8WWh-E04J1a6OOt-OYx5nHqLn0hZlPp-nlDm0tnN)',
-            }}
-          ></div>
-
-          {/* Map Vector Overlay */}
-          <div className="absolute inset-0 flex items-center justify-center p-8">
-            <svg className="h-full w-full drop-shadow-2xl" viewBox="0 0 400 225">
-              {/* Walking Route */}
-              <path
-                className="animate-draw-path map-glow-filter"
-                d="M140,80 L260,80 L280,110 L260,160 L140,160 L120,110 Z"
-                fill="none"
-                stroke="#f9d406"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                style={{ strokeDasharray: 600, strokeDashoffset: 600 }}
-              ></path>
-
-              {/* Landmarks */}
-              {[
-                { cx: 200, cy: 120, delay: '0s' },
-                { cx: 280, cy: 110, delay: '0.5s' },
-                { cx: 120, cy: 110, delay: '1s' },
-                { cx: 260, cy: 160, delay: '1.5s' },
-                { cx: 260, cy: 80, delay: '2s' },
-                { cx: 190, cy: 70, delay: '2.2s' },
-                { cx: 140, cy: 80, delay: '2.7s' },
-                { cx: 140, cy: 160, delay: '3.1s' },
-              ].map((site, idx) => (
-                <circle
-                  key={idx}
-                  cx={site.cx}
-                  cy={site.cy}
-                  fill="#f9d406"
-                  r="3.5"
-                  className="map-glow-filter animate-pulse-glow"
-                  style={{ animationDelay: site.delay }}
-                />
-              ))}
-            </svg>
+      <main className="relative z-10 flex h-full w-full max-w-md flex-col items-center justify-center px-6 py-8">
+        <div className="mb-8 animate-[fade-in-down_1s_ease-out] space-y-3 text-center">
+          <div className="border-gold-DEFAULT/30 bg-gold-DEFAULT/10 mb-2 inline-flex items-center justify-center rounded-full border p-2">
+            <span className="material-symbols-outlined text-gold-DEFAULT mr-1 text-sm">stars</span>
+            <span className="text-gold-light text-[10px] font-bold uppercase tracking-widest sm:text-xs">
+              Hoàn thành xuất sắc
+            </span>
+            <span className="material-symbols-outlined text-gold-DEFAULT ml-1 text-sm">stars</span>
           </div>
+          <h1 className="from-gold-light via-gold-DEFAULT to-gold-dark bg-gradient-to-b bg-clip-text font-display text-3xl font-bold text-transparent drop-shadow-sm md:text-4xl">
+            Chúc mừng!
+          </h1>
+          <p className="text-paper/80 mx-auto max-w-[280px] text-sm font-light leading-relaxed md:text-base">
+            Bạn đã phục hồi toàn bộ ký ức về một Hà Nội vàng son.
+          </p>
+        </div>
 
-          {/* Vignette */}
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,rgba(35,32,15,0.9)_100%)]"></div>
+        <div className="perspective-1000 group relative my-4">
+          <div className="bg-gold-DEFAULT/20 absolute left-1/2 top-1/2 h-64 w-80 -translate-x-1/2 -translate-y-1/2 animate-pulse rounded-full blur-[60px]"></div>
+          <div className="transform-style-3d relative h-64 w-44 animate-float transition-transform duration-500 sm:h-80 sm:w-56">
+            <div className="translate-z-[-10px] bg-paper absolute bottom-1 right-2 top-1 w-full translate-x-2 rounded-r-md border-r border-gray-300 shadow-lg"></div>
+            <div className="book-cover border-gold-DEFAULT/30 absolute inset-0 z-20 flex flex-col items-center justify-between overflow-hidden rounded-l-sm rounded-r-md border p-4 shadow-[10px_10px_30px_rgba(0,0,0,0.5)]">
+              <div className="border-gold-DEFAULT absolute left-2 top-2 h-8 w-8 border-l-2 border-t-2 opacity-50"></div>
+              <div className="border-gold-DEFAULT absolute right-2 top-2 h-8 w-8 border-r-2 border-t-2 opacity-50"></div>
+              <div className="border-gold-DEFAULT absolute bottom-2 left-2 h-8 w-8 border-b-2 border-l-2 opacity-50"></div>
+              <div className="border-gold-DEFAULT absolute bottom-2 right-2 h-8 w-8 border-b-2 border-r-2 opacity-50"></div>
+              <div className="z-10 mt-8 text-center">
+                <div className="border-gold-DEFAULT/50 mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full border">
+                  <span className="material-symbols-outlined text-gold-light text-2xl">
+                    auto_stories
+                  </span>
+                </div>
+                <h2 className="text-gold-light mb-1 font-display text-2xl tracking-wide">KÝ ỨC</h2>
+                <h3 className="text-gold-DEFAULT font-display text-xl uppercase tracking-widest">
+                  HÀ NỘI
+                </h3>
+              </div>
+              <div className="z-10 mb-4 text-center">
+                <p className="text-gold-DEFAULT/70 text-[10px] uppercase tracking-widest">
+                  Bộ sưu tập đặc biệt
+                </p>
+                <div className="bg-gold-DEFAULT/50 mx-auto my-2 h-[1px] w-8"></div>
+                <p className="text-gold-DEFAULT/50 font-serif text-[10px] italic">1900 - 2024</p>
+              </div>
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent"></div>
+            </div>
+            <div className="book-spine absolute bottom-0 left-0 top-0 z-10 w-4 -translate-x-full rounded-l-sm shadow-inner"></div>
+          </div>
+        </div>
 
-          {/* Accent corners for cinematic feel */}
-          <div className="border-primary/40 absolute left-4 top-4 h-4 w-4 rounded-tl-sm border-l border-t"></div>
-          <div className="border-primary/40 absolute bottom-4 right-4 h-4 w-4 rounded-br-sm border-b border-r"></div>
+        <div className="mt-10 flex w-full animate-[fade-in-up_1s_ease-out_0.5s_both] flex-col items-center gap-4">
+          <button className="from-gold-light via-gold-DEFAULT to-gold-dark group relative w-full max-w-[320px] transform overflow-hidden rounded-lg bg-gradient-to-b p-[1px] shadow-[0_0_20px_rgba(212,175,55,0.3)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(212,175,55,0.5)] active:translate-y-0">
+            <div className="flex items-center justify-center gap-3 rounded-[7px] bg-navy-deep px-6 py-4 transition-colors duration-300 hover:bg-navy-light">
+              <span className="material-symbols-outlined text-gold-light group-hover:animate-bounce">
+                download
+              </span>
+              <span className="text-gold-light font-display text-sm font-semibold tracking-wide md:text-base">
+                Nhận quyển sách Ký ức (PDF)
+              </span>
+              <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[7px]">
+                <div className="animate-shine absolute left-0 top-0 h-full w-1/2 skew-x-[-20deg] bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+              </div>
+            </div>
+          </button>
+          <div className="mt-4 flex gap-6">
+            <button
+              onClick={() => setCurrentScreen('library')}
+              className="text-gold-DEFAULT/60 hover:text-gold-light flex items-center gap-1 text-xs uppercase tracking-widest transition-colors"
+            >
+              <span className="material-symbols-outlined text-sm">share</span> Chia sẻ
+            </button>
+            <button
+              onClick={() => setCurrentScreen('landing')}
+              className="text-gold-DEFAULT/60 hover:text-gold-light flex items-center gap-1 text-xs uppercase tracking-widest transition-colors"
+            >
+              <span className="material-symbols-outlined text-sm">home</span> Về trang chủ
+            </button>
+          </div>
         </div>
       </main>
 
-      {/* Bottom Actions */}
-      <footer className="from-background-dark via-background-dark relative z-20 w-full bg-gradient-to-t to-transparent px-6 pb-[calc(env(safe-area-inset-bottom)+1.5rem)] pt-6">
-        <div
-          className="animate-fade-in mx-auto flex max-w-md flex-col items-center gap-6 opacity-0"
-          style={{ animationDelay: '2s', animationFillMode: 'forwards' }}
-        >
-          <div className="space-y-2 text-center">
-            <p className="text-lg font-light leading-relaxed text-white/90">
-              {t('completion.subtitle')}
-            </p>
-            <p className="text-primary text-sm font-bold uppercase tracking-[0.2em]">
-              {t('completion.legend')}
-            </p>
-          </div>
-
-          {/* Primary Button */}
-          <button
-            onClick={() => setCurrentScreen('library')}
-            className="animate-pulse-glow bg-primary text-background-dark shadow-primary/20 border-primary/50 group relative h-16 w-full max-w-xs overflow-hidden rounded-xl border shadow-lg transition-all hover:scale-[1.02] active:scale-[0.98]"
-          >
-            <div className="absolute inset-0 flex translate-x-[-150%] items-center justify-center bg-gradient-to-r from-transparent via-white/40 to-transparent transition-transform duration-700 ease-in-out group-hover:translate-x-[150%]"></div>
-            <div className="relative flex items-center justify-center gap-3 text-lg font-bold uppercase tracking-wide">
-              <span className="material-symbols-outlined text-2xl">history_edu</span>
-              <span>{t('completion.review_memories')}</span>
-            </div>
-          </button>
-
-          {/* Secondary Button */}
-          <button className="text-primary/60 hover:text-primary flex items-center gap-2 py-2 text-xs font-bold uppercase tracking-[0.2em] transition-all hover:tracking-[0.25em]">
-            <span className="material-symbols-outlined text-[18px]">share</span>
-            <span>{t('completion.share')}</span>
-          </button>
-        </div>
-
-        {/* Decorative Divider */}
-        <div className="via-primary/30 mx-auto mt-10 h-[1px] w-48 rounded-full bg-gradient-to-r from-transparent to-transparent"></div>
-      </footer>
-
       <style jsx>{`
-        .glass-panel {
-          background: rgba(35, 32, 15, 0.4);
-          backdrop-filter: blur(8px);
-          -webkit-backdrop-filter: blur(8px);
+        .book-spine {
+          background: linear-gradient(
+            90deg,
+            #5e4b1f 0%,
+            #8a7032 20%,
+            #5e4b1f 40%,
+            #8a7032 60%,
+            #5e4b1f 100%
+          );
         }
-        .text-glow {
-          text-shadow: 0 0 15px rgba(249, 212, 6, 0.3);
+        .book-cover {
+          background: linear-gradient(135deg, #1a2a44 0%, #0d1b2e 100%);
+          box-shadow:
+            inset 0 0 20px rgba(0, 0, 0, 0.5),
+            inset 2px 0 5px rgba(255, 255, 255, 0.1);
         }
-        .map-glow-filter {
-          filter: drop-shadow(0 0 8px rgba(249, 212, 6, 0.6));
+        .text-paper {
+          color: #f5f0e6;
         }
-        .animate-draw-path {
-          animation: drawPath 3s ease-in-out forwards;
+        .text-gold-light {
+          color: #fceda3;
         }
-        @keyframes drawPath {
-          to {
-            stroke-dashoffset: 0;
-          }
+        .text-gold-DEFAULT {
+          color: #d4af37;
         }
-        .animate-fade-in {
-          animation: fadeIn 1s ease-out forwards;
+        .bg-navy-deep {
+          background-color: #0a192f;
         }
-        @keyframes fadeIn {
-          from {
+        .bg-navy-light {
+          background-color: #112240;
+        }
+        .gold-dark {
+          color: #aa8c2c;
+        }
+        @keyframes sparkle-anim {
+          0% {
+            transform: scale(0);
             opacity: 0;
-            transform: translateY(20px);
           }
-          to {
-            opacity: 1;
-            transform: translateY(0);
+          50% {
+            transform: scale(1);
+            opacity: 0.8;
+          }
+          100% {
+            transform: scale(0);
+            opacity: 0;
           }
         }
-        @keyframes pulse-glow {
+        .sparkle {
+          animation: sparkle-anim 2s infinite;
+        }
+        @keyframes shine {
+          0% {
+            transform: translateX(-100%);
+          }
+          20% {
+            transform: translateX(100%);
+          }
+          100% {
+            transform: translateX(100%);
+          }
+        }
+        .animate-shine {
+          animation: shine 8s linear infinite;
+        }
+        @keyframes float {
           0%,
           100% {
-            opacity: 1;
-            transform: scale(1);
+            transform: translateY(0);
           }
           50% {
-            opacity: 0.6;
-            transform: scale(1.1);
+            transform: translateY(-15px);
           }
         }
-        .animate-pulse-glow {
-          animation: pulse-glow 2s infinite ease-in-out;
-        }
-        @keyframes particle-rise {
-          0% {
-            transform: translateY(0) scale(0.5);
-            opacity: 0;
-          }
-          50% {
-            opacity: 0.4;
-          }
-          100% {
-            transform: translateY(-100vh) scale(1.2);
-            opacity: 0;
-          }
-        }
-        .animate-particle-rise {
-          animation: particle-rise linear infinite;
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
         }
       `}</style>
     </div>

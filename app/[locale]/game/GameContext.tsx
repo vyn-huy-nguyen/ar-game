@@ -29,6 +29,8 @@ interface GameContextType {
   setCurrentLocationId: (id: string | null) => void;
   unlockedMemories: string[];
   unlockMemory: (id: string) => void;
+  movingMode: 'overview' | 'navigation';
+  setMovingMode: (mode: 'overview' | 'navigation') => void;
   resetGame: () => void;
 }
 
@@ -41,16 +43,19 @@ export function GameProvider({ children }: { children: ReactNode }) {
   const [currentScreen, setCurrentScreen] = useState<GameScreen>('landing');
   const [currentLocationId, setCurrentLocationId] = useState<string | null>(null);
   const [unlockedMemories, setUnlockedMemories] = useState<string[]>([]);
+  const [movingMode, setMovingMode] = useState<'overview' | 'navigation'>('overview');
 
   // Load from LocalStorage on mount
   React.useEffect(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
       try {
-        const { currentScreen, currentLocationId, unlockedMemories } = JSON.parse(saved);
+        const { currentScreen, currentLocationId, unlockedMemories, movingMode } =
+          JSON.parse(saved);
         setCurrentScreen(currentScreen || 'landing');
         setCurrentLocationId(currentLocationId || null);
         setUnlockedMemories(unlockedMemories || []);
+        setMovingMode(movingMode || 'overview');
       } catch (e) {
         console.error('Failed to load game progress', e);
       }
@@ -61,10 +66,10 @@ export function GameProvider({ children }: { children: ReactNode }) {
   // Save to LocalStorage on change
   React.useEffect(() => {
     if (isLoaded) {
-      const data = { currentScreen, currentLocationId, unlockedMemories };
+      const data = { currentScreen, currentLocationId, unlockedMemories, movingMode };
       localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
     }
-  }, [currentScreen, currentLocationId, unlockedMemories, isLoaded]);
+  }, [currentScreen, currentLocationId, unlockedMemories, movingMode, isLoaded]);
 
   const unlockMemory = (id: string) => {
     if (!unlockedMemories.includes(id)) {
@@ -82,6 +87,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
     setCurrentScreen('landing');
     setCurrentLocationId(null);
     setUnlockedMemories([]);
+    setMovingMode('overview');
     localStorage.removeItem(STORAGE_KEY);
   };
 
@@ -96,6 +102,8 @@ export function GameProvider({ children }: { children: ReactNode }) {
         setCurrentLocationId,
         unlockedMemories,
         unlockMemory,
+        movingMode,
+        setMovingMode,
         resetGame,
       }}
     >

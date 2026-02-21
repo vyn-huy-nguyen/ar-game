@@ -152,6 +152,10 @@ export default function MapScreen() {
   };
 
   const handleContinue = () => {
+    if (unlockedMemories.length === 8) {
+      setCurrentScreen('completion');
+      return;
+    }
     if (selectedId) {
       setCurrentLocationId(selectedId);
       setCurrentScreen('moving');
@@ -159,9 +163,9 @@ export default function MapScreen() {
   };
 
   return (
-    <div className="bg-background-dark font-body selection:bg-primary selection:text-background-dark relative min-h-screen w-full overflow-hidden text-white">
+    <div className="font-body relative min-h-screen w-full overflow-hidden bg-background-dark text-white selection:bg-primary selection:text-background-dark">
       {/* Background Gradients */}
-      <div className="from-navy-mid via-background-dark pointer-events-none fixed inset-0 z-0 bg-gradient-to-b to-black"></div>
+      <div className="pointer-events-none fixed inset-0 z-0 bg-gradient-to-b from-navy-mid via-background-dark to-black"></div>
       <div
         ref={firefliesRef}
         className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
@@ -172,17 +176,17 @@ export default function MapScreen() {
         <header className="relative flex-none px-6 pb-2 pt-[calc(env(safe-area-inset-top)+1.5rem)] text-center">
           <div className="pointer-events-none absolute left-0 top-0 z-0 h-full w-full bg-gradient-to-b from-black/60 to-transparent"></div>
           <div className="relative z-10">
-            <p className="text-primary font-cinzel mb-1 text-xs uppercase tracking-[0.2em] opacity-80">
+            <p className="mb-1 font-cinzel text-xs uppercase tracking-[0.2em] text-primary opacity-80">
               {t('historical_puzzle')}
             </p>
-            <h1 className="from-primary-glow via-primary to-primary-glow font-cinzel inline-block border-b border-white/10 bg-gradient-to-r bg-clip-text pb-4 text-2xl font-bold leading-relaxed tracking-widest text-transparent drop-shadow-md md:text-3xl">
+            <h1 className="inline-block border-b border-white/10 bg-gradient-to-r from-primary-glow via-primary to-primary-glow bg-clip-text pb-4 font-cinzel text-2xl font-bold leading-relaxed tracking-widest text-transparent drop-shadow-md md:text-3xl">
               GIẢI MÃ KINH KỲ
             </h1>
           </div>
           {/* Progress */}
-          <div className="border-primary/30 absolute right-4 top-[calc(env(safe-area-inset-top)+1.5rem)] flex items-center space-x-2 rounded-full border bg-black/40 px-3 py-1 backdrop-blur-sm">
-            <span className="material-symbols-outlined text-primary text-sm">stars</span>
-            <span className="text-primary-glow text-xs font-bold">{unlockedMemories.length}/8</span>
+          <div className="absolute right-4 top-[calc(env(safe-area-inset-top)+1.5rem)] flex items-center space-x-2 rounded-full border border-primary/30 bg-black/40 px-3 py-1 backdrop-blur-sm">
+            <span className="material-symbols-outlined text-sm text-primary">stars</span>
+            <span className="text-xs font-bold text-primary-glow">{unlockedMemories.length}/8</span>
           </div>
         </header>
 
@@ -227,15 +231,15 @@ export default function MapScreen() {
                     key={loc.id}
                     className="pointer-events-none absolute left-1/2 top-1/2 z-10 flex h-32 w-40 -translate-x-1/2 -translate-y-1/2 transform flex-col items-center justify-center"
                   >
-                    <div className="bg-primary/20 animate-pulse-slow absolute inset-0 rounded-full blur-3xl"></div>
+                    <div className="absolute inset-0 animate-pulse-slow rounded-full bg-primary/20 blur-3xl"></div>
                     <div className="group relative z-20 flex flex-col items-center">
-                      <div className="to-navy-light/80 border-primary/50 relative flex h-16 w-16 items-center justify-center rounded-lg border bg-gradient-to-t from-black/80 shadow-[0_0_30px_rgba(212,175,55,0.3)] backdrop-blur-sm sm:h-20 sm:w-20">
-                        <span className="material-symbols-outlined text-primary text-3xl drop-shadow-[0_0_10px_rgba(212,175,55,0.8)] sm:text-4xl">
+                      <div className="relative flex h-16 w-16 items-center justify-center rounded-lg border border-primary/50 bg-gradient-to-t from-black/80 to-navy-light/80 shadow-[0_0_30px_rgba(212,175,55,0.3)] backdrop-blur-sm sm:h-20 sm:w-20">
+                        <span className="material-symbols-outlined text-3xl text-primary drop-shadow-[0_0_10px_rgba(212,175,55,0.8)] sm:text-4xl">
                           {loc.icon}
                         </span>
-                        <div className="border-primary/20 absolute -bottom-4 h-8 w-32 rounded-[100%] border-t bg-blue-500/10 blur-sm"></div>
+                        <div className="absolute -bottom-4 h-8 w-32 rounded-[100%] border-t border-primary/20 bg-blue-500/10 blur-sm"></div>
                       </div>
-                      <span className="font-cinzel text-primary-glow border-primary/20 mt-2 rounded border bg-black/60 px-2 py-0.5 text-[9px] uppercase tracking-widest backdrop-blur-md sm:mt-3 sm:text-[10px]">
+                      <span className="mt-2 rounded border border-primary/20 bg-black/60 px-2 py-0.5 font-cinzel text-[9px] uppercase tracking-widest text-primary-glow backdrop-blur-md sm:mt-3 sm:text-[10px]">
                         {loc.name}
                       </span>
                     </div>
@@ -293,7 +297,7 @@ export default function MapScreen() {
                     )}
                     {isSelected && (
                       <div
-                        className="animate-pulse-slow absolute -inset-2 rounded-full border border-dashed opacity-50"
+                        className="absolute -inset-2 animate-pulse-slow rounded-full border border-dashed opacity-50"
                         style={{ borderColor: loc.color }}
                       ></div>
                     )}
@@ -337,13 +341,13 @@ export default function MapScreen() {
         {/* Footer */}
         <footer className="relative z-20 flex-none bg-gradient-to-t from-black to-transparent px-6 pb-[calc(env(safe-area-inset-bottom)+1.5rem)] pt-2 md:pb-8">
           <div className="mb-3 text-center">
-            <p className="text-primary/80 font-serif text-[10px] italic sm:text-xs">
+            <p className="font-serif text-[10px] italic text-primary/80 sm:text-xs">
               &quot;The bell echoes from the ancient guild...&quot;
             </p>
           </div>
-          <div className="bg-navy-mid relative h-2.5 w-full overflow-hidden rounded-full border border-white/10 shadow-inner sm:h-3">
+          <div className="relative h-2.5 w-full overflow-hidden rounded-full border border-white/10 bg-navy-mid shadow-inner sm:h-3">
             <div
-              className="via-primary to-primary-glow absolute left-0 top-0 h-full bg-gradient-to-r from-[#8a6e1e] shadow-[0_0_10px_rgba(212,175,55,0.8)] transition-all duration-1000"
+              className="absolute left-0 top-0 h-full bg-gradient-to-r from-[#8a6e1e] via-primary to-primary-glow shadow-[0_0_10px_rgba(212,175,55,0.8)] transition-all duration-1000"
               style={{ width: `${(unlockedMemories.length / 8) * 100}%` }}
             ></div>
           </div>
@@ -353,25 +357,29 @@ export default function MapScreen() {
           </div>
 
           <button
-            disabled={!selectedId}
+            disabled={!selectedId && unlockedMemories.length < 8}
             onClick={handleContinue}
-            className={`font-display mt-4 w-full rounded-lg border py-3 font-bold uppercase tracking-[0.15em] transition-all duration-300 sm:mt-6
+            className={`mt-4 w-full rounded-lg border py-3 font-display font-bold uppercase tracking-[0.15em] transition-all duration-300 sm:mt-6
               ${
-                selectedId
-                  ? 'from-primary/20 to-primary/30 border-primary text-primary hover:bg-primary shadow-glow scale-100 cursor-pointer bg-gradient-to-r hover:text-black'
+                selectedId || unlockedMemories.length === 8
+                  ? 'shadow-glow scale-100 cursor-pointer border-primary bg-gradient-to-r from-primary/20 to-primary/30 text-primary hover:bg-primary hover:text-black'
                   : 'scale-95 cursor-not-allowed border-white/10 bg-transparent text-white/20 opacity-50'
               }
             `}
           >
-            {selectedId ? 'Tiếp tục hành trình' : 'Chọn địa điểm'}
+            {unlockedMemories.length === 8
+              ? 'Nhận quyển sách ký ức'
+              : selectedId
+                ? 'Tiếp tục hành trình'
+                : 'Chọn địa điểm'}
           </button>
         </footer>
 
         {/* Corner Accents */}
-        <div className="border-primary/30 pointer-events-none absolute left-4 top-[calc(env(safe-area-inset-top)+1rem)] h-8 w-8 rounded-tl-lg border-l border-t sm:top-4"></div>
-        <div className="border-primary/30 pointer-events-none absolute right-4 top-[calc(env(safe-area-inset-top)+1rem)] h-8 w-8 rounded-tr-lg border-r border-t sm:top-4"></div>
-        <div className="border-primary/30 pointer-events-none absolute bottom-[calc(env(safe-area-inset-bottom)+1rem)] left-4 h-8 w-8 rounded-bl-lg border-b border-l sm:bottom-4"></div>
-        <div className="border-primary/30 pointer-events-none absolute bottom-[calc(env(safe-area-inset-bottom)+1rem)] right-4 h-8 w-8 rounded-br-lg border-b border-r sm:bottom-4"></div>
+        <div className="pointer-events-none absolute left-4 top-[calc(env(safe-area-inset-top)+1rem)] h-8 w-8 rounded-tl-lg border-l border-t border-primary/30 sm:top-4"></div>
+        <div className="pointer-events-none absolute right-4 top-[calc(env(safe-area-inset-top)+1rem)] h-8 w-8 rounded-tr-lg border-r border-t border-primary/30 sm:top-4"></div>
+        <div className="pointer-events-none absolute bottom-[calc(env(safe-area-inset-bottom)+1rem)] left-4 h-8 w-8 rounded-bl-lg border-b border-l border-primary/30 sm:bottom-4"></div>
+        <div className="pointer-events-none absolute bottom-[calc(env(safe-area-inset-bottom)+1rem)] right-4 h-8 w-8 rounded-br-lg border-b border-r border-primary/30 sm:bottom-4"></div>
       </div>
 
       <style jsx global>{`

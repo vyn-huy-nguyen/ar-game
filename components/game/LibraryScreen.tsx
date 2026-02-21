@@ -4,107 +4,169 @@ import React from 'react';
 import { useGame } from '@/app/[locale]/game/GameContext';
 
 const MEMORIES = [
-  { id: 'ho-guom', title: 'Hồ Hoàn Kiếm', icon: 'temple_buddhist' },
-  { id: 'o-quan-chuong', title: 'Ô Quan Chưởng', icon: 'fort' },
-  { id: 'hang-buom', title: 'Hàng Buồm', icon: 'sailing' },
-  { id: 'hang-dong', title: 'Hàng Đồng', icon: 'notifications' },
-  { id: 'hang-trong', title: 'Hàng Trống', icon: 'image' },
-  { id: 'lan-ong', title: 'Lãn Ông', icon: 'local_florist' },
-  { id: 'dong-xuan', title: 'Đồng Xuân', icon: 'storefront' },
-  { id: 'hang-ma', title: 'Hàng Mã', icon: 'local_fire_department' },
+  { id: 'o-quan-chuong', title: 'Ô Quan Chưởng', icon: 'castle', date: 'Mảnh ghép #01' },
+  { id: 'hang-buom', title: 'Hàng Buồm', icon: 'sailing', date: 'Mảnh ghép #02' },
+  { id: 'hang-dong', title: 'Hàng Đồng', icon: 'notifications', date: 'Mảnh ghép #03' },
+  { id: 'hang-trong', title: 'Hàng Trống', icon: 'image', date: 'Mảnh ghép #04' },
+  { id: 'lan-ong', title: 'Lãn Ông', icon: 'local_florist', date: 'Mảnh ghép #05' },
+  { id: 'dong-xuan', title: 'Đồng Xuân', icon: 'storefront', date: 'Mảnh ghép #06' },
+  { id: 'hang-ma', title: 'Hàng Mã', icon: 'local_fire_department', date: 'Mảnh ghép #07' },
+  { id: 'ho-guom', title: 'Hồ Hoàn Kiếm', icon: 'castle', date: 'Mảnh ghép #08' },
 ];
 
 export default function LibraryScreen() {
   const { setCurrentScreen, unlockedMemories } = useGame();
 
   return (
-    <div className="bg-background-dark font-display flex h-[100dvh] w-full flex-col text-white">
-      {/* Header */}
-      <div className="bg-background-dark/80 sticky top-0 z-20 flex items-center justify-between px-6 pb-2 pt-[calc(env(safe-area-inset-top)+1rem)] backdrop-blur-md">
-        <button
-          onClick={() => setCurrentScreen('map')}
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 hover:bg-white/10"
-        >
-          <span className="material-symbols-outlined text-primary">arrow_back</span>
-        </button>
-        <h1 className="text-primary text-xl font-black uppercase tracking-[0.3em]">
-          Thư viện ký ức
-        </h1>
-        <div className="w-10"></div>
+    <div className="relative h-[100dvh] w-full overflow-hidden bg-background-dark font-display text-white">
+      {/* Background Gradients & Particles */}
+      <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-800 via-background-dark to-background-dark"></div>
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        {[...Array(6)].map((_, i) => (
+          <div
+            key={i}
+            className="animate-particle-float absolute rounded-full bg-primary opacity-0 shadow-[0_0_4px_#f9d406]"
+            style={{
+              width: `${Math.random() * 4 + 2}px`,
+              height: `${Math.random() * 4 + 2}px`,
+              left: `${Math.random() * 100}%`,
+              top: `${90 + Math.random() * 10}%`,
+              animationDelay: `${Math.random() * 5}s`,
+            }}
+          ></div>
+        ))}
       </div>
 
-      {/* Grid */}
-      <div className="scrollbar-hide flex-grow overflow-y-auto px-6 py-4">
-        <div className="grid grid-cols-2 gap-4">
-          {MEMORIES.map((memory) => {
-            const isUnlocked = unlockedMemories.includes(memory.id);
-            return (
-              <div
-                key={memory.id}
-                className={`relative flex aspect-square flex-col items-center justify-center gap-3 rounded-3xl border p-4 transition-all duration-500
-                   ${
-                     isUnlocked
-                       ? 'border-primary/40 bg-navy-mid/30 shadow-glow'
-                       : 'border-white/5 bg-white/5 opacity-40 grayscale'
-                   }
-                 `}
-              >
-                <div
-                  className={`flex h-14 w-14 items-center justify-center rounded-full
-                    ${isUnlocked ? 'bg-primary text-background-dark' : 'bg-white/10 text-white/20'}
-                  `}
-                >
-                  <span className="material-symbols-outlined text-2xl">
-                    {isUnlocked ? memory.icon : 'lock'}
-                  </span>
-                </div>
-                <p
-                  className={`text-center text-[10px] font-black uppercase tracking-widest
-                    ${isUnlocked ? 'text-white' : 'text-white/20'}
-                  `}
-                >
-                  {isUnlocked ? memory.title : 'Đang khóa'}
-                </p>
-
-                {isUnlocked && (
-                  <div className="absolute right-3 top-3">
-                    <div className="bg-primary shadow-glow h-2 w-2 animate-pulse rounded-full"></div>
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Statistics or Status */}
-        <div className="bg-navy-deep/20 mb-[calc(env(safe-area-inset-bottom)+5rem)] mt-12 space-y-4 rounded-3xl border border-white/5 p-8 text-center sm:mb-12">
-          <h3 className="text-primary text-xs font-bold uppercase tracking-widest">
-            Tiến trình khôi phục
-          </h3>
-          <div className="relative h-2 w-full overflow-hidden rounded-full bg-white/5">
-            <div
-              className="bg-primary shadow-glow absolute left-0 top-0 h-full transition-all duration-1000"
-              style={{ width: `${(unlockedMemories.length / 8) * 100}%` }}
-            ></div>
-          </div>
-          <p className="text-4xl font-black text-white">{unlockedMemories.length}/8</p>
-          <p className="text-[10px] uppercase tracking-[0.3em] text-white/40">
-            Ký ức đã được giải mã
-          </p>
-        </div>
-      </div>
-
-      {/* Footer Button if all unlocked */}
-      {unlockedMemories.length === 8 && (
-        <div className="mt-8 px-6">
+      <div className="relative z-10 mx-auto flex h-full max-w-md flex-col">
+        {/* Header */}
+        <header className="flex shrink-0 items-center justify-between px-6 pb-2 pt-6">
           <button
-            onClick={() => setCurrentScreen('completion')}
-            className="bg-primary text-background-dark shadow-glow h-14 w-full rounded-2xl font-bold uppercase tracking-widest"
+            onClick={() => setCurrentScreen('arrival')}
+            className="group flex items-center gap-2 text-white/80 transition-colors hover:text-primary"
           >
-            Xem thành quả cuối cùng
+            <span className="material-symbols-outlined text-[24px] transition-transform group-hover:-translate-x-1">
+              arrow_back
+            </span>
+            <span className="hidden text-sm font-medium tracking-wide sm:inline">Quay lại</span>
           </button>
-        </div>
-      )}
+          <h1 className="gold-gradient-text flex-grow pr-8 text-center text-2xl font-bold uppercase tracking-wide md:text-3xl">
+            Thư viện Ký ức
+          </h1>
+        </header>
+
+        <div className="mb-4 h-px w-full bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
+
+        {/* Scrollable Content */}
+        <main className="custom-scrollbar flex-grow overflow-y-auto px-6 pb-24 pt-2">
+          <div className="grid grid-cols-2 gap-4 pb-8">
+            {MEMORIES.map((memory) => {
+              const isUnlocked = unlockedMemories.includes(memory.id);
+              if (isUnlocked) {
+                return (
+                  <div
+                    key={memory.id}
+                    className="card-glass group relative flex flex-col items-center gap-3 overflow-hidden rounded-xl p-4 text-center transition-all hover:border-primary/40 hover:shadow-[0_0_15px_rgba(249,212,6,0.1)]"
+                  >
+                    <div className="absolute right-0 top-0 flex h-8 w-8 items-center justify-center rounded-bl-xl bg-primary/10 text-primary">
+                      <span className="material-symbols-outlined text-[16px]">check_circle</span>
+                    </div>
+                    <div className="flex h-14 w-14 items-center justify-center rounded-full border border-primary/30 bg-slate-800 transition-transform duration-300 group-hover:scale-110">
+                      <span className="material-symbols-outlined text-[28px] text-primary">
+                        {memory.icon}
+                      </span>
+                    </div>
+                    <div className="flex flex-col gap-0.5">
+                      <h3 className="line-clamp-1 text-sm font-semibold text-white">
+                        {memory.title}
+                      </h3>
+                      <span className="text-[10px] uppercase tracking-wider text-white/50">
+                        {memory.date}
+                      </span>
+                    </div>
+                    <button className="group/btn mt-auto flex w-full items-center justify-center gap-1.5 rounded-lg border border-primary/30 bg-primary/10 px-3 py-2 text-primary transition-all hover:bg-primary hover:text-background-dark">
+                      <span className="material-symbols-outlined text-[16px]">download</span>
+                      <span className="text-xs font-bold">Tải PDF</span>
+                    </button>
+                  </div>
+                );
+              }
+              return (
+                <div
+                  key={memory.id}
+                  className="card-locked relative flex flex-col items-center gap-3 overflow-hidden rounded-xl p-4 text-center opacity-75"
+                >
+                  <div className="mb-1 flex h-14 w-14 items-center justify-center rounded-full border border-white/10 bg-slate-800/50">
+                    <span className="material-symbols-outlined text-[24px] text-white/20">
+                      lock
+                    </span>
+                  </div>
+                  <div className="flex w-full flex-col items-center gap-0.5">
+                    <div className="mb-1 h-4 w-2/3 rounded bg-white/10"></div>
+                    <span className="text-[10px] uppercase tracking-wider text-white/30">
+                      Chưa mở khóa
+                    </span>
+                  </div>
+                  <div className="mt-auto flex h-8 w-full items-center justify-center rounded-lg border border-dashed border-white/10 bg-white/5">
+                    <span className="material-symbols-outlined text-[16px] text-white/20">
+                      lock
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </main>
+      </div>
+
+      <style jsx>{`
+        .gold-gradient-text {
+          background: linear-gradient(to bottom, #f9d406, #dcb805);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .card-glass {
+          background: rgba(30, 41, 59, 0.7);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+          border: 1px solid rgba(249, 212, 6, 0.15);
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        .card-locked {
+          background: rgba(15, 23, 42, 0.6);
+          backdrop-filter: blur(4px);
+          border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: rgba(255, 255, 255, 0.05);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: rgba(249, 212, 6, 0.3);
+          border-radius: 4px;
+        }
+        @keyframes particle-float {
+          0% {
+            transform: translateY(0) translateX(0);
+            opacity: 0;
+          }
+          20% {
+            opacity: 0.5;
+          }
+          80% {
+            opacity: 0.5;
+          }
+          100% {
+            transform: translateY(-100px) translateX(20px);
+            opacity: 0;
+          }
+        }
+        .animate-particle-float {
+          animation: particle-float 10s linear infinite;
+        }
+      `}</style>
     </div>
   );
 }

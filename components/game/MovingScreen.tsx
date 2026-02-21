@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { useGame } from '@/app/[locale]/game/GameContext';
 import { useTranslations } from 'next-intl';
 import dynamic from 'next/dynamic';
@@ -9,9 +9,9 @@ import dynamic from 'next/dynamic';
 const LeafletMap = dynamic(() => import('./LeafletMap'), {
   ssr: false,
   loading: () => (
-    <div className="bg-background-dark flex h-full w-full items-center justify-center text-white/40">
+    <div className="flex h-full w-full items-center justify-center bg-background-dark text-white/40">
       <div className="flex flex-col items-center gap-4">
-        <div className="border-primary h-8 w-8 animate-spin rounded-full border-2 border-t-transparent"></div>
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent"></div>
         <p className="font-display text-xs uppercase tracking-widest">Đang tải bản đồ...</p>
       </div>
     </div>
@@ -29,11 +29,8 @@ const LOCATION_COORDS: Record<string, { lat: number; lng: number; name: string }
   'hang-ngang': { lat: 21.034, lng: 105.851, name: 'Phố Hàng Ngang' },
 };
 
-type NavMode = 'overview' | 'navigation';
-
 export default function MovingScreen() {
-  const { setCurrentScreen, currentLocationId } = useGame();
-  const [mode, setMode] = useState<NavMode>('overview');
+  const { setCurrentScreen, currentLocationId, movingMode, setMovingMode } = useGame();
   const t = useTranslations('game');
 
   const location = useMemo(
@@ -43,24 +40,26 @@ export default function MovingScreen() {
 
   if (!location) {
     return (
-      <div className="bg-background-dark flex h-[100dvh] items-center justify-center text-white">
+      <div className="flex h-[100dvh] items-center justify-center bg-background-dark text-white">
         <p>No location selected</p>
       </div>
     );
   }
 
   return (
-    <div className="bg-background-dark font-display relative flex h-[100dvh] w-full flex-col overflow-hidden text-white">
+    <div className="relative flex h-[100dvh] w-full flex-col overflow-hidden bg-background-dark font-display text-white">
       {/* Top Header */}
-      <div className="from-background-dark/90 absolute left-0 top-0 z-20 flex w-full items-center justify-between bg-gradient-to-b to-transparent px-4 pb-4 pt-[calc(env(safe-area-inset-top)+1rem)]">
+      <div className="absolute left-0 top-0 z-20 flex w-full items-center justify-between bg-gradient-to-b from-background-dark/90 to-transparent px-4 pb-4 pt-[calc(env(safe-area-inset-top)+1rem)]">
         <button
-          onClick={() => (mode === 'navigation' ? setMode('overview') : setCurrentScreen('map'))}
-          className="bg-navy-light/50 hover:bg-navy-light/80 flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-white backdrop-blur-md transition-colors"
+          onClick={() =>
+            movingMode === 'navigation' ? setMovingMode('overview') : setCurrentScreen('map')
+          }
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-navy-light/50 text-white backdrop-blur-md transition-colors hover:bg-navy-light/80"
         >
           <span className="material-symbols-outlined text-2xl">arrow_back</span>
         </button>
-        <div className="bg-navy-light/50 flex items-center gap-2 rounded-full border border-white/10 px-3 py-1 backdrop-blur-md">
-          <span className="text-primary text-xs font-bold uppercase leading-none tracking-widest">
+        <div className="flex items-center gap-2 rounded-full border border-white/10 bg-navy-light/50 px-3 py-1 backdrop-blur-md">
+          <span className="text-xs font-bold uppercase leading-none tracking-widest text-primary">
             {location.name}
           </span>
         </div>
@@ -68,8 +67,8 @@ export default function MovingScreen() {
       </div>
 
       {/* Main Map Content Area */}
-      <div className="bg-background-dark relative h-full w-full flex-grow overflow-hidden border-b border-white/5">
-        {mode === 'navigation' ? (
+      <div className="relative h-full w-full flex-grow overflow-hidden border-b border-white/5 bg-background-dark">
+        {movingMode === 'navigation' ? (
           // REAL-TIME NAVIGATION MODE (Leaflet)
           <div className="animate-in fade-in absolute inset-0 z-0 duration-1000">
             <LeafletMap
@@ -109,14 +108,14 @@ export default function MovingScreen() {
             {/* Destination Marker */}
             <div className="absolute left-[65%] top-[35%] z-10 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center">
               <div className="relative">
-                <div className="bg-primary absolute inset-0 animate-pulse rounded-full opacity-40 blur-lg"></div>
-                <div className="border-primary shadow-glow-strong bg-background-dark relative rounded-full border-2 p-3">
-                  <span className="material-symbols-outlined text-primary text-4xl">
+                <div className="absolute inset-0 animate-pulse rounded-full bg-primary opacity-40 blur-lg"></div>
+                <div className="shadow-glow-strong relative rounded-full border-2 border-primary bg-background-dark p-3">
+                  <span className="material-symbols-outlined text-4xl text-primary">
                     temple_buddhist
                   </span>
                 </div>
               </div>
-              <div className="border-primary/30 text-primary mt-3 whitespace-nowrap rounded border bg-black/60 px-4 py-2 text-sm font-bold shadow-lg backdrop-blur-sm">
+              <div className="mt-3 whitespace-nowrap rounded border border-primary/30 bg-black/60 px-4 py-2 text-sm font-bold text-primary shadow-lg backdrop-blur-sm">
                 {location.name}
               </div>
             </div>
@@ -136,14 +135,14 @@ export default function MovingScreen() {
       <div className="relative z-30 flex-none overflow-hidden px-4 pb-[calc(env(safe-area-inset-bottom)+1.5rem)] pt-4">
         {/* Mission Control Panel (Overview Mode) */}
         <div
-          className={`transition-all duration-500 ${mode === 'overview' ? 'translate-y-0 opacity-100' : 'pointer-events-none fixed translate-y-20 opacity-0'}`}
+          className={`transition-all duration-500 ${movingMode === 'overview' ? 'translate-y-0 opacity-100' : 'pointer-events-none fixed translate-y-20 opacity-0'}`}
         >
-          <div className="bg-navy-light/40 mx-auto w-full max-w-md overflow-hidden rounded-2xl border border-white/10 shadow-2xl ring-1 ring-white/5 backdrop-blur-xl">
-            <div className="via-primary h-1 w-full bg-gradient-to-r from-transparent to-transparent opacity-50"></div>
+          <div className="mx-auto w-full max-w-md overflow-hidden rounded-2xl border border-white/10 bg-navy-light/40 shadow-2xl ring-1 ring-white/5 backdrop-blur-xl">
+            <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50"></div>
             <div className="flex flex-col gap-4 p-5">
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1">
-                  <h2 className="text-primary/90 mb-1 flex items-center gap-1 text-xs font-bold uppercase tracking-widest">
+                  <h2 className="mb-1 flex items-center gap-1 text-xs font-bold uppercase tracking-widest text-primary/90">
                     <span className="material-symbols-outlined text-sm">history_edu</span>
                     {t('current_mission')}
                   </h2>
@@ -151,7 +150,7 @@ export default function MovingScreen() {
                     {t.rich('mission_desc', {
                       location: location.name,
                       span: (chunks) => (
-                        <span className="text-primary border-primary/30 border-b pb-0.5">
+                        <span className="border-b border-primary/30 pb-0.5 text-primary">
                           {chunks}
                         </span>
                       ),
@@ -170,8 +169,8 @@ export default function MovingScreen() {
 
               <div className="mt-2 flex gap-3">
                 <button
-                  onClick={() => setMode('navigation')}
-                  className="bg-primary hover:bg-primary/90 text-navy-dark shadow-glow flex flex-1 items-center justify-center gap-3 rounded-xl py-4 text-sm font-black uppercase tracking-widest transition-all active:scale-95"
+                  onClick={() => setMovingMode('navigation')}
+                  className="text-navy-dark shadow-glow flex flex-1 items-center justify-center gap-3 rounded-xl bg-primary py-4 text-sm font-black uppercase tracking-widest transition-all hover:bg-primary/90 active:scale-95"
                 >
                   <span>{t('start_walking')}</span>
                   <span className="material-symbols-outlined text-xl">navigation</span>
@@ -183,11 +182,11 @@ export default function MovingScreen() {
 
         {/* Arrival Action Bar (Navigation Mode) */}
         <div
-          className={`transition-all duration-500 ${mode === 'navigation' ? 'translate-y-0 opacity-100' : 'pointer-events-none fixed translate-y-20 opacity-0'}`}
+          className={`transition-all duration-500 ${movingMode === 'navigation' ? 'translate-y-0 opacity-100' : 'pointer-events-none fixed translate-y-20 opacity-0'}`}
         >
           <button
             onClick={() => setCurrentScreen('arrival')}
-            className="animate-pulse-glow bg-primary text-navy-dark shadow-glow-strong mx-auto block h-16 w-full max-w-[320px] rounded-2xl border border-white/20 font-black uppercase tracking-[0.2em] transition-all active:scale-95"
+            className="text-navy-dark shadow-glow-strong mx-auto block h-16 w-full max-w-[320px] animate-pulse-glow rounded-2xl border border-white/20 bg-primary font-black uppercase tracking-[0.2em] transition-all active:scale-95"
           >
             Đã đến nơi
           </button>

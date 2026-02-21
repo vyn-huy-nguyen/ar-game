@@ -1,111 +1,303 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-'use client';
-
-import React from 'react';
+/* eslint-disable @next/next/no-img-element */
+import React, { useState } from 'react';
 import { useGame } from '@/app/[locale]/game/GameContext';
-import { useTranslations } from 'next-intl';
+
+const LOCATION_INFO: Record<
+  string,
+  {
+    title: string;
+    subtitle: string;
+    history: string;
+    culture: string;
+    quote: string;
+    photo: string;
+    year: string;
+  }
+> = {
+  'o-quan-chuong': {
+    title: 'Ô Quan Chưởng',
+    subtitle: 'Di sản ngàn năm',
+    history:
+      'Ô Quan Chưởng (hay Ô Đông Hà) được xây dựng vào năm Cảnh Hưng thứ 10 (1749). Đây là cửa ô duy nhất còn sót lại của kinh thành Thăng Long xưa, chứng kiến bao thăng trầm của lịch sử thủ đô qua các cuộc kháng chiến.',
+    culture:
+      'Kiến trúc mang đậm nét đặc trưng thời Nguyễn với vọng lâu và mái vòm cong. Nơi đây không chỉ là di tích kiến trúc quân sự mà còn là biểu tượng cho tinh thần bất khuất của người Hà Nội.',
+    quote: 'Lối xưa xe ngựa hồn thu thảo, \nNền cũ lâu đài bóng tịch dương.',
+    photo:
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuCiwN5uhZGlq_ZLIfRjwgnr5GY5zBGyAXnD5Ik8kLik-EL5eifDaRltNyhVqV554V4Nf29gQ8HaLmSjrZ2iRp07SZZ9HuPFrZ_sG04WgBZjvfpYrhP_sG8OICtrMUeZHbGMwZSCTuPRhWklKh07nLJIeux1Eur_YrKnJ9VVBtt_ZeLBksHBHXbfN_6_MyBCzot_zVtrYMnwr8qeFjXMpcmDEa7zMGl3gXlCgZpuZBhInIgIl1qGlLupjDDUU1tp7E-dQ8x5sJTa4sM4',
+    year: 'Hanoi, circa 1900',
+  },
+  default: {
+    title: 'Phố Cổ Hà Nội',
+    subtitle: 'Hồn cốt Kinh Kỳ',
+    history:
+      'Khu phố cổ Hà Nội là một di sản đô thị văn hóa độc đáo, nơi lưu giữ kiến trúc từ thế kỷ 19 with những ngôi nhà ống đặc trưng và hệ thống ngõ nhỏ đan xen.',
+    culture:
+      'Văn hóa phố nghề "Hàng" gắn liền với đời sống tâm linh và sinh hoạt cộng đồng của người dân thủ đô qua hàng trăm năm lịch sử giao thương rộn rã.',
+    quote: 'Hà Nội ba mươi sáu phố phường, \nHàng Buồm, Hàng Bạc, Hàng Ngang, Hàng Đào.',
+    photo:
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuDkYYgAtSHck1GUzYNJCg7rS9rPKGfGzLoUvy1wZ422LNEoo_hSLKt0sbpMYoKdYvpHBJBW1E1lZvWLDNcPDnK9_2I0xz002BO-nP2e6RnXbn3Z-OHDqFw5bLSQ8WLVA1xln8A4zkPAuWLq4dE4US_lIvWr55USKSExWFZd2H3YacVa7U1I50S1I0N2L-mMFxBO70uhmXbEQHdjqd0xxr5JnzpsJjb-fh4JOkDOwgBFqaggPgQYGyqZeNqaGNPXpgSKRX4xTbD9R8ne',
+    year: 'Hanoi, Early 20th Century',
+  },
+};
 
 export default function ArrivalScreen() {
   const { setCurrentScreen, currentLocationId } = useGame();
-  const t = useTranslations('game');
+  const [view, setView] = useState<'splash' | 'info'>('splash');
+
+  const info = currentLocationId
+    ? LOCATION_INFO[currentLocationId] || LOCATION_INFO.default
+    : LOCATION_INFO.default;
 
   return (
-    <div className="bg-background-light font-display selection:bg-primary dark:bg-background-dark relative h-[100dvh] w-full overflow-hidden text-white selection:text-black">
-      {/* Decorative Border Frame */}
-      <div className="border-primary/30 pointer-events-none fixed inset-4 z-20 rounded-[2rem] border shadow-[0_0_15px_rgba(249,212,6,0.1)]"></div>
+    <div className="relative flex h-[100dvh] w-full flex-col overflow-hidden bg-navy-deep font-display text-white transition-colors duration-700 selection:bg-primary selection:text-black">
+      {/* Decorative Border Frame (Splash only) */}
+      {view === 'splash' && (
+        <div className="pointer-events-none fixed inset-4 z-20 rounded-[2rem] border border-primary/30 shadow-[0_0_15px_rgba(249,212,6,0.1)]"></div>
+      )}
 
       {/* Background Effects */}
-      <div className="bg-background-dark absolute inset-0 z-0">
-        {/* Radial Glow Center */}
+      <div className="absolute inset-0 z-0">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(249,212,6,0.15)_0%,rgba(15,20,32,0)_70%)]"></div>
+        <div
+          className="pointer-events-none absolute inset-0 opacity-10"
+          style={{
+            backgroundImage: "url('https://www.transparenttextures.com/patterns/dust.png')",
+          }}
+        ></div>
 
-        {/* Floating Particles (Simulated) */}
         {[...Array(6)].map((_, i) => (
           <div
             key={i}
-            className="bg-primary absolute rounded-full opacity-60 blur-[1px]"
+            className="absolute animate-particle-rise rounded-full bg-primary opacity-30 blur-[1px]"
             style={{
-              width: Math.random() > 0.5 ? '4px' : '6px',
-              height: Math.random() > 0.5 ? '4px' : '6px',
-              top: `${Math.random() * 80 + 10}%`,
-              left: `${Math.random() * 80 + 10}%`,
-              animation: `float ${Math.random() * 5 + 5}s ease-in-out infinite ${Math.random() * 2}s`,
-              opacity: Math.random() * 0.5 + 0.3,
+              width: `${Math.random() * 3 + 1}px`,
+              height: `${Math.random() * 3 + 1}px`,
+              bottom: '5%',
+              left: `${Math.random() * 90 + 5}%`,
+              animationDelay: `${Math.random() * 4}s`,
+              animationDuration: `${Math.random() * 3 + 4}s`,
             }}
           ></div>
         ))}
       </div>
 
-      {/* Main Content Container */}
-      <div className="relative z-10 flex h-full flex-col justify-between px-6 pb-[calc(env(safe-area-inset-bottom)+1.5rem)] pt-[calc(env(safe-area-inset-top)+1rem)]">
-        {/* Header: Navigation Icons */}
-        <div className="flex w-full items-start justify-between px-2">
-          {/* Map Button */}
+      {/* Header: Navigation Icons */}
+      <div className="relative z-40 flex w-full shrink-0 items-start justify-between px-6 pb-4 pt-[calc(env(safe-area-inset-top)+1.5rem)]">
+        <button
+          onClick={() => (view === 'info' ? setView('splash') : setCurrentScreen('moving'))}
+          className="group flex size-10 items-center justify-center rounded-full border border-primary/20 bg-navy-light/60 text-primary shadow-lg backdrop-blur-sm transition-all duration-300 hover:bg-primary hover:text-navy-deep active:scale-95"
+        >
+          <span className="material-symbols-outlined !text-[20px] transition-transform group-hover:-translate-x-0.5">
+            arrow_back
+          </span>
+        </button>
+
+        <div className="flex gap-4">
           <button
-            onClick={() => setCurrentScreen('map')}
-            className="border-primary/20 bg-navy-mid text-primary hover:bg-primary hover:text-navy-mid hover:shadow-primary/20 group flex size-12 items-center justify-center rounded-full border shadow-lg transition-all duration-300 active:scale-95"
+            onClick={() => setView('info')}
+            className={`flex size-10 items-center justify-center rounded-full border shadow-lg backdrop-blur-sm transition-all duration-300 active:scale-95
+              ${view === 'info' ? 'border-primary bg-primary text-navy-deep' : 'border-primary/20 bg-navy-light/60 text-primary hover:bg-primary hover:text-navy-deep'}`}
+            title={view === 'info' ? 'Đang xem' : 'Giới thiệu'}
           >
-            <span className="material-symbols-outlined !text-[24px]">map</span>
-          </button>
-          {/* Journal Button */}
-          <button
-            onClick={() => setCurrentScreen('collected')}
-            className="border-primary/20 bg-navy-mid text-primary hover:bg-primary hover:text-navy-mid hover:shadow-primary/20 group flex size-12 items-center justify-center rounded-full border shadow-lg transition-all duration-300 active:scale-95"
-          >
-            <span className="material-symbols-outlined !text-[24px]">book_2</span>
-          </button>
-        </div>
-
-        {/* Center Stage: Title & Visual */}
-        <div className="-mt-10 flex flex-1 flex-col items-center justify-center space-y-8 text-center">
-          {/* Decorative Element above text */}
-          <div className="via-primary h-16 w-px bg-gradient-to-b from-transparent to-transparent opacity-50"></div>
-
-          <div className="relative px-4">
-            {/* Text Glow Effect Layer */}
-            <div className="bg-primary/10 absolute inset-0 scale-150 rounded-full blur-xl"></div>
-            <h1 className="text-primary relative text-3xl font-bold leading-tight tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] md:text-5xl">
-              Bạn đã đến
-              <br />
-              <span className="text-white">vùng ký ức</span>
-            </h1>
-            <p className="text-primary/60 mt-4 font-sans text-sm uppercase tracking-widest">
-              Hà Nội • {currentLocationId ? 'Phố cổ' : '1946'}
-            </p>
-          </div>
-
-          {/* Decorative Element below text */}
-          <div className="via-primary h-16 w-px bg-gradient-to-b from-transparent to-transparent opacity-50"></div>
-        </div>
-
-        {/* Footer: Primary Action */}
-        <div className="flex w-full flex-col items-center justify-end space-y-6">
-          {/* Scan Button */}
-          <button
-            onClick={() => setCurrentScreen('scanning')}
-            className="group relative w-full max-w-xs"
-          >
-            <div className="animate-pulse-glow bg-primary absolute inset-0 rounded-full opacity-40 blur transition-opacity duration-500 group-hover:opacity-60"></div>
-            <div className="bg-primary text-navy-mid relative flex h-14 w-full items-center justify-center overflow-hidden rounded-full text-lg font-bold tracking-wide shadow-xl transition-transform duration-200 hover:-translate-y-0.5 active:scale-95">
-              <span className="material-symbols-outlined mr-2 animate-pulse">radar</span>
-              Quét manh mối
-              {/* Shiny reflection effect */}
-              <div className="absolute inset-0 -translate-x-full skew-x-12 bg-gradient-to-r from-transparent via-white/30 to-transparent group-hover:animate-[shimmer_1.5s_infinite]"></div>
-            </div>
+            <span className="material-symbols-outlined !text-[20px]">menu_book</span>
           </button>
 
-          {/* Hint Text */}
-          <p className="text-primary/40 font-sans text-xs tracking-wide">
-            Chạm để khám phá không gian xung quanh
-          </p>
+          <button
+            onClick={() => setCurrentScreen('library')}
+            className="group flex size-10 items-center justify-center rounded-full border border-primary/20 bg-navy-light/60 text-primary shadow-lg backdrop-blur-sm transition-all duration-300 hover:bg-primary hover:text-navy-deep active:scale-95"
+            title="Thư viện"
+          >
+            <span className="material-symbols-outlined !text-[20px]">inventory_2</span>
+          </button>
         </div>
       </div>
 
+      {/* Main Content Area */}
+      <div className="relative z-10 flex min-h-0 flex-1 flex-col overflow-hidden">
+        {view === 'splash' ? (
+          /* SPLASH VIEW (SCREEN 5) */
+          <div className="animate-fade-in flex flex-1 flex-col items-center justify-center p-6 text-center">
+            <div className="animate-fade-in space-y-8">
+              <div className="mx-auto h-12 w-px bg-gradient-to-b from-transparent via-primary to-transparent opacity-50"></div>
+
+              <div className="relative px-4">
+                <div className="absolute inset-0 scale-150 rounded-full bg-primary/10 blur-2xl"></div>
+                <h1 className="relative text-3xl font-bold leading-tight tracking-wide text-primary drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] md:text-5xl">
+                  Bạn đã đến
+                  <br />
+                  <span className="text-white">vùng ký ức</span>
+                </h1>
+                <p className="mt-4 font-sans text-sm font-bold uppercase tracking-widest text-primary/60">
+                  Hà Nội • {currentLocationId?.replace('-', ' ') || 'Kinh kỳ'}
+                </p>
+              </div>
+
+              <div className="mx-auto h-12 w-px bg-gradient-to-b from-transparent via-primary to-transparent opacity-50"></div>
+            </div>
+
+            {/* Footer: Scan Button (Splash only) */}
+            <div className="mt-8 flex w-full flex-col items-center justify-end space-y-6">
+              <button
+                onClick={() => setCurrentScreen('scanning')}
+                className="group relative w-full max-w-xs"
+              >
+                <div className="absolute inset-0 animate-pulse-glow rounded-full bg-primary opacity-40 blur transition-opacity duration-500 group-hover:opacity-60"></div>
+                <div className="relative flex h-14 w-full items-center justify-center overflow-hidden rounded-full bg-primary font-black tracking-widest text-navy-deep shadow-xl transition-all duration-300 hover:-translate-y-0.5 active:scale-95">
+                  <span className="material-symbols-outlined mr-2 animate-pulse">radar</span>
+                  QUÉT MANH MỐI
+                  <div className="group-hover:animate-shimmer-fast absolute inset-0 -translate-x-full skew-x-12 bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
+                </div>
+              </button>
+              <p className="font-sans text-[10px] font-black uppercase tracking-[0.2em] text-primary/40">
+                Chạm để khám phá ký ức
+              </p>
+            </div>
+          </div>
+        ) : (
+          /* INFO VIEW (SCREEN 5.1 REDESIGN) */
+          <div className="animate-fade-in-up mx-auto flex min-h-0 w-full max-w-6xl flex-1 items-center justify-center overflow-hidden p-3 md:aspect-[16/9] md:p-8">
+            <div className="relative flex h-full w-full flex-col overflow-hidden rounded-[2rem] border border-primary/20 bg-navy-mid shadow-2xl md:flex-row md:rounded-[3.5rem]">
+              {/* Left Side: Photo */}
+              <div className="group relative h-40 w-full shrink-0 overflow-hidden md:h-full md:w-1/2">
+                <div className="absolute inset-0 z-10 bg-navy-deep/20"></div>
+                <img
+                  alt={`${info.title} Historical Photo`}
+                  className="sepia-filter h-full w-full object-cover opacity-90 transition-transform duration-1000 group-hover:scale-105"
+                  src={info.photo}
+                />
+                <div className="absolute inset-0 z-20 bg-gradient-to-t from-navy-mid via-navy-mid/40 to-transparent md:bg-gradient-to-r"></div>
+                <div className="absolute bottom-2 left-5 z-30 opacity-80">
+                  <div className="text-primary-dim font-serif text-[9px] italic">{info.year}</div>
+                </div>
+              </div>
+
+              {/* Right Side: Text Details */}
+              <div className="scrollbar-hide relative z-30 flex min-h-0 w-full flex-1 flex-col overflow-y-auto overflow-x-hidden p-6 md:h-full md:w-1/2 md:p-12">
+                <div className="mb-3 h-1 w-10 bg-gradient-to-r from-primary to-transparent opacity-80"></div>
+                <h2 className="mb-0.5 font-display text-2xl font-bold tracking-tight text-primary drop-shadow-sm md:text-5xl">
+                  {info.title}
+                </h2>
+                <p className="mb-4 font-sans text-[9px] uppercase tracking-[0.2em] text-primary/60">
+                  {info.subtitle}
+                </p>
+
+                <div className="min-h-0 flex-1 space-y-5">
+                  <div>
+                    <h3 className="mb-1 flex items-center gap-2 text-[11px] font-bold text-white/90">
+                      <span className="h-1 w-1 rounded-full bg-primary"></span>
+                      Lịch sử hình thành
+                    </h3>
+                    <p className="border-l border-primary/10 py-0.5 pl-3 text-justify font-sans text-[11px] leading-relaxed text-white/70">
+                      {info.history}
+                    </p>
+                  </div>
+
+                  <div>
+                    <h3 className="mb-1 flex items-center gap-2 text-[11px] font-bold text-white/90">
+                      <span className="h-1 w-1 rounded-full bg-primary"></span>
+                      Dấu ấn văn hóa
+                    </h3>
+                    <p className="border-l border-primary/10 py-0.5 pl-3 text-justify font-sans text-[11px] leading-relaxed text-white/70">
+                      {info.culture}
+                    </p>
+                  </div>
+
+                  <div className="relative mt-1 rounded-xl border border-white/5 bg-white/5 p-4">
+                    <span className="material-symbols-outlined absolute left-1.5 top-1.5 text-lg text-primary/10">
+                      format_quote
+                    </span>
+                    <p className="whitespace-pre-line px-4 text-center font-serif text-[10px] italic leading-relaxed text-primary/60">
+                      &quot;{info.quote}&quot;
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-5 flex shrink-0 items-center justify-between border-t border-white/5 pb-4 pt-5 md:pb-0">
+                  <div className="xs:flex flex hidden items-center gap-2 text-[10px] text-white/30">
+                    <span className="material-symbols-outlined text-sm">visibility</span>
+                    <span>Đã khám phá</span>
+                  </div>
+                  <button
+                    onClick={() => setView('splash')}
+                    className="xs:w-auto from-primary-dim flex w-full transform items-center justify-center gap-2 rounded-full bg-gradient-to-r to-primary px-8 py-3 text-[10px] font-black uppercase tracking-[0.15em] text-navy-deep shadow-xl transition-all hover:scale-105 hover:shadow-primary/20"
+                  >
+                    TIẾP TỤC
+                    <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
       <style jsx>{`
-        @keyframes shimmer {
+        @keyframes shimmer-fast {
           100% {
             transform: translateX(100%);
           }
+        }
+        .animate-shimmer-fast {
+          animation: shimmer-fast 1s infinite linear;
+        }
+        @keyframes particle-rise {
+          0% {
+            transform: translateY(0) scale(0);
+            opacity: 0;
+          }
+          20% {
+            opacity: 1;
+          }
+          100% {
+            transform: translateY(-300px) scale(1.5);
+            opacity: 0;
+          }
+        }
+        .animate-particle-rise {
+          animation: particle-rise 4s linear infinite;
+        }
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+            transform: scale(0.95);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+        .animate-fade-in {
+          animation: fade-in 0.5s ease-out forwards;
+        }
+        @keyframes fade-in-up {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-fade-in-up {
+          animation: fade-in-up 0.5s ease-out forwards;
+        }
+        @keyframes pulse-glow {
+          0%,
+          100% {
+            opacity: 0.3;
+            transform: scale(1);
+          }
+          50% {
+            opacity: 0.5;
+            transform: scale(1.05);
+          }
+        }
+        .animate-pulse-glow {
+          animation: pulse-glow 3s infinite ease-in-out;
+        }
+        .sepia-filter {
+          filter: sepia(0.8) contrast(1.1) brightness(0.9);
         }
       `}</style>
     </div>
