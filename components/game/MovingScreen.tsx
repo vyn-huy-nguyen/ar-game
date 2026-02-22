@@ -13,13 +13,13 @@ const LeafletMap = dynamic(() => import('./LeafletMap'), {
 const LOCATION_COORDS: Record<string, { lat: number; lng: number; name: string }> = {
   'ho-guom': { lat: 21.0285, lng: 105.8542, name: 'Hồ Hoàn Kiếm' },
   'o-quan-chuong': { lat: 21.0366, lng: 105.8528, name: 'Ô Quan Chưởng' },
+  'hang-ngang': { lat: 21.034, lng: 105.851, name: 'Phố Hàng Ngang' },
   'hang-buom': { lat: 21.0355, lng: 105.8525, name: 'Phố Hàng Buồm' },
   'hang-dong': { lat: 21.0345, lng: 105.852, name: 'Phố Hàng Đồng' },
+  'hang-bac': { lat: 21.0338, lng: 105.8525, name: 'Phố Hàng Bạc' },
+  'dong-xuan': { lat: 21.0375, lng: 105.8495, name: 'Chợ Đồng Xuân' },
   'hang-trong': { lat: 21.0305, lng: 105.8505, name: 'Phố Hàng Trống' },
   'lan-ong': { lat: 21.035, lng: 105.849, name: 'Phố Lãn Ông' },
-  'dong-xuan': { lat: 21.0375, lng: 105.8495, name: 'Chợ Đồng Xuân' },
-  'hang-ngang': { lat: 21.034, lng: 105.851, name: 'Phố Hàng Ngang' },
-  'hang-bac': { lat: 21.0338, lng: 105.8525, name: 'Phố Hàng Bạc' },
 };
 
 export default function MovingScreen() {

@@ -6,12 +6,10 @@ import { useTranslations } from 'next-intl';
 
 // Background images per location
 const LOCATION_BG: Record<string, string> = {
-  'o-quan-chuong':
-    'https://lh3.googleusercontent.com/aida-public/AB6AXuC4MLT-Sf2ajhapj7lnhs_TrXrwHE5gkbX0phBDDWtO21uljx7PjGzNyq9Kb8lDEIv4X-IKe9qtlrFmkufN6i05o8zpV2YRl1atFwOsus5VmyJrWIqcLHAhfpv2IxqVbEAmkm-G7NRtg6d-pdbFHJVKqNwgFxM9OVS90EJXWcNexxkTVwa0MbELMmTawxo2L8ckCfHaLO5j1C4v-RA1owOG6LPXGK2HXYvKcPapYAOEWjv-I93tOrnkI2jXmom0yr-QP6_3q8Upvhsl',
+  'o-quan-chuong': '/images/img1-2.jpeg',
 };
 
-const DEFAULT_BG =
-  'https://lh3.googleusercontent.com/aida-public/AB6AXuDkYYgAtSHck1GUzYNJCg7rS9rPKGfGzLoUvy1wZ422LNEoo_hSLKt0sbpMYoKdYvpHBJBW1E1lZvWLDNcPDnK9_2I0xz002BO-nP2e6RnXbn3Z-OHDqFw5bLSQ8WLVA1xln8A4zkPAuWLq4dE4US_lIvWr55USKSExWFZd2H3YacVa7U1I50S1I0N2L-mMFxBO70uhmXbEQHdjqd0xxr5JnzpsJjb-fh4JOkDOwgBFqaggPgQYGyqZeNqaGNPXpgSKRX4xTbD9R8ne';
+const DEFAULT_BG = '/images/img1-2.jpeg';
 
 // Location order for the memory index
 const LOCATION_ORDER = [

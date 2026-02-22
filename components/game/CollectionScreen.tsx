@@ -5,12 +5,10 @@ import { useTranslations } from 'next-intl';
 
 // Background images per location (used for both background blur and card)
 const LOCATION_BG: Record<string, string> = {
-  'o-quan-chuong':
-    'https://lh3.googleusercontent.com/aida-public/AB6AXuAgluo53FEleHihqP8ESPPwttpfWgzFCIm7GFT5_DJOCDkXjB7i05HBrJxkKNrFvXzPK_H6yzglusui4RwOqX5q8QhsdEtkVr7babki0VcwLKtweqh4VxMMzActLzbv2no-0mucHG5LFL4mJJ8VnLSDRU-42nX_1gixJj1wdViRQH8q6OtDEUH7zjXl5gjDUu4RphETvocnSUURXRENaZIcn4bRoFDxuHaOIgcoxCEa_n2wcHAQKAXOZB-7xcQ77bHc6pGQHKn9sEnE',
+  'o-quan-chuong': '/images/img1-1.jpg',
 };
 
-const DEFAULT_BG =
-  'https://lh3.googleusercontent.com/aida-public/AB6AXuDkYYgAtSHck1GUzYNJCg7rS9rPKGfGzLoUvy1wZ422LNEoo_hSLKt0sbpMYoKdYvpHBJBW1E1lZvWLDNcPDnK9_2I0xz002BO-nP2e6RnXbn3Z-OHDqFw5bLSQ8WLVA1xln8A4zkPAuWLq4dE4US_lIvWr55USKSExWFZd2H3YacVa7U1I50S1I0N2L-mMFxBO70uhmXbEQHdjqd0xxr5JnzpsJjb-fh4JOkDOwgBFqaggPgQYGyqZeNqaGNPXpgSKRX4xTbD9R8ne';
+const DEFAULT_BG = '/images/img1-1.jpg';
 
 export default function CollectionScreen() {
   const { setCurrentScreen, currentLocationId, unlockedMemories } = useGame();
