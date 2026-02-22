@@ -4,16 +4,15 @@ import { useTranslations } from 'next-intl';
 
 // Background images per location
 const LOCATION_BG: Record<string, string> = {
-  'o-quan-chuong':
-    'https://lh3.googleusercontent.com/aida-public/AB6AXuAgB0HmUFaw03DvSGBXvbV90ob7-DoVcy_dH0TBx0kmxXQ0hEV_lCfqQZcZ_dWcvnVvXGcxqytpyjGQXsQu_90jH7c0V3qqaMuX2hruK0j2VBZTCFX1gG_aE3K0J0IZHVPFKA2iWTQ0M0FCZQS6V7mFZgyXlG1RDIbSArtudU_brKMM9zkF8GipBQP-4GSd9keiisL9EVT0ZMAlLSN6GztBYfHVRLhGSE2e0aVYKaIcBKLhQYhEuJvsueW6zISZ6MEDWGRM9Y6PQzHl',
+  'o-quan-chuong': '/images/img1-2.jpeg',
 };
 
-const DEFAULT_BG =
-  'https://lh3.googleusercontent.com/aida-public/AB6AXuDkYYgAtSHck1GUzYNJCg7rS9rPKGfGzLoUvy1wZ422LNEoo_hSLKt0sbpMYoKdYvpHBJBW1E1lZvWLDNcPDnK9_2I0xz002BO-nP2e6RnXbn3Z-OHDqFw5bLSQ8WLVA1xln8A4zkPAuWLq4dE4US_lIvWr55USKSExWFZd2H3YacVa7U1I50S1I0N2L-mMFxBO70uhmXbEQHdjqd0xxr5JnzpsJjb-fh4JOkDOwgBFqaggPgQYGyqZeNqaGNPXpgSKRX4xTbD9R8ne';
+const DEFAULT_BG = '/images/img1-2.jpeg';
 
 export default function QuizScreen() {
   const { setCurrentScreen, currentLocationId } = useGame();
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [wrongIndices, setWrongIndices] = useState<number[]>([]);
+  const [correctSelectedIndex, setCorrectSelectedIndex] = useState<number | null>(null);
   const t = useTranslations('game');
 
   const quiz = useMemo(() => {
@@ -33,12 +32,19 @@ export default function QuizScreen() {
   const correctIndex = quiz.correctIndex ?? 0;
 
   const handleSelect = (index: number) => {
-    if (selectedIndex !== null) return; // Prevent double-tap
-    setSelectedIndex(index);
+    if (correctSelectedIndex !== null || wrongIndices.includes(index)) return; // Prevent clicking after correct or re-clicking wrong
+
     if (index === correctIndex) {
+      setCorrectSelectedIndex(index);
       setTimeout(() => {
         setCurrentScreen('fact');
       }, 800);
+    } else {
+      setWrongIndices((prev) => [...prev, index]);
+      // Remove the wrong indication after a short flash (600ms)
+      setTimeout(() => {
+        setWrongIndices((prev) => prev.filter((i) => i !== index));
+      }, 600);
     }
   };
 
@@ -100,16 +106,16 @@ export default function QuizScreen() {
                 <button
                   key={idx}
                   onClick={() => handleSelect(idx)}
-                  disabled={selectedIndex !== null && selectedIndex !== idx}
-                  className={`quiz-option group flex w-full items-center gap-4 rounded-xl px-5 py-4 text-left transition-all duration-300
+                  disabled={correctSelectedIndex !== null || wrongIndices.includes(idx)}
+                  className={`quiz-option group relative flex w-full items-center gap-4 rounded-xl px-5 py-4 text-left transition-all duration-300
                     ${
-                      selectedIndex === idx
-                        ? idx === correctIndex
-                          ? 'correct-answer border-emerald-400/60 bg-emerald-500/15 text-emerald-300'
-                          : 'wrong-answer border-red-400/60 bg-red-500/15 text-red-300'
-                        : selectedIndex !== null
-                          ? 'border-white/5 bg-white/[0.02] opacity-40'
-                          : 'border-primary/25 bg-white/[0.03] text-white/80 hover:border-primary/50 hover:bg-primary/10'
+                      idx === correctSelectedIndex
+                        ? 'correct-answer border-emerald-400/60 bg-emerald-500/15 text-emerald-300'
+                        : wrongIndices.includes(idx)
+                          ? 'wrong-answer border-red-400/60 bg-red-500/15 text-red-300'
+                          : correctSelectedIndex !== null
+                            ? 'border-white/5 bg-white/[0.02] opacity-40'
+                            : 'border-primary/25 bg-white/[0.03] text-white/80 hover:border-primary/50 hover:bg-primary/10'
                     }
                   `}
                 >
@@ -119,9 +125,14 @@ export default function QuizScreen() {
                   <span className="flex-grow text-center text-lg font-medium sm:text-xl">
                     {option}
                   </span>
-                  {selectedIndex === idx && (
-                    <span className="material-symbols-outlined shrink-0 text-[20px]">
-                      {idx === correctIndex ? 'check_circle' : 'cancel'}
+                  {idx === correctSelectedIndex && (
+                    <span className="material-symbols-outlined absolute right-5 shrink-0 text-[20px]">
+                      check_circle
+                    </span>
+                  )}
+                  {wrongIndices.includes(idx) && (
+                    <span className="material-symbols-outlined absolute right-5 shrink-0 text-[20px]">
+                      cancel
                     </span>
                   )}
                 </button>
