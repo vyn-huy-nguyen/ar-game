@@ -1,0 +1,79 @@
+name: Deploy Next.js App to Server
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Build and Archive
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Application
+        run: npm run build
+
+      - name: Archive Production Build
+        run: tar -czf release.tar.gz .next public package.json package-lock.json
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-artifact
+          path: release.tar.gz
+          retention-days: 1
+
+  deploy:
+    name: Deploy to Server
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: release-artifact
+
+      - name: Copy Artifacts to Server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: ${{ secrets.SERVER_PORT || 22 }}
+          source: release.tar.gz
+          target: /var/www/ar-game # Thay đổi thư mục đích trên server tùy ý bạn
+
+      - name: Extract, Install & Restart on Server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: ${{ secrets.SERVER_PORT || 22 }}
+          script: |
+            cd /var/www/ar-game
+            
+            # Giải nén ban build
+            tar -xzf release.tar.gz
+            rm release.tar.gz
+            
+            # Cài đặt các package bắt buộc để chạy Next.js (bỏ devDependencies)
+            npm ci --production
+            
+            # Restart ứng dụng bằng PM2 (sửa "ar-game" thành process thực tế đang quản lý)
+            pm2 restart ar-game || pm2 start npm --name "ar-game" -- start
+            
+            # Lưu lại danh sách PM2
+            pm2 save
