@@ -100,7 +100,7 @@ export default function LandingScreen() {
           </div>
 
           <div className="space-y-8">
-            <h1 className="bg-gradient-to-b from-[#fffbe6] to-[#d4d4d4] bg-clip-text text-4xl font-black uppercase leading-normal tracking-widest text-transparent drop-shadow-lg md:text-5xl">
+            <h1 className="bg-gradient-to-b from-[#fffbe6] to-[#d4d4d4] bg-clip-text font-display text-4xl font-black uppercase leading-normal tracking-widest text-transparent drop-shadow-lg md:text-5xl">
               {t('title')}
             </h1>
 
@@ -111,11 +111,11 @@ export default function LandingScreen() {
               <div className="h-[1px] w-16 bg-gradient-to-r from-transparent via-primary/60 to-transparent"></div>
             </div>
 
-            <h2 className="text-5xl font-black uppercase leading-normal tracking-tight text-primary drop-shadow-[0_2px_10px_rgba(249,212,6,0.3)] md:text-6xl">
+            <h2 className="font-display text-5xl font-black uppercase leading-normal tracking-tight text-primary drop-shadow-[0_2px_10px_rgba(249,212,6,0.3)] md:text-6xl">
               {t('subtitle')}
             </h2>
 
-            <p className="mt-6 border-t border-white/5 pt-8 font-display text-sm uppercase tracking-[0.3em] text-gray-400">
+            <p className="font-body mt-6 border-t border-white/5 pt-8 text-sm uppercase tracking-[0.3em] text-gray-400">
               {t('legend')}
             </p>
           </div>

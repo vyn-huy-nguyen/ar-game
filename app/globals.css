@@ -27,7 +27,7 @@ body {
   height: 100dvh;
   width: 100vw;
   background: #000;
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-be-vietnam), sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

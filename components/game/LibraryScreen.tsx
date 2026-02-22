@@ -5,14 +5,14 @@ import { useGame } from '@/app/[locale]/game/GameContext';
 import { useTranslations } from 'next-intl';
 
 const MEMORIES = [
-  { id: 'ho-guom', icon: 'castle' },
-  { id: 'o-quan-chuong', icon: 'castle' },
+  { id: 'o-quan-chuong', icon: 'fort' },
+  { id: 'hang-ngang', icon: 'menu_book' },
   { id: 'hang-buom', icon: 'sailing' },
   { id: 'hang-dong', icon: 'notifications' },
+  { id: 'hang-bac', icon: 'diamond' },
+  { id: 'dong-xuan', icon: 'storefront' },
   { id: 'hang-trong', icon: 'image' },
   { id: 'lan-ong', icon: 'local_florist' },
-  { id: 'dong-xuan', icon: 'storefront' },
-  { id: 'hang-ma', icon: 'local_fire_department' },
 ];
 
 export default function LibraryScreen() {
@@ -20,20 +20,23 @@ export default function LibraryScreen() {
   const t = useTranslations('game');
 
   return (
-    <div className="relative h-[100dvh] w-full overflow-hidden bg-background-dark font-display text-white">
-      {/* Background Gradients & Particles */}
-      <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-800 via-background-dark to-background-dark"></div>
+    <div className="font-body relative h-[100dvh] w-full overflow-hidden bg-[#0b1120] text-white">
+      {/* Background */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#111827] via-[#0b1120] to-[#0b1120]"></div>
+
+      {/* Floating particles */}
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-        {[...Array(6)].map((_, i) => (
+        {[...Array(8)].map((_, i) => (
           <div
             key={i}
-            className="animate-particle-float absolute rounded-full bg-primary opacity-0 shadow-[0_0_4px_#f9d406]"
+            className="animate-particle-float absolute rounded-full bg-primary opacity-0 shadow-[0_0_6px_#f9d406]"
             style={{
-              width: `${Math.random() * 4 + 2}px`,
-              height: `${Math.random() * 4 + 2}px`,
+              width: `${Math.random() * 3 + 1.5}px`,
+              height: `${Math.random() * 3 + 1.5}px`,
               left: `${Math.random() * 100}%`,
-              top: `${90 + Math.random() * 10}%`,
-              animationDelay: `${Math.random() * 5}s`,
+              top: `${80 + Math.random() * 20}%`,
+              animationDelay: `${Math.random() * 8}s`,
+              animationDuration: `${8 + Math.random() * 6}s`,
             }}
           ></div>
         ))}
@@ -41,77 +44,93 @@ export default function LibraryScreen() {
 
       <div className="relative z-10 mx-auto flex h-full max-w-md flex-col">
         {/* Header */}
-        <header className="flex shrink-0 items-center justify-between px-6 pb-2 pt-6">
+        <header className="flex shrink-0 items-center px-5 pb-3 pt-[calc(env(safe-area-inset-top)+1.25rem)]">
           <button
             onClick={() => setCurrentScreen('arrival')}
-            className="group flex items-center gap-2 text-white/80 transition-colors hover:text-primary"
+            className="group flex h-10 w-10 items-center justify-center rounded-full text-white/70 transition-colors hover:bg-white/10 hover:text-primary"
           >
-            <span className="material-symbols-outlined text-[24px] transition-transform group-hover:-translate-x-1">
+            <span className="material-symbols-outlined text-[22px] transition-transform group-hover:-translate-x-0.5">
               arrow_back
             </span>
-            <span className="hidden text-sm font-medium tracking-wide sm:inline">
-              {t('navigation.back')}
-            </span>
           </button>
-          <h1 className="gold-gradient-text flex-grow pr-8 text-center text-2xl font-bold uppercase tracking-wide md:text-3xl">
+          <h1 className="flex-grow text-center font-display text-[1.4rem] font-extrabold uppercase tracking-[0.12em] text-primary drop-shadow-[0_2px_8px_rgba(249,212,6,0.3)]">
             {t('library_title')}
           </h1>
+          <div className="w-10"></div>
         </header>
 
-        <div className="mb-4 h-px w-full bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
+        {/* Divider */}
+        <div className="mx-5 mb-3 h-px bg-gradient-to-r from-transparent via-primary/25 to-transparent"></div>
 
-        {/* Scrollable Content */}
-        <main className="custom-scrollbar flex-grow overflow-y-auto px-6 pb-24 pt-2">
-          <div className="grid grid-cols-2 gap-4 pb-8">
+        {/* Scrollable Grid */}
+        <main className="library-scroll flex-grow overflow-y-auto px-4 pb-[calc(env(safe-area-inset-bottom)+2rem)]">
+          <div className="grid grid-cols-2 gap-3.5 pb-4">
             {MEMORIES.map((memory, index) => {
               const isUnlocked = unlockedMemories.includes(memory.id);
+
               if (isUnlocked) {
                 return (
                   <div
                     key={memory.id}
-                    className="card-glass group relative flex flex-col items-center gap-3 overflow-hidden rounded-xl p-4 text-center transition-all hover:border-primary/40 hover:shadow-[0_0_15px_rgba(249,212,6,0.1)]"
+                    className="group relative flex flex-col items-center overflow-hidden rounded-2xl border border-primary/25 bg-[#151d2e]/80 p-5 text-center shadow-[0_2px_16px_rgba(0,0,0,0.4)] backdrop-blur-sm transition-all duration-300 hover:border-primary/40 hover:shadow-[0_0_20px_rgba(249,212,6,0.08)]"
                   >
-                    <div className="absolute right-0 top-0 flex h-8 w-8 items-center justify-center rounded-bl-xl bg-primary/10 text-primary">
-                      <span className="material-symbols-outlined text-[16px]">check_circle</span>
+                    {/* Checkmark badge */}
+                    <div className="absolute right-2.5 top-2.5 flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.4)]">
+                      <span className="material-symbols-outlined text-[14px] font-bold text-white">
+                        check
+                      </span>
                     </div>
-                    <div className="flex h-14 w-14 items-center justify-center rounded-full border border-primary/30 bg-slate-800 transition-transform duration-300 group-hover:scale-110">
-                      <span className="material-symbols-outlined text-[28px] text-primary">
+
+                    {/* Icon */}
+                    <div className="mb-3 flex h-16 w-16 items-center justify-center rounded-full border border-primary/20 bg-[#1a2540] shadow-inner">
+                      <span className="material-symbols-outlined text-[30px] text-primary drop-shadow-[0_0_6px_rgba(249,212,6,0.4)]">
                         {memory.icon}
                       </span>
                     </div>
-                    <div className="flex flex-col gap-0.5">
-                      <h3 className="line-clamp-1 text-sm font-semibold text-white">
-                        {t(`locations.${memory.id}.name`)}
-                      </h3>
-                      <span className="text-[10px] uppercase tracking-wider text-white/50">
-                        {t('found_fragment')} #{String(index + 1).padStart(2, '0')}
-                      </span>
-                    </div>
-                    <button className="group/btn mt-auto flex w-full items-center justify-center gap-1.5 rounded-lg border border-primary/30 bg-primary/10 px-3 py-2 text-primary transition-all hover:bg-primary hover:text-background-dark">
+
+                    {/* Name */}
+                    <h3 className="mb-0.5 line-clamp-2 min-h-[2.5rem] font-display text-[0.85rem] font-bold leading-tight text-white">
+                      {t(`locations.${memory.id}.fullName`)}
+                    </h3>
+                    <span className="mb-3 text-[9px] font-bold uppercase tracking-[0.15em] text-white/40">
+                      MẢNH GHÉP #{String(index + 1).padStart(2, '0')}
+                    </span>
+
+                    {/* Download button */}
+                    <button className="bg-primary/8 mt-auto flex w-full items-center justify-center gap-1.5 rounded-lg border border-primary/25 px-3 py-2 text-primary transition-all duration-200 hover:bg-primary hover:text-[#0b1120]">
                       <span className="material-symbols-outlined text-[16px]">download</span>
-                      <span className="text-xs font-bold">{t('download_pdf')}</span>
+                      <span className="text-[11px] font-bold tracking-wide">
+                        {t('download_pdf')}
+                      </span>
                     </button>
                   </div>
                 );
               }
+
+              // Locked card
               return (
                 <div
                   key={memory.id}
-                  className="card-locked relative flex flex-col items-center gap-3 overflow-hidden rounded-xl p-4 text-center opacity-75"
+                  className="relative flex flex-col items-center overflow-hidden rounded-2xl border border-white/[0.06] bg-[#111827]/70 p-5 text-center shadow-[0_2px_12px_rgba(0,0,0,0.3)] backdrop-blur-sm"
                 >
-                  <div className="mb-1 flex h-14 w-14 items-center justify-center rounded-full border border-white/10 bg-slate-800/50">
-                    <span className="material-symbols-outlined text-[24px] text-white/20">
+                  {/* Lock icon */}
+                  <div className="mb-3 flex h-16 w-16 items-center justify-center rounded-full border border-white/[0.08] bg-[#1a2036]/80">
+                    <span className="material-symbols-outlined text-[28px] text-white/20">
                       lock
                     </span>
                   </div>
-                  <div className="flex w-full flex-col items-center gap-0.5">
-                    <div className="mb-1 h-4 w-2/3 rounded bg-white/10"></div>
-                    <span className="text-[10px] uppercase tracking-wider text-white/30">
-                      {t('locked')}
-                    </span>
-                  </div>
-                  <div className="mt-auto flex h-8 w-full items-center justify-center rounded-lg border border-dashed border-white/10 bg-white/5">
-                    <span className="material-symbols-outlined text-[16px] text-white/20">
+
+                  {/* Name - visible even when locked */}
+                  <h3 className="mb-0.5 line-clamp-2 min-h-[2.5rem] font-display text-[0.85rem] font-bold leading-tight text-white/60">
+                    {t(`locations.${memory.id}.fullName`)}
+                  </h3>
+                  <span className="mb-3 text-[9px] font-bold uppercase tracking-[0.15em] text-white/25">
+                    {t('locked').toUpperCase()}
+                  </span>
+
+                  {/* Locked download placeholder */}
+                  <div className="mt-auto flex h-9 w-full items-center justify-center rounded-lg border border-dashed border-white/[0.08] bg-white/[0.02]">
+                    <span className="material-symbols-outlined text-[14px] text-white/15">
                       lock
                     </span>
                   </div>
@@ -123,32 +142,14 @@ export default function LibraryScreen() {
       </div>
 
       <style jsx>{`
-        .gold-gradient-text {
-          background: linear-gradient(to bottom, #f9d406, #dcb805);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+        .library-scroll::-webkit-scrollbar {
+          width: 3px;
         }
-        .card-glass {
-          background: rgba(30, 41, 59, 0.7);
-          backdrop-filter: blur(8px);
-          -webkit-backdrop-filter: blur(8px);
-          border: 1px solid rgba(249, 212, 6, 0.15);
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        .library-scroll::-webkit-scrollbar-track {
+          background: transparent;
         }
-        .card-locked {
-          background: rgba(15, 23, 42, 0.6);
-          backdrop-filter: blur(4px);
-          border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        .custom-scrollbar::-webkit-scrollbar {
-          width: 4px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-          background: rgba(255, 255, 255, 0.05);
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: rgba(249, 212, 6, 0.3);
+        .library-scroll::-webkit-scrollbar-thumb {
+          background: rgba(249, 212, 6, 0.2);
           border-radius: 4px;
         }
         @keyframes particle-float {
@@ -156,14 +157,14 @@ export default function LibraryScreen() {
             transform: translateY(0) translateX(0);
             opacity: 0;
           }
-          20% {
-            opacity: 0.5;
+          15% {
+            opacity: 0.6;
           }
-          80% {
-            opacity: 0.5;
+          85% {
+            opacity: 0.6;
           }
           100% {
-            transform: translateY(-100px) translateX(20px);
+            transform: translateY(-120px) translateX(15px);
             opacity: 0;
           }
         }

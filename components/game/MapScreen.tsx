@@ -90,7 +90,7 @@ const LOCATIONS = [
 
 export default function MapScreen() {
   const t = useTranslations('game');
-  const { setCurrentScreen, setCurrentLocationId, unlockedMemories } = useGame();
+  const { setCurrentScreen, setCurrentLocationId, unlockedMemories, resetGame } = useGame();
   const [selectedId, setSelectedId] = React.useState<string | null>(null);
   const firefliesRef = useRef<HTMLDivElement>(null);
 
@@ -174,11 +174,18 @@ export default function MapScreen() {
         <header className="relative flex-none px-6 pb-2 pt-[calc(env(safe-area-inset-top)+1.5rem)] text-center">
           <div className="pointer-events-none absolute left-0 top-0 z-0 h-full w-full bg-gradient-to-b from-black/60 to-transparent"></div>
           <div className="relative z-10">
+            {/* Reset button */}
+            <button
+              onClick={resetGame}
+              className="absolute left-0 top-0 flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-black/40 text-white/60 backdrop-blur-sm transition-colors hover:bg-black/60 hover:text-white"
+            >
+              <span className="material-symbols-outlined text-[18px]">close</span>
+            </button>
             <p className="mb-1 font-display text-xs uppercase tracking-widest text-primary opacity-80">
               {t('historical_puzzle')}
             </p>
             <h1 className="inline-block border-b border-white/10 bg-gradient-to-r from-primary-glow via-primary to-primary-glow bg-clip-text pb-4 font-display text-2xl font-bold leading-relaxed tracking-widest text-transparent drop-shadow-md md:text-3xl">
-              GIẢI MÃ KINH KỲ
+              {t('title')} {t('subtitle')}
             </h1>
           </div>
           {/* Progress */}
@@ -339,7 +346,7 @@ export default function MapScreen() {
         {/* Footer */}
         <footer className="relative z-20 flex-none bg-gradient-to-t from-black to-transparent px-6 pb-[calc(env(safe-area-inset-bottom)+1.5rem)] pt-2 md:pb-8">
           <div className="mb-3 text-center">
-            <p className="font-serif text-[10px] italic text-primary/80 sm:text-xs">
+            <p className="font-display text-[10px] italic text-primary/80 sm:text-xs">
               &quot;The bell echoes from the ancient guild...&quot;
             </p>
           </div>

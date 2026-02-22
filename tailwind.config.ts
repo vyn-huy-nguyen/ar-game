@@ -20,9 +20,10 @@ const config: Config = {
       },
       fontFamily: {
         sans: ['var(--font-be-vietnam)', 'sans-serif'],
-        display: ['var(--font-noto-serif)', 'serif'],
+        display: ['var(--font-playfair)', 'var(--font-noto-serif)', 'serif'],
         cinzel: ['var(--font-cinzel)', 'serif'],
         serif: ['var(--font-noto-serif)', 'serif'],
+        playfair: ['var(--font-playfair)', 'serif'],
       },
       animation: {
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',

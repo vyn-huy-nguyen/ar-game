@@ -75,34 +75,40 @@ const LeafletMap = forwardRef<LeafletMapHandle, LeafletMapProps>(
         map.invalidateSize();
       }, 100);
 
-      // Target Marker Icon
+      // Target Marker Icon (Refined for Screen 4)
       if (targetLat && targetLng) {
         const targetIcon = L.divIcon({
           className: 'custom-target-icon',
-          html: `<div class="relative flex items-center justify-center">
-                  <div class="absolute inset-0 rounded-full bg-yellow-400 blur-md opacity-40 animate-pulse"></div>
-                  <div class="relative bg-[#131a26] border-2 border-[#f9d406] rounded-full p-2 shadow-[0_0_15px_rgba(249,212,6,0.6)]">
-                    <span class="material-symbols-outlined text-[#f9d406] text-xl" style="font-size: 20px;">temple_buddhist</span>
+          html: `<div class="relative flex flex-col items-center">
+                  <div class="relative flex h-10 w-10 items-center justify-center rounded-full border border-[#f9d406] bg-[#0f1420] text-[#f9d406] shadow-[0_0_15px_rgba(249,212,6,0.5)]">
+                    <span class="material-symbols-outlined" style="font-size: 18px;">temple_buddhist</span>
+                  </div>
+                  <div class="mt-2 w-max rounded-full border border-primary/30 bg-black/80 px-3 py-1 text-[9px] font-bold text-white shadow-lg backdrop-blur-sm">
+                    ${targetName}
                   </div>
                 </div>`,
-          iconSize: [40, 40],
-          iconAnchor: [20, 20],
+          iconSize: [120, 80],
+          iconAnchor: [60, 20],
         });
 
-        targetMarkerRef.current = L.marker([targetLat, targetLng], { icon: targetIcon })
-          .addTo(map)
-          .bindPopup(targetName);
+        targetMarkerRef.current = L.marker([targetLat, targetLng], { icon: targetIcon }).addTo(map);
       }
 
-      // User Marker Icon
+      // User Marker Icon (Refined for Screen 4)
       const userIcon = L.divIcon({
         className: 'custom-user-icon',
-        html: `<div class="relative flex items-center justify-center">
-                <div class="absolute w-8 h-8 bg-blue-500 rounded-full opacity-30 animate-ping"></div>
-                <div class="w-4 h-4 bg-blue-400 border-2 border-white rounded-full shadow-[0_0_10px_rgba(59,130,246,0.8)]"></div>
+        html: `<div class="relative flex flex-col items-center">
+                <div class="mb-2 w-max rounded-full border border-primary/30 bg-black/80 px-3 py-1 text-[9px] font-black uppercase tracking-widest text-primary shadow-lg backdrop-blur-sm">
+                  VỊ TRÍ HIỆN TẠI
+                </div>
+                <div class="relative flex h-5 w-5 items-center justify-center">
+                  <div class="absolute inset-0 h-full w-full animate-ping rounded-full bg-blue-500/40"></div>
+                  <div class="h-4 w-4 rounded-full border-2 border-white bg-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.8)]"></div>
+                  <div class="absolute -top-1 h-0 w-0 border-b-[6px] border-l-[4px] border-r-[4px] border-b-blue-400 border-l-transparent border-r-transparent"></div>
+                </div>
               </div>`,
-        iconSize: [20, 20],
-        iconAnchor: [10, 10],
+        iconSize: [120, 60],
+        iconAnchor: [60, 45],
       });
 
       userMarkerRef.current = L.marker([21.0285, 105.8542], { icon: userIcon }).addTo(map);
@@ -165,9 +171,12 @@ const LeafletMap = forwardRef<LeafletMapHandle, LeafletMapProps>(
         polylineRef.current.setLatLngs([userLatLng, [targetLat, targetLng]]);
       }
 
-      // Smoothly pan to user if interactive
+      // Smoothly pan to user if interactive, or fit bounds in overview
       if (interactive) {
-        mapRef.current.panTo(userLatLng);
+        mapRef.current.panTo(userLatLng, { animate: true });
+      } else if (targetLat && targetLng) {
+        const bounds = L.latLngBounds([userLatLng, [targetLat, targetLng]]);
+        mapRef.current.fitBounds(bounds, { padding: [50, 50], animate: true });
       }
     }, [userLocation, targetLat, targetLng, interactive]);
 

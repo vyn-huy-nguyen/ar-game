@@ -14,24 +14,27 @@
     "subtitle": "KINH KỲ",
     "legend": "HUYỀN SỬ HÀ NỘI",
     "start": "Bắt đầu hành trình",
-    "historical_puzzle": "Historical Puzzle Game",
+    "historical_puzzle": "Mảnh ghép thời gian",
     "credits": "© 2026 Hanoi Memories Studio",
     "progress": "Hoàn thành",
     "journey": "Hành trình ký ức",
     "continue": "Tiếp tục hành trình",
     "select_location": "Chọn địa điểm",
-    "get_book": "Nhận quyển sách ký ức",
+    "get_book": "Tài liệu số hóa địa điểm",
     "current_mission": "Nhiệm vụ hiện tại",
     "mission_desc": "Tìm đến {location} để mở khóa mảnh ký ức tiếp theo.",
     "distance": "Khoảng cách",
     "meters": "Mét",
     "start_walking": "Bắt đầu đi",
+    "old_quarter": "Khu phố cổ",
+    "unit_km": "KM",
+    "unit_meters": "MÉT",
     "current_location_label": "Vị trí hiện tại",
     "back": "Quay lại",
     "library_title": "Thư viện Ký ức",
-    "download_pdf": "Tải PDF",
+    "download_pdf": "Tải xuống (PDF)",
     "locked": "Chưa mở khóa",
-    "found_fragment": "Đã tìm thấy mảnh ghép!",
+    "found_fragment": "Phần thưởng ký ức",
     "scan_instructions": "Di chuyển camera để quét các {span}",
     "scan_target": "mảnh ghép ký ức",
     "history_question": "Câu hỏi lịch sử",
@@ -43,8 +46,8 @@
       "wrong": "Thử lại nhé!"
     },
     "fact": {
-      "label": "Kiến thức lịch sử",
-      "add_to_collection": "Bổ sung vào bộ sưu tập"
+      "label": "Ký ức",
+      "add_to_collection": "Bạn đã nhận được"
     },
     "arrival": {
       "title": "Bạn đã đến",
@@ -56,137 +59,169 @@
       "library_hint": "Thư viện",
       "history_label": "Lịch sử hình thành",
       "culture_label": "Dấu ấn văn hóa",
-      "discovered": "Đã khám phá",
-      "continue_btn": "TIẾP TỤC"
+      "discovered": "Đã mở khóa",
+      "continue_btn": "TIẾP TỤC",
+      "close_btn": "Đóng và tiếp tục"
     },
     "completion": {
-      "title": "Hành trình hoàn tất",
-      "subtitle": "Chúc mừng bạn đã hoàn thành",
-      "legend": "Huyền sử Thăng Long",
-      "review_memories": "Xem lại ký ức",
-      "share": "Chia sẻ hành trình"
+      "badge": "Hoàn thành xuất sắc",
+      "title": "Chúc mừng!",
+      "subtitle": "Bạn đã phục hồi toàn bộ ký ức về một Hà Nội vàng son.",
+      "legend": "Bộ sưu tập đặc biệt",
+      "download": "Nhận quyển sách Ký ức (PDF)",
+      "share": "Chia sẻ",
+      "home": "Về trang chủ",
+      "book_title": "HÀ NỘI",
+      "book_subtitle": "AR - ITAGE X",
+      "review_memories": "Xem lại ký ức"
     },
     "locations": {
       "ho-guom": {
         "name": "Hồ Hoàn Kiếm",
+        "fullName": "Hồ Hoàn Kiếm",
         "title": "Hồ Hoàn Kiếm",
         "subtitle": "Trái tim của Thủ đô",
         "history": "Hồ Hoàn Kiếm gắn liền với truyền thuyết vua Lê Lợi trả gươm báu cho Rùa Vàng sau khi đánh đuổi giặc Minh. Đây là biểu tượng thiêng liêng về tinh thần yêu chuộng hòa bình của dân tộc.",
         "culture": "Quần thể di tích Đền Ngọc Sơn, Cầu Thê Húc, Tháp Rùa tạo nên một không gian văn hóa tâm linh đặc sắc, là nơi hội tụ linh khí của đất Thăng Long ngàn năm văn hiến.",
         "quote": "Rủ nhau xem cảnh Kiếm Hồ,\nXem cầu Thê Húc, xem chùa Ngọc Sơn.",
         "year": "Hà Nội, thế kỷ 19",
+        "narrative": "Mặt hồ gương soi bóng tháp cổ, nơi huyền thoại gươm thần hòa quyện cùng sương khói ngàn năm...",
         "quiz": {
           "question": "Tháp Rùa nằm ở vị trí nào trong Hồ Hoàn Kiếm?",
           "options": ["Giữa hồ", "Cạnh đền Ngọc Sơn", "Cần cầu Thê Húc", "Ven hồ"],
+          "correctIndex": 0,
           "fact": "Tháp Rùa được xây dựng trên một gò đất nhỏ giữa hồ, là hình ảnh biểu tượng gắn liền với vẻ đẹp thơ mộng và cổ kính của Hà Nội."
         }
       },
       "o-quan-chuong": {
         "name": "Ô Quan Chưởng",
+        "fullName": "Phố Ô Quan Chưởng",
         "title": "Ô Quan Chưởng",
         "subtitle": "Di sản ngàn năm",
         "history": "Ô Quan Chưởng (hay Ô Đông Hà) được xây dựng vào năm Cảnh Hưng thứ 10 (1749). Đây là cửa ô duy nhất còn sót lại của kinh thành Thăng Long xưa.",
         "culture": "Kiến trúc mang đậm nét đặc trưng thời Nguyễn với vọng lâu và mái vòm cong. Nơi đây là biểu tượng cho tinh thần bất khuất của người Hà Nội.",
         "quote": "Lối xưa xe ngựa hồn thu thảo, \nNền cũ lâu đài bóng tịch dương.",
-        "year": "Hà Nội, khoảng 1900",
+        "year": "Hà Nội 1749",
+        "narrative": "Bóng cổng thành xưa in hằn dấu ấn thời gian, nơi những gánh hàng rong đi về sớm tối...",
         "quiz": {
-          "question": "Ô Quan Chưởng được xây dựng dưới triều đại nào?",
-          "options": ["Lý", "Trần", "Lê", "Nguyễn"],
-          "fact": "Ô Quan Chưởng được xây dựng vào năm 1749 thời vua Lê Hiển Tông. Đây là cửa ô duy nhất còn sót lại của kinh thành Thăng Long xưa."
+          "question": "Ô Quan Chưởng là một trong bao nhiêu cửa ô được xây dựng vào năm 1749?",
+          "options": ["3", "5", "9"],
+          "correctIndex": 1,
+          "fact": "Ô Quan Chưởng là một trong 5 cửa ô được xây dựng vào năm 1749 dưới thời vua Lê Hiển Tông. Đây là cửa ô duy nhất còn sót lại của kinh thành Thăng Long xưa."
         }
       },
       "hang-buom": {
         "name": "Hàng Buồm",
+        "fullName": "Phố Hàng Buồm",
         "title": "Phố Hàng Buồm",
         "subtitle": "Dấu ấn thương cảng",
         "history": "Xưa kia là nơi tập trung các nghệ nhân làm buồm và các mặt hàng liên quan đến sông nước. Phố nằm sát bến sông Hồng cũ, là cửa ngõ giao thương sầm uất.",
         "culture": "Nơi đây còn lưu giữ Hội quán Quảng Đông và đền Bạch Mã - một trong 'Thăng Long tứ trấn' thiêng liêng bảo vệ kinh thành.",
         "quote": "Hà Nội ba mươi sáu phố phường,\nHàng Buồm, Hàng Bạc, Hàng Ngang, Hàng Đào.",
         "year": "Hà Nội, đầu thế kỷ 20",
+        "narrative": "Con phố nhỏ thơm mùi hương trầm, vọng tiếng chuông chùa giữa phố phường tấp nập...",
         "quiz": {
           "question": "Địa danh nổi tiếng nào nằm trên phố Hàng Buồm?",
           "options": ["Đền Bạch Mã", "Đền Ngọc Sơn", "Chùa Một Cột", "Nhà hát Lớn"],
+          "correctIndex": 0,
           "fact": "Đền Bạch Mã tọa lạc tại số 76 Hàng Buồm, là ngôi đền cổ nhất trong tứ trấn của kinh thành Thăng Long."
         }
       },
       "hang-dong": {
         "name": "Hàng Đồng",
+        "fullName": "Phố Hàng Đồng",
         "title": "Phố Hàng Đồng",
         "subtitle": "Âm vang đồ đồng",
         "history": "Phố là nơi hội tụ của những người thợ làm đồ đồng nổi tiếng từ làng Ngũ Xã và các vùng lân cận, chuyên chế tác đồ thờ tự, mâm đồng, nồi đồng.",
         "culture": "Tiếng đục, tiếng gõ vang lên suốt ngày đêm đã tạo nên một nhịp điệu riêng cho con phố nghề thủ công truyền thống của Hà Thành.",
         "quote": "Làng nghề Ngũ Xã đúc đồng,\nHàng Đồng bày bán rộn ràng sớm trưa.",
         "year": "Hà Nội, khoảng 1920",
+        "narrative": "Tiếng búa gõ đều đặn vang vọng ngõ phố, nơi lửa lò rèn thắp sáng những đêm đông giá rét...",
         "quiz": {
           "question": "Sản phẩm thủ công nổi tiếng nhất của phố Hàng Đồng là gì?",
           "options": ["Đồ đồng thờ tự", "Tranh lụa", "Mũ cối", "Gốm sứ"],
+          "correctIndex": 0,
           "fact": "Phố Hàng Đồng từ lâu đã nổi tiếng với các sản phẩm bằng đồng như đồ thờ, mâm, nồi... được chế tác bởi các nghệ nhân làng nghề Ngũ Xã."
         }
       },
       "hang-trong": {
         "name": "Hàng Trống",
+        "fullName": "Phố Hàng Trống",
         "title": "Phố Hàng Trống",
         "subtitle": "Nét vẽ tâm hồn",
         "history": "Nổi tiếng với nghề làm trống và đặc biệt là dòng tranh dân gian Hàng Trống nổi danh một thời, phục vụ nhu cầu tâm linh và trang trí ngày Tết.",
         "culture": "Tranh Hàng Trống mang vẻ đẹp trang nhã, trau chuốt, thể hiện chiều sâu tâm hồn và tính thẩm mỹ cao của người dân Hà Nội xưa.",
         "quote": "Tranh treo Hàng Trống đón xuân,\nCâu đối Hàng Ngang rực rỡ tiền đường.",
         "year": "Hà Nội, cuối thế kỷ 19",
+        "narrative": "Từng nét bút tài hoa in dấu hồn dân tộc, nơi sắc màu dân gian hòa quyện cùng tiếng trống thiêng...",
         "quiz": {
           "question": "Dòng tranh dân gian nào gắn liền với phố Hàng Trống?",
           "options": ["Tranh Hàng Trống", "Tranh Đông Hồ", "Tranh Kim Hoàng", "Tranh Làng Sình"],
+          "correctIndex": 0,
           "fact": "Tranh Hàng Trống là một trong những dòng tranh dân gian tiêu biểu của Việt Nam, nổi bật với kỹ thuật tô màu tinh xảo."
         }
       },
       "lan-ong": {
         "name": "Lãn Ông",
+        "fullName": "Phố Lãn Ông",
         "title": "Phố Lãn Ông",
         "subtitle": "Mùi hương thảo dược",
         "history": "Tên phố được đặt theo tên của Hải Thượng Lãn Ông - vị danh y lỗi lạc. Từ xưa, đây đã là nơi tập trung các cửa hiệu thuốc Đông y truyền thống.",
         "culture": "Mùi thuốc bắc nồng nàn lan tỏa khắp con phố là nét đặc trưng không thể lẫn vào đâu được, thể hiện sự gìn giữ tinh hoa y học dân tộc.",
         "quote": "Lãn Ông phố thuốc thơm nồng,\nBắt mạch kê đơn, giúp đời thái bình.",
         "year": "Hà Nội, 1930s",
+        "narrative": "Hương thảo dược thoang thoảng bay, nơi những bài thuốc gia truyền lưu giữ tinh hoa y học ngàn đời...",
         "quiz": {
           "question": "Phố Lãn Ông nổi tiếng với nghề truyền thống nào?",
           "options": ["Thuốc Đông y", "Làm lồng chim", "Rèn dao kéo", "Thêu ren"],
+          "correctIndex": 0,
           "fact": "Phố Lãn Ông là trung tâm kinh doanh thuốc Đông y lớn nhất Hà Nội, nơi lưu giữ nghề bốc thuốc cứu người từ bao đời nay."
         }
       },
       "dong-xuan": {
         "name": "Đồng Xuân",
+        "fullName": "Phố Chợ Đồng Xuân",
         "title": "Chợ Đồng Xuân",
         "subtitle": "Kẻ Chợ sầm uất",
         "history": "Được chính quyền Pháp xây dựng vào năm 1889, đây là ngôi chợ lớn nhất Hà Nội, chứng kiến cuộc chiến đấu anh dũng bảo vệ thủ đô mùa đông năm 1946.",
         "culture": "Chợ không chỉ là nơi giao thương mà còn là biểu tượng văn hóa đời sống của người dân Hà Nội với cấu trúc 5 vòm cửa đặc trưng.",
         "quote": "Vui nhất là chợ Đồng Xuân,\nThứ gì cũng có, người gần người xa.",
         "year": "Hà Nội, circa 1910",
+        "narrative": "Mái vòm năm cửa sừng sững giữa phố phường, chứng nhân bao mùa xuân chợ Tết rộn ràng...",
         "quiz": {
           "question": "Chợ Đồng Xuân được xây dựng vào năm nào?",
           "options": ["1889", "1902", "1946", "1954"],
+          "correctIndex": 0,
           "fact": "Chợ Đồng Xuân được xây dựng năm 1889 trên khu vực bến sông Tô Lịch cũ, trở thành biểu tượng giao thương của Thăng Long."
         }
       },
       "hang-ma": {
         "name": "Hàng Mã",
+        "fullName": "Phố Hàng Mã",
         "title": "Phố Hàng Mã",
         "subtitle": "Sắc màu rực rỡ",
         "history": "Phố chuyên làm các mặt hàng đồ mã để phục vụ cúng lễ và các loại đồ chơi dân gian cho trẻ em mỗi dịp Trung thu hay lễ Tết.",
         "culture": "Đây là con phố luôn rực rỡ sắc màu và nhộn nhịp nhất phố cổ vào những dịp lễ hội, là nơi lưu giữ ký ức tuổi thơ của biết bao thế hệ.",
         "quote": "Trung thu rước đèn Hàng Mã,\nĐèn sao rực rỡ, phố xá vui vầy.",
         "year": "Hà Nội, khoảng 1940",
+        "narrative": "Phố phường rực rỡ sắc màu giấy hoa, nơi tuổi thơ bao thế hệ hòa trong tiếng cười đêm hội...",
         "quiz": {
           "question": "Phố Hàng Mã nhộn nhịp nhất vào dịp nào?",
           "options": ["Trung thu & Tết", "Mùa hè", "Giáng sinh", "Quốc khánh"],
+          "correctIndex": 0,
           "fact": "Phố Hàng Mã là tâm điểm của các lễ hội truyền thống, nơi cung cấp đồ trang trí và đồ chơi dân gian lớn nhất Hà Nội."
         }
       },
       "hang-ngang": {
         "name": "Hàng Ngang",
+        "fullName": "Phố Hàng Ngang",
         "title": "Phố Hàng Ngang",
         "subtitle": "Nơi ghi dấu lịch sử",
         "history": "Phố Hàng Ngang xưa kia là nơi giàu có nhất phố cổ, nổi tiếng với các hiệu tơ lụa. Đặc biệt, ngôi nhà số 48 là nơi Bác Hồ viết bản Tuyên ngôn Độc lập.",
         "culture": "Kiến trúc giao thoa và sự hưng thịnh về thương mại đã biến Hàng Ngang thành biểu tượng cho sự phong lưu, đài các của kinh kỳ.",
         "quote": "Bốn tám Hàng Ngang, trang sử mới,\nSáng soi độc lập, rạng ngời non sông.",
         "year": "Hà Nội, 1945",
+        "narrative": "Ngôi nhà nhỏ giữa phố xưa, nơi từng dòng chữ viết nên trang sử mới cho cả dân tộc...",
         "quiz": {
           "question": "Sự kiện lịch sử trọng đại nào gắn liền với phố Hàng Ngang?",
           "options": [
@@ -195,7 +230,25 @@
             "Ngày tiếp quản Thủ đô",
             "Khởi nghĩa Lam Sơn"
           ],
+          "correctIndex": 0,
           "fact": "Ngôi nhà số 48 Hàng Ngang là nơi Chủ tịch Hồ Chí Minh đã viết bản Tuyên ngôn Độc lập khai sinh ra nước Việt Nam Dân chủ Cộng hòa."
+        }
+      },
+      "hang-bac": {
+        "name": "Hàng Bạc",
+        "fullName": "Phố Hàng Bạc",
+        "title": "Phố Hàng Bạc",
+        "subtitle": "Tinh hoa chạm bạc",
+        "history": "Phố Hàng Bạc hình thành từ thế kỷ 15, hội tụ những người thợ kim hoàn tài hoa từ ba làng nghề nổi tiếng: Châu Khê, Đồng Xâm và Định Công. Nơi đây từng là nơi đúc bạc nén cho triều đình.",
+        "culture": "Con phố vẫn giữ được nét kiến trúc cổ kính và những cửa hiệu kim hoàn truyền thống, nơi kỹ thuật chạm khắc bạc thủ công được truyền giữ qua nhiều thế hệ.",
+        "quote": "Hàng Bạc thợ khéo chạm hoa,\nBạc nén rực rỡ, lụa là kiêu sa.",
+        "year": "Hà Nội, thế kỷ 18",
+        "narrative": "Ánh bạc lấp lánh dưới bàn tay nghệ nhân, nơi từng sợi chỉ bạc kể câu chuyện trăm năm...",
+        "quiz": {
+          "question": "Phố Hàng Bạc nổi tiếng với nghề truyền thống nào?",
+          "options": ["Chạm khắc bạc", "Dệt lụa", "Đúc đồng", "Làm nón"],
+          "correctIndex": 0,
+          "fact": "Phố Hàng Bạc là trung tâm kim hoàn sầm uất nhất phố cổ, nổi tiếng với kỹ thuật xối (chạm nổi) và đậu (kéo sợi) bạc tinh xảo."
         }
       }
     }

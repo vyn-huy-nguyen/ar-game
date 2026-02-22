@@ -1,5 +1,13 @@
+/* eslint-disable @next/next/google-font-display */
+/* eslint-disable @next/next/no-page-custom-font */
 import type { Metadata } from 'next';
-import { Inter, Playfair_Display, Cinzel, Noto_Serif_Display } from 'next/font/google';
+import {
+  Inter,
+  Playfair_Display,
+  Cinzel,
+  Noto_Serif_Display,
+  Be_Vietnam_Pro,
+} from 'next/font/google';
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 import './globals.css';
 
@@ -8,13 +16,15 @@ const inter = Inter({
   variable: '--font-inter',
   display: 'swap',
 });
-const beVietnam = Inter({
+const beVietnam = Be_Vietnam_Pro({
   subsets: ['latin', 'vietnamese'],
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
   variable: '--font-be-vietnam',
   display: 'swap',
 });
 const playfair = Playfair_Display({
   subsets: ['latin', 'vietnamese'],
+  weight: ['400', '500', '600', '700', '800', '900'],
   variable: '--font-playfair',
   display: 'swap',
 });

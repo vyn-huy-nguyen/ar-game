@@ -20,18 +20,21 @@
     "journey": "Memory Journey",
     "continue": "Continue Journey",
     "select_location": "Select Location",
-    "get_book": "Get Memory Book",
+    "get_book": "Digital location document",
     "current_mission": "Current Mission",
     "mission_desc": "Find your way to {location} to unlock next memory fragment.",
     "distance": "Distance",
     "meters": "Meters",
     "start_walking": "Start Walking",
+    "old_quarter": "Old Quarter",
+    "unit_km": "KM",
+    "unit_meters": "METERS",
     "current_location_label": "Current Position",
     "back": "Back",
     "library_title": "Memory Library",
-    "download_pdf": "Download PDF",
+    "download_pdf": "Download (PDF)",
     "locked": "Locked",
-    "found_fragment": "Memory Fragment Found!",
+    "found_fragment": "Memory Reward",
     "scan_instructions": "Move camera to scan {span}",
     "scan_target": "memory fragments",
     "history_question": "History Question",
@@ -44,7 +47,7 @@
     },
     "fact": {
       "label": "Historical Knowledge",
-      "add_to_collection": "Add to Collection"
+      "add_to_collection": "You have received"
     },
     "arrival": {
       "title": "You have arrived",
@@ -57,24 +60,32 @@
       "history_label": "Historical Origins",
       "culture_label": "Cultural Imprints",
       "discovered": "Discovered",
-      "continue_btn": "CONTINUE"
+      "continue_btn": "CONTINUE",
+      "close_btn": "Close and continue"
     },
     "completion": {
-      "title": "Journey Completed",
-      "subtitle": "Congratulations on finishing",
-      "legend": "Thang Long Legends",
-      "review_memories": "Review Memories",
-      "share": "Share Journey"
+      "badge": "Outstanding Achievement",
+      "title": "Congratulations!",
+      "subtitle": "You have restored all the memories of a golden Hanoi.",
+      "legend": "Special Collection",
+      "download": "Get Memory Book (PDF)",
+      "share": "Share",
+      "home": "Home",
+      "book_title": "HÀ NỘI",
+      "book_subtitle": "AR - ITAGE X",
+      "review_memories": "Review Memories"
     },
     "locations": {
       "ho-guom": {
         "name": "Hoan Kiem Lake",
+        "fullName": "Hoan Kiem Lake",
         "title": "Hoan Kiem Lake",
         "subtitle": "The Heart of the Capital",
         "history": "Hoan Kiem Lake is associated with the legend of King Le Loi returning the magic sword to the Golden Turtle after defeating the Ming invaders. It is a sacred symbol of the nation's peace-loving spirit.",
         "culture": "The ensemble of Ngoc Son Temple, The Huc Bridge, and Turtle Tower creates a unique spiritual cultural space, where the spiritual essence of Thang Long's thousand-year civilization converges.",
         "quote": "Let's go see the Kiem Ho scenery,\nSee The Huc bridge, see Ngoc Sơn temple.",
         "year": "Hanoi, 19th Century",
+        "narrative": "The lake mirrors ancient tower shadows, where the legend of the divine sword blends with millennia of mist...",
         "quiz": {
           "question": "Where is the Turtle Tower located in Hoan Kiem Lake?",
           "options": [
@@ -83,31 +94,37 @@
             "Near The Huc bridge",
             "At the lake shore"
           ],
+          "correctIndex": 0,
           "fact": "The Turtle Tower was built on a small mound in the middle of the lake, serving as an iconic image associated with the poetic and ancient beauty of Hanoi."
         }
       },
       "o-quan-chuong": {
         "name": "O Quan Chuong",
+        "fullName": "O Quan Chuong Street",
         "title": "O Quan Chuong",
         "subtitle": "Thousand-year Heritage",
         "history": "O Quan Chuong (or O Dong Ha) was built in the 10th year of Canh Hung (1749). It is the only remaining city gate of the ancient Thang Long citadel.",
         "culture": "The architecture bears the characteristic features of the Nguyen dynasty with a watchtower and curved arches. It is a symbol of the indomitable spirit of Hanoi people.",
         "quote": "Ancient paths where horse carriages once passed, \nOld palace foundations under the evening sun.",
         "year": "Hanoi, circa 1900",
+        "narrative": "Shadows of the ancient city gate bear the marks of time, where street vendors have come and gone since dawn and dusk...",
         "quiz": {
-          "question": "Under which dynasty was O Quan Chuong built?",
-          "options": ["Ly", "Tran", "Le", "Nguyen"],
-          "fact": "O Quan Chuong was built in 1749 during the reign of King Le Hien Tong. It is the only remaining gate of the old Thang Long citadel."
+          "question": "O Quan Chuong is one of how many city gates built in 1749?",
+          "options": ["3", "5", "9"],
+          "correctIndex": 1,
+          "fact": "O Quan Chuong is one of 5 city gates built in 1749 during the reign of King Le Hien Tong. It is the only remaining gate of the old Thang Long citadel."
         }
       },
       "hang-buom": {
         "name": "Hang Buom",
+        "fullName": "Hang Buom Street",
         "title": "Hang Buom Street",
         "subtitle": "Trading Port Imprint",
         "history": "Formerly a gathering place for sail makers and water-related trade items. The street sits near the old Red River pier, making it a bustling gateway for commerce.",
         "culture": "This area still preserves the Cantonese Assembly Hall and Bach Ma Temple - one of the four sacred guards of Thang Long protecting the citadel.",
         "quote": "Hanoi has thirty-six streets,\nHang Buom, Hang Bac, Hang Ngang, Hang Dao.",
         "year": "Hanoi, early 20th Century",
+        "narrative": "A small street fragrant with incense, echoing temple bells amidst the bustling quarter...",
         "quiz": {
           "question": "Which famous destination is located on Hang Buom Street?",
           "options": [
@@ -116,31 +133,37 @@
             "One Pillar Pagoda",
             "Grand Opera House"
           ],
+          "correctIndex": 0,
           "fact": "Bach Ma Temple, located at 76 Hang Buom, is the oldest temple among the four guards of Thang Long citadel."
         }
       },
       "hang-dong": {
         "name": "Hang Dong",
+        "fullName": "Hang Dong Street",
         "title": "Hang Dong Street",
         "subtitle": "Copper Resonance",
         "history": "The street is a gathering place for famous copper smiths from Ngu Xa village and surrounding areas, specializing in ritual items, copper trays, and pots.",
         "culture": "The sounds of chiseling and hammering day and night have created a unique rhythm for this traditional handicraft street of Hanoi.",
         "quote": "Ngu Xa village for copper casting,\nHang Dong for selling in the morning light.",
         "year": "Hanoi, circa 1920",
+        "narrative": "The steady rhythm of hammers echoes through the alley, where forge fires illuminate cold winter nights...",
         "quiz": {
           "question": "What is the most famous handicraft product of Hang Dong Street?",
           "options": ["Copper ritual items", "Silk paintings", "Pith helmets", "Ceramics"],
+          "correctIndex": 0,
           "fact": "Hang Dong Street has long been famous for copper products such as ritual items, trays, pots... crafted by Ngu Xa village artisans."
         }
       },
       "hang-trong": {
         "name": "Hang Trong",
+        "fullName": "Hang Trong Street",
         "title": "Hang Trong Street",
         "subtitle": "Soulful Strokes",
         "history": "Famous for drum making and especially the Hang Trong folk painting style that was once renowned, serving spiritual and decoration needs for Tet.",
         "culture": "Hang Trong paintings carry an elegant, refined beauty, expressing the depth of soul and high aesthetic sense of ancient Hanoi people.",
         "quote": "Hang Trong paintings for the spring,\nHang Ngang couplets bright in the hall.",
         "year": "Hanoi, late 19th Century",
+        "narrative": "Each masterful brushstroke imprints the soul of a nation, where folk colors blend with sacred drum beats...",
         "quiz": {
           "question": "Which folk painting style is associated with Hang Trong Street?",
           "options": [
@@ -149,59 +172,71 @@
             "Kim Hoang paintings",
             "Sinh Village paintings"
           ],
+          "correctIndex": 0,
           "fact": "Hang Trong painting is one of Vietnam's typical folk painting styles, destacated for its sophisticated coloring techniques."
         }
       },
       "lan-ong": {
         "name": "Lan Ong",
+        "fullName": "Lan Ong Street",
         "title": "Lan Ong Street",
         "subtitle": "Herbal Scent",
         "history": "The street is named after Hai Thuong Lan Ong - a brilliant physician. Since old times, this has been the hub for traditional oriental medicine shops.",
         "culture": "The intense aroma of oriental herbs spreading throughout the street is an unmistakable characteristic, showing the preservation of national medical essence.",
         "quote": "Lan Ong street with aromatic medicine,\nPulse diagnosis and prescriptions for a peaceful life.",
         "year": "Hanoi, 1930s",
+        "narrative": "Herbal fragrances drift gently through the air, where ancestral remedies preserve the essence of ancient healing...",
         "quiz": {
           "question": "Which traditional profession is Lan Ong Street famous for?",
           "options": ["Oriental Medicine", "Bird cage making", "Knife forging", "Embroidery"],
+          "correctIndex": 0,
           "fact": "Lan Ong Street is the largest oriental medicine trading center in Hanoi, preserving the profession of medicine for generations."
         }
       },
       "dong-xuan": {
         "name": "Dong Xuan",
+        "fullName": "Dong Xuan Market Street",
         "title": "Dong Xuan Market",
         "subtitle": "Bustling Marketplace",
         "history": "Built by the French administration in 1889, this is the largest market in Hanoi, witnessing the heroic fight to protect the capital in winter 1946.",
         "culture": "The market is not just a place for trade but also a cultural icon of Hanoi life with its characteristic 5-vaulted door structure.",
         "quote": "The most joyful is Dong Xuan market,\nEverything is there, for people near and far.",
         "year": "Hanoi, circa 1910",
+        "narrative": "Five-arched roofs stand tall amidst the streets, witnessing countless festive Tet market seasons...",
         "quiz": {
           "question": "In what year was Dong Xuan Market built?",
           "options": ["1889", "1902", "1946", "1954"],
+          "correctIndex": 0,
           "fact": "Dong Xuan Market was built in 1889 on the site of the old To Lich river pier, becoming a trade symbol of Thang Long."
         }
       },
       "hang-ma": {
         "name": "Hang Ma",
+        "fullName": "Hang Ma Street",
         "title": "Hang Ma Street",
         "subtitle": "Vibrant Colors",
         "history": "The street specializes in votive paper items for rituals and folk toys for children during Mid-Autumn and Tet festivals.",
         "culture": "This is always the most colorful and bustling street in the old quarter during festival seasons, preserving the childhood memories of many generations.",
         "quote": "Mid-autumn lantern procession on Hang Ma,\nBright star lanterns, joyful streets.",
         "year": "Hanoi, circa 1940",
+        "narrative": "Streets ablaze with colorful paper decorations, where generations of childhoods merge in festival laughter...",
         "quiz": {
           "question": "When is Hang Ma Street most bustling?",
           "options": ["Mid-Autumn & Tet", "Summer", "Christmas", "National Day"],
+          "correctIndex": 0,
           "fact": "Hang Ma Street is the center of traditional festivals, providing decorations and folk toys in Hanoi."
         }
       },
       "hang-ngang": {
         "name": "Hang Ngang",
+        "fullName": "Hang Ngang Street",
         "title": "Hang Ngang Street",
         "subtitle": "Historical Milestone",
         "history": "Hang Ngang Street was once the wealthiest in the old quarter, famous for silk shops. House No. 48 is where Uncle Ho wrote the Declaration of Independence.",
         "culture": "The intersection of architecture and commercial prosperity has turned Hang Ngang into a symbol of the capital's elegance and aristocracy.",
         "quote": "No. 48 Hang Ngang, a new history page,\nShining independence, radiant country.",
         "year": "Hanoi, 1945",
+        "narrative": "A small house on an ancient street, where each written word forged a new chapter in the nation's history...",
         "quiz": {
           "question": "Which major historical event is associated with Hang Ngang Street?",
           "options": [
@@ -210,7 +245,25 @@
             "Capital Takeover Day",
             "Lam Son Uprising"
           ],
+          "correctIndex": 0,
           "fact": "House No. 48 Hang Ngang is where President Ho Chi Minh wrote the Declaration of Independence, founding the Democratic Republic of Vietnam."
+        }
+      },
+      "hang-bac": {
+        "name": "Hang Bac",
+        "fullName": "Hang Bac Street",
+        "title": "Hang Bac Street",
+        "subtitle": "Silver Craft Essence",
+        "history": "Hang Bac Street was formed in the 15th century, gathering talented jewelers from three famous craft villages: Chau Khe, Dong Xam, and Dinh Cong. It was once the place where silver bullion was cast for the court.",
+        "culture": "The street still retains its ancient architecture and traditional jewelry shops, where manual silver carving techniques are preserved through many generations.",
+        "quote": "Hang Bac craftsmen skillfully carve flowers,\nBright silver bullion, elegant silk.",
+        "year": "Hanoi, 18th Century",
+        "narrative": "Silver gleams beneath artisan hands, where every thread of silver tells a century-old story...",
+        "quiz": {
+          "question": "Which traditional profession is Hang Bac Street famous for?",
+          "options": ["Silver carving", "Silk weaving", "Copper casting", "Hat making"],
+          "correctIndex": 0,
+          "fact": "Hang Bac Street is the most bustling jewelry center in the old quarter, famous for sophisticated silver engraving and filigree techniques."
         }
       }
     }

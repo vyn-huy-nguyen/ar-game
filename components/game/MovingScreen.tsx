@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useMemo, useRef } from 'react';
 import { useGame } from '@/app/[locale]/game/GameContext';
 import { useTranslations } from 'next-intl';
@@ -17,8 +18,8 @@ const LOCATION_COORDS: Record<string, { lat: number; lng: number; name: string }
   'hang-trong': { lat: 21.0305, lng: 105.8505, name: 'Phố Hàng Trống' },
   'lan-ong': { lat: 21.035, lng: 105.849, name: 'Phố Lãn Ông' },
   'dong-xuan': { lat: 21.0375, lng: 105.8495, name: 'Chợ Đồng Xuân' },
-  'hang-ma': { lat: 21.0365, lng: 105.8485, name: 'Phố Hàng Mã' },
   'hang-ngang': { lat: 21.034, lng: 105.851, name: 'Phố Hàng Ngang' },
+  'hang-bac': { lat: 21.0338, lng: 105.8525, name: 'Phố Hàng Bạc' },
 };
 
 export default function MovingScreen() {
@@ -103,104 +104,104 @@ export default function MovingScreen() {
 
         <div className="max-w-[65%] translate-y-1 transform rounded-full border border-primary/40 bg-[#0f1420]/95 px-6 py-2 shadow-[0_0_20px_rgba(0,0,0,0.8)] ring-1 ring-primary/10 backdrop-blur-md">
           <h1 className="truncate text-center font-display text-sm font-bold uppercase tracking-widest text-primary sm:text-base">
-            {currentLocationId ? t(`locations.${currentLocationId}.name`) : 'KHU PHỐ CỔ'}
+            {currentLocationId ? t(`locations.${currentLocationId}.name`) : t('old_quarter')}
           </h1>
         </div>
 
-        <div className="w-12"></div>
+        {movingMode === 'navigation' ? (
+          <button
+            onClick={() => setCurrentScreen('library')}
+            className="group relative flex h-12 w-12 items-center justify-center rounded-full border border-primary/30 bg-[#0f1420]/80 text-primary shadow-lg backdrop-blur-md transition-all hover:scale-110 active:scale-95"
+          >
+            <span className="material-symbols-outlined text-2xl">menu_book</span>
+            <div className="absolute right-[5px] top-[5px] h-2 w-2 rounded-full bg-red-500 shadow-[0_0_5px_rgba(239,68,68,0.8)]"></div>
+          </button>
+        ) : (
+          <button></button>
+        )}
       </div>
 
-      {/* Floating Map Controls - Moved to top-level for guaranteed visibility */}
+      {/* Floating Map Controls - Refined for Screen 4 Layout */}
       {movingMode === 'navigation' && (
-        <div className="pointer-events-auto fixed bottom-64 right-8 z-[9999] flex flex-col items-center gap-4 sm:right-12">
-          <div className="flex flex-col space-y-2 rounded-2xl border border-primary/40 bg-[#0f1420]/95 p-1.5 shadow-[0_0_30px_rgba(0,0,0,0.5)] ring-1 ring-white/10 backdrop-blur-xl">
-            <button
-              onClick={() => mapRef.current?.zoomIn()}
-              className="flex h-12 w-12 items-center justify-center rounded-xl text-primary transition-all hover:bg-primary hover:text-[#0f1420] active:scale-95"
-              title="Phóng to"
-            >
-              <span className="material-symbols-outlined text-2xl font-bold">add</span>
+        <>
+          {/* BOTTOM CENTER: Navigation Bar - Compact design to matched UI3 Screen 4 */}
+          <div className="pointer-events-auto fixed bottom-8 left-1/2 z-[60] flex min-w-[210px] -translate-x-1/2 transform items-center justify-between gap-1 rounded-full border border-primary/40 bg-[#0f1420]/95 p-1.5 shadow-[0_0_30px_rgba(0,0,0,0.8)] ring-1 ring-white/10 backdrop-blur-3xl">
+            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-navy-deep shadow-[0_0_20px_rgba(249,212,6,0.6)]">
+              <span className="material-symbols-outlined text-xl font-black">location_on</span>
+            </div>
+            <button className="flex h-9 w-9 items-center justify-center text-primary/40 transition-all hover:text-primary active:scale-90">
+              <span className="material-symbols-outlined text-xl">route</span>
             </button>
-            <div className="mx-auto h-px w-8 bg-primary/20"></div>
-            <button
-              onClick={() => mapRef.current?.zoomOut()}
-              className="flex h-12 w-12 items-center justify-center rounded-xl text-primary transition-all hover:bg-primary hover:text-[#0f1420] active:scale-95"
-              title="Thu nhỏ"
-            >
-              <span className="material-symbols-outlined text-2xl font-bold">remove</span>
+            <button className="flex h-9 w-9 items-center justify-center text-primary/40 transition-all hover:text-primary active:scale-90">
+              <span className="material-symbols-outlined text-xl">search</span>
             </button>
           </div>
 
-          <button
-            onClick={() => mapRef.current?.centerOnUser()}
-            className="flex h-16 w-16 items-center justify-center rounded-full border border-primary/50 bg-primary text-[#0f1420] shadow-[0_0_25px_rgba(249,212,6,0.6)] transition-all hover:scale-110 active:scale-90"
-            title="Định vị của tôi"
-          >
-            <span className="material-symbols-outlined text-3xl font-black">my_location</span>
-          </button>
-        </div>
+          {/* BOTTOM RIGHT: Zoom Controls - Compact to avoid overlap */}
+          <div className="pointer-events-auto fixed bottom-8 right-6 z-[60] flex flex-col gap-2 sm:right-10">
+            <button
+              onClick={() => mapRef.current?.zoomIn()}
+              className="group flex h-9 w-9 items-center justify-center rounded-full border border-primary/40 bg-[#0f1420]/90 text-primary shadow-xl backdrop-blur-xl transition-all hover:bg-primary hover:text-navy-deep active:scale-90"
+            >
+              <span className="material-symbols-outlined text-lg font-bold">add</span>
+            </button>
+            <button
+              onClick={() => mapRef.current?.zoomOut()}
+              className="group flex h-9 w-9 items-center justify-center rounded-full border border-primary/40 bg-[#0f1420]/90 text-primary shadow-xl backdrop-blur-xl transition-all hover:bg-primary hover:text-navy-deep active:scale-90"
+            >
+              <span className="material-symbols-outlined text-lg font-bold">remove</span>
+            </button>
+          </div>
+        </>
       )}
 
       {/* Main Map Content Area */}
       <div className="relative h-full w-full flex-grow overflow-hidden bg-[#0f1420]">
-        {movingMode === 'navigation' ? (
-          // REAL-TIME NAVIGATION MODE (Leaflet)
-          <div className="animate-fade-in absolute inset-0 z-0 duration-1000">
-            {mounted && (
-              <LeafletMap
-                ref={mapRef}
-                targetLat={location.lat}
-                targetLng={location.lng}
-                targetName={currentLocationId ? t(`locations.${currentLocationId}.name`) : ''}
-              />
-            )}
+        {/* UNIVERSAL MAP BACKGROUND */}
+        <div className="animate-fade-in absolute inset-0 z-0 duration-1000">
+          {mounted && (
+            <LeafletMap
+              ref={mapRef}
+              targetLat={location.lat}
+              targetLng={location.lng}
+              targetName={currentLocationId ? t(`locations.${currentLocationId}.name`) : ''}
+              interactive={movingMode === 'navigation'}
+            />
+          )}
+        </div>
+
+        {/* COMPASS UI (From Screen 3 PNG) */}
+        {/* <div className="pointer-events-none absolute right-5 top-20 z-20 h-16 w-16 opacity-80 sm:right-6">
+          <div className="relative flex h-full w-full items-center justify-center rounded-full border-2 border-white/10 bg-navy-light/30 backdrop-blur-sm">
+            <span className="absolute top-1 font-sans text-[10px] font-bold text-white/50">N</span>
+            <span className="absolute bottom-1 font-sans text-[10px] font-bold text-white/50">
+              S
+            </span>
+            <span className="absolute left-1 font-sans text-[10px] font-bold text-white/50">W</span>
+            <span className="absolute right-1 font-sans text-[10px] font-bold text-white/50">
+              E
+            </span>
+            <div className="shadow-glow absolute h-8 w-1 origin-center rotate-45 rounded-full bg-gradient-to-t from-white/20 to-primary"></div>
           </div>
-        ) : (
-          // OVERVIEW MODE (Mission Card Background)
-          <div className="map-grid absolute inset-0">
+        </div> */}
+
+        {/* OVERLAY DECORATIONS FOR OVERVIEW MODE */}
+        {movingMode === 'overview' && (
+          <div className="pointer-events-none absolute inset-0 z-10 bg-navy-deep/40 backdrop-blur-[2px]">
             <div className="absolute inset-0 z-0 overflow-hidden opacity-20">
               <div className="absolute left-[20%] top-[-10%] h-[120%] w-3 rotate-3 rounded-full bg-primary/10"></div>
               <div className="absolute left-[35%] top-[-10%] h-[120%] w-2 -rotate-2 rounded-full bg-primary/10"></div>
               <div className="absolute left-[55%] top-[-10%] h-[120%] w-4 rotate-1 rounded-full bg-primary/10"></div>
               <div className="absolute left-[75%] top-[-10%] h-[120%] w-2 rotate-6 rounded-full bg-primary/10"></div>
             </div>
-
-            {/* Destination Marker */}
-            <div className="absolute left-[65%] top-[35%] z-10 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center">
-              <div className="relative">
-                <div className="absolute inset-0 animate-ping rounded-full bg-primary/30 opacity-40"></div>
-                <div className="relative flex h-12 w-12 items-center justify-center rounded-full border border-primary bg-[#0f1420] text-primary shadow-[0_0_15px_rgba(249,212,6,0.3)]">
-                  <span className="material-symbols-outlined text-[20px]">temple_buddhist</span>
-                </div>
-              </div>
-              <div className="mt-3 max-w-[120px] truncate rounded-full border border-primary/30 bg-[#0f1420]/95 px-3 py-1 text-center font-display text-[10px] uppercase tracking-wider text-white shadow-lg backdrop-blur-sm">
-                {currentLocationId ? t(`locations.${currentLocationId}.name`) : ''}
-              </div>
-            </div>
-
-            {/* User Pointer */}
-            <div className="absolute bottom-[30%] left-[30%] z-10 -translate-x-1/2 -translate-y-1/2">
-              <div className="relative flex flex-col items-center">
-                <div className="relative">
-                  <div className="absolute inset-0 animate-ping rounded-full bg-blue-500/30"></div>
-                  <div className="relative h-5 w-5 rounded-full border-2 border-white bg-gradient-to-br from-blue-400 to-blue-600 shadow-[0_0_15px_rgba(59,130,246,0.6)]"></div>
-                  <div className="clip-path-cone absolute bottom-1/2 left-1/2 h-[60px] w-[60px] origin-bottom -translate-x-1/2 -rotate-45 transform bg-gradient-to-t from-blue-500/20 to-transparent"></div>
-                </div>
-                <div className="mt-4 rounded-full border border-primary/40 bg-[#0f1420]/90 px-3 py-1 shadow-lg backdrop-blur-sm">
-                  <span className="whitespace-nowrap font-display text-[9px] font-black uppercase tracking-widest text-primary">
-                    {t('current_location_label')}
-                  </span>
-                </div>
-              </div>
-            </div>
           </div>
         )}
       </div>
 
-      {/* Bottom Panel */}
-      <div className="relative z-50 flex-none px-6 pb-12 pt-4">
+      {/* Bottom Panel - Positioned absolutely to overlay on the map */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-6 z-50 flex flex-col items-center px-6">
         {/* Error Handling & Troubleshooting */}
-        {locationError && (
+        {/* {locationError && (
           <div className="animate-fade-in mb-6 overflow-hidden rounded-2xl border border-red-500/30 bg-red-950/40 p-1 ring-1 ring-red-500/20 backdrop-blur-xl">
             <div className="flex flex-col p-4">
               <div className="mb-3 flex items-start gap-4">
@@ -238,7 +239,6 @@ export default function MovingScreen() {
                 </button>
               </div>
 
-              {/* Debug Mock Button (Visible during development/testing) */}
               <button
                 onClick={() =>
                   setMockLocation(
@@ -252,63 +252,77 @@ export default function MovingScreen() {
               </button>
             </div>
           </div>
-        )}
+        )} */}
 
         {movingMode === 'overview' ? (
-          <div className="animate-fade-in duration-500">
-            <div className="overflow-hidden rounded-2xl border border-primary/20 bg-[#1a2236]/80 p-5 shadow-2xl ring-1 ring-white/5 backdrop-blur-xl">
-              <div className="flex flex-col gap-6">
-                <div className="flex items-start justify-between gap-6">
+          <div className="animate-fade-in pointer-events-auto w-full duration-500">
+            <div className="overflow-hidden rounded-3xl border border-primary/20 bg-[#1a2236]/90 p-3 shadow-2xl ring-1 ring-white/10 backdrop-blur-2xl">
+              <div className="flex flex-col gap-3">
+                <div className="flex items-start justify-between gap-3">
                   <div className="flex-1">
-                    <h2 className="mb-2 flex items-center gap-2 font-display text-xs font-black uppercase tracking-wider text-primary">
+                    <h2 className="mb-1 flex items-center gap-2 font-display text-xs font-black uppercase tracking-wider text-primary">
                       <span className="material-symbols-outlined text-base">history_edu</span>
-                      NHIỆM VỤ HIỆN TẠI
+                      {t('current_mission')}
                     </h2>
-                    <p className="font-display text-sm font-medium leading-relaxed text-white/90">
+                    <p className="font-display text-[13px] font-medium leading-relaxed text-white/90">
                       {t.rich('mission_desc', {
                         location: currentLocationId ? t(`locations.${currentLocationId}.name`) : '',
-                        span: (chunks) => <span className="font-bold text-primary">{chunks}</span>,
+                        span: (chunks) => (
+                          <span className="font-bold text-primary underline decoration-primary/50 underline-offset-4">
+                            {chunks}
+                          </span>
+                        ),
                       })}
                     </p>
                   </div>
-                  <div className="flex h-16 w-20 flex-col items-center justify-center rounded-xl border border-white/5 bg-black/40 shadow-inner">
-                    <span className="font-display text-xl font-black text-white">
-                      {distance !== null ? distance : '--'}
+                  <div className="flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-2xl border border-primary/20 bg-black/50 shadow-inner">
+                    <span className="font-display text-[18px] font-black leading-none text-white">
+                      {distance !== null
+                        ? distance >= 1000
+                          ? (distance / 1000).toFixed(1)
+                          : distance
+                        : '--'}
                     </span>
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-gray-500">
-                      MÉT
+                    <span className="mt-1 text-[9px] font-black uppercase tracking-widest text-primary/50">
+                      {distance !== null && distance >= 1000 ? t('unit_km') : t('unit_meters')}
                     </span>
                   </div>
                 </div>
 
-                <button
-                  onClick={() => setMovingMode('navigation')}
-                  className="group relative flex w-full items-center justify-center gap-3 overflow-hidden rounded-xl bg-primary py-4 font-display text-sm font-black uppercase tracking-widest text-black shadow-[0_0_20px_rgba(249,212,6,0.3)] transition-all hover:scale-[1.02] active:scale-95"
-                >
-                  <span className="relative z-10">BẮT ĐẦU ĐI</span>
-                  <span className="material-symbols-outlined relative z-10 text-xl font-black">
-                    navigation
-                  </span>
-                  <div className="absolute inset-0 -translate-x-full skew-x-12 bg-gradient-to-r from-transparent via-white/40 to-transparent transition-transform duration-700 group-hover:translate-x-full"></div>
-                </button>
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={() => setMovingMode('navigation')}
+                    className="group relative flex flex-1 items-center justify-center gap-3 overflow-hidden rounded-2xl bg-primary py-3 font-display text-sm font-black uppercase tracking-widest text-black shadow-[0_0_20px_rgba(249,212,6,0.3)] transition-all hover:scale-[1.02] active:scale-95"
+                  >
+                    <span className="relative z-10">{t('start_walking')}</span>
+                    <span className="material-symbols-outlined relative z-10 rotate-45 text-xl font-black">
+                      navigation
+                    </span>
+                    <div className="absolute inset-0 -translate-x-full skew-x-12 bg-gradient-to-r from-transparent via-white/40 to-transparent transition-transform duration-700 group-hover:translate-x-full"></div>
+                  </button>
+
+                  <button className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-primary shadow-lg backdrop-blur-md transition-all hover:bg-white/10 active:scale-90">
+                    <span className="material-symbols-outlined !text-[24px]">lightbulb</span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         ) : (
-          // Navigation Mode Action (Discover Button)
-          <div className="flex w-full flex-col items-center">
-            {distance !== null && distance < 30 ? (
+          // Navigation Mode Action (Discover Button) - Moved higher to avoid overlap with Bottom Nav
+          <div className="pointer-events-auto mb-20 flex w-full flex-col items-center px-6">
+            {distance !== null && distance < 30000 ? (
               <button
                 onClick={() => setCurrentScreen('arrival')}
-                className="shadow-glow-strong flex w-full max-w-sm animate-pulse-glow items-center justify-center gap-4 rounded-2xl border border-primary/40 bg-primary py-5 font-display text-base font-black uppercase tracking-[0.15em] text-black transition-all hover:scale-105 active:scale-95"
+                className="shadow-glow-strong flex w-full max-w-[240px] animate-pulse-glow items-center justify-center gap-3 rounded-2xl border border-primary/40 bg-primary py-3.5 font-display text-sm font-black uppercase tracking-[0.12em] text-black transition-all hover:scale-105 active:scale-95"
               >
                 <span>KHÁM PHÁ</span>
-                <span className="material-symbols-outlined text-2xl font-black">explore</span>
+                <span className="material-symbols-outlined text-xl font-black">explore</span>
               </button>
             ) : (
               // Navigation ongoing hint
               <div className="flex w-full justify-center">
-                <div className="animate-pulse rounded-full border border-primary/20 bg-black/60 px-6 py-3 text-[10px] font-black uppercase tracking-widest text-primary backdrop-blur-md">
+                <div className="animate-pulse rounded-full border border-primary/20 bg-black/80 px-8 py-4 text-[11px] font-black uppercase tracking-widest text-primary backdrop-blur-md">
                   Tiến gần hơn để khám phá
                 </div>
               </div>

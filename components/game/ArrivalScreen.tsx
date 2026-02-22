@@ -16,8 +16,8 @@ const LOCATION_COORDS: Record<string, { lat: number; lng: number }> = {
   'hang-trong': { lat: 21.0305, lng: 105.8505 },
   'lan-ong': { lat: 21.035, lng: 105.849 },
   'dong-xuan': { lat: 21.0375, lng: 105.8495 },
-  'hang-ma': { lat: 21.0365, lng: 105.8485 },
   'hang-ngang': { lat: 21.034, lng: 105.851 },
+  'hang-bac': { lat: 21.0338, lng: 105.8525 },
 };
 
 export default function ArrivalScreen() {
@@ -128,7 +128,7 @@ export default function ArrivalScreen() {
                   <br />
                   <span className="text-white">{t('arrival.subtitle')}</span>
                 </h1>
-                <p className="mt-4 font-sans text-sm font-bold uppercase tracking-widest text-primary/60">
+                <p className="font-body mt-4 text-sm font-bold uppercase tracking-widest text-primary/60">
                   Hà Nội • {t(`locations.${locId}.name`)}
                 </p>
               </div>
@@ -149,7 +149,7 @@ export default function ArrivalScreen() {
                   <div className="group-hover:animate-shimmer-fast absolute inset-0 -translate-x-full skew-x-12 bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
                 </div>
               </button>
-              <p className="font-sans text-[10px] font-black uppercase tracking-[0.2em] text-primary/40">
+              <p className="font-body text-[10px] font-black uppercase tracking-[0.2em] text-primary/40">
                 {t('arrival.scan_hint')}
               </p>
             </div>
@@ -166,12 +166,12 @@ export default function ArrivalScreen() {
                   className="sepia-filter h-full w-full object-cover opacity-90 transition-transform duration-1000 group-hover:scale-105"
                   src={
                     info.photo ||
-                    'https://lh3.googleusercontent.com/aida-public/AB6AXuDkYYgAtSHck1GUzYNJCg7rS9rPKGfGzLoUvy1wZ422LNEoo_hSLKt0sbpMYoKdYvpHBJBW1E1lZvWLDNcPDnK9_2I0xz002BO-nP2e6RnXbn3Z-OHDqFw5bLSQ8WLVA1xln8A4zkPAuWLq4dE4US_lIvWr55USKSExWFZd2H3YacVa7U1I50S1I0N2L-mMFxBO70uhmXbEQHdjqd0xxr5JnzpsJjb-fh4JOkDOwgBFqaggPgQYGyqZeNqaGNPXpgSKRX4xTbD9R8ne'
+                    'https://lh3.googleusercontent.com/aida-public/AB6AXuCiwN5uhZGlq_ZLIfRjwgnr5GY5zBGyAXnD5Ik8kLik-EL5eifDaRltNyhVqV554V4Nf29gQ8HaLmSjrZ2iRp07SZZ9HuPFrZ_sG04WgBZjvfpYrhP_sG8OICtrMUeZHbGMwZSCTuPRhWklKh07nLJIeux1Eur_YrKnJ9VVBtt_ZeLBksHBHXbfN_6_MyBCzot_zVtrYMnwr8qeFjXMpcmDEa7zMGl3gXlCgZpuZBhInIgIl1qGlLupjDDUU1tp7E-dQ8x5sJTa4sM4'
                   }
                 />
                 <div className="absolute inset-0 z-20 bg-gradient-to-t from-navy-mid via-navy-mid/40 to-transparent md:bg-gradient-to-r"></div>
                 <div className="absolute bottom-2 left-5 z-30 opacity-80">
-                  <div className="text-primary-dim font-serif text-[9px] italic">{info.year}</div>
+                  <div className="text-primary-dim font-display text-[9px] italic">{info.year}</div>
                 </div>
               </div>
 
@@ -181,7 +181,7 @@ export default function ArrivalScreen() {
                 <h2 className="mb-0.5 font-display text-2xl font-bold tracking-tight text-primary drop-shadow-sm md:text-5xl">
                   {info.title}
                 </h2>
-                <p className="mb-4 font-sans text-[9px] uppercase tracking-[0.2em] text-primary/60">
+                <p className="font-body mb-4 text-[9px] uppercase tracking-[0.2em] text-primary/60">
                   {info.subtitle}
                 </p>
 
@@ -191,7 +191,7 @@ export default function ArrivalScreen() {
                       <span className="h-1 w-1 rounded-full bg-primary"></span>
                       {t('arrival.history_label')}
                     </h3>
-                    <p className="border-l border-primary/10 py-0.5 pl-3 text-justify font-sans text-[11px] leading-relaxed text-white/70">
+                    <p className="font-body border-l border-primary/10 py-0.5 pl-3 text-justify text-[11px] leading-relaxed text-white/70">
                       {info.history}
                     </p>
                   </div>
@@ -201,7 +201,7 @@ export default function ArrivalScreen() {
                       <span className="h-1 w-1 rounded-full bg-primary"></span>
                       {t('arrival.culture_label')}
                     </h3>
-                    <p className="border-l border-primary/10 py-0.5 pl-3 text-justify font-sans text-[11px] leading-relaxed text-white/70">
+                    <p className="font-body border-l border-primary/10 py-0.5 pl-3 text-justify text-[11px] leading-relaxed text-white/70">
                       {info.culture}
                     </p>
                   </div>
@@ -210,13 +210,13 @@ export default function ArrivalScreen() {
                     <span className="material-symbols-outlined absolute left-1.5 top-1.5 text-lg text-primary/10">
                       format_quote
                     </span>
-                    <p className="whitespace-pre-line px-4 text-center font-serif text-[10px] italic leading-relaxed text-primary/60">
+                    <p className="whitespace-pre-line px-4 text-center font-display text-[10px] italic leading-relaxed text-primary/60">
                       &quot;{info.quote}&quot;
                     </p>
                   </div>
                 </div>
 
-                <div className="mt-5 flex shrink-0 items-center justify-between border-t border-white/5 pb-4 pt-5 md:pb-0">
+                {/* <div className="mt-5 flex shrink-0 items-center justify-between border-t border-white/5 pb-4 pt-5 md:pb-0">
                   <div className="xs:flex flex hidden items-center gap-2 text-[10px] text-white/30">
                     <span className="material-symbols-outlined text-sm">visibility</span>
                     <span>{t('arrival.discovered')}</span>
@@ -228,7 +228,7 @@ export default function ArrivalScreen() {
                     {t('arrival.continue_btn')}
                     <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
                   </button>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

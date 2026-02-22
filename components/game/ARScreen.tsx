@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
 import { useGame } from '@/app/[locale]/game/GameContext';
+import { useTranslations } from 'next-intl';
 import MindARViewer from './MindARViewer';
 
 const LOCATION_TARGET_MAP: Record<string, number> = {
   'o-quan-chuong': 0,
-  'hang-buom': 1,
-  'hang-dong': 2,
-  'hang-trong': 3,
-  'lan-ong': 4,
+  'hang-ngang': 1,
+  'hang-buom': 2,
+  'hang-dong': 3,
+  'hang-bac': 4,
   'dong-xuan': 5,
-  'hang-ma': 6,
-  'ho-guom': 7,
+  'hang-trong': 6,
+  'lan-ong': 7,
 };
 
 export default function ARScreen() {
   const { setCurrentScreen, currentLocationId, unlockedMemories } = useGame();
+  const t = useTranslations('game');
   const [isFound, setIsFound] = useState(false);
 
   const targetIndex = currentLocationId ? (LOCATION_TARGET_MAP[currentLocationId] ?? 0) : 0;
@@ -28,7 +30,7 @@ export default function ARScreen() {
   };
 
   return (
-    <div className="relative h-[100dvh] w-full overflow-hidden bg-background-dark font-sans text-white">
+    <div className="relative h-[100dvh] w-full overflow-hidden bg-background-dark font-display text-white">
       {/* AR View Layer */}
       <div className="absolute inset-0 z-0">
         <MindARViewer onTargetFound={handleTargetFound} targetIndex={targetIndex} />
@@ -93,11 +95,12 @@ export default function ARScreen() {
               </div>
               <p className="font-display text-sm font-light leading-relaxed tracking-wide text-white">
                 {isFound ? (
-                  <span className="font-bold text-primary">Đã tìm thấy mảnh ghép!</span>
+                  <span className="font-bold text-primary">{t('found_fragment')}</span>
                 ) : (
                   <>
-                    Di chuyển camera để quét các{' '}
-                    <span className="font-medium text-primary">mảnh ghép ký ức</span>
+                    {t.rich('scan_instructions', {
+                      span: (chunks) => <span className="font-medium text-primary">{chunks}</span>,
+                    })}
                   </>
                 )}
               </p>
