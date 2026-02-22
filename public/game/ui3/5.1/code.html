@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html class="dark" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Street Historical Introduction Screen</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f9d406",
+                        "primary-dim": "#bfa304",
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#23200f",
+                        "navy-deep": "#0f1420", 
+                        "navy-light": "#1a2236",
+                        "sepia-overlay": "rgba(66, 50, 20, 0.4)",
+                    },
+                    fontFamily: {
+                        "display": ["Noto Serif", "serif"],
+                        "sans": ["Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                    backgroundImage: {
+                        'radial-glow': 'radial-gradient(circle at center, rgba(249, 212, 6, 0.05) 0%, rgba(15, 20, 32, 0) 70%)',
+                        'texture-pattern': "url('https://www.transparenttextures.com/patterns/dust.png')",
+                    },
+                    aspectRatio: {
+                        '16/9': '16 / 9',
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            min-height: 100vh;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .sepia-filter {
+            filter: sepia(0.8) contrast(1.1) brightness(0.9);
+        }
+    </style>
+<style>
+        body {
+          min-height: max(884px, 100dvh);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-navy-deep text-white font-display overflow-hidden h-screen w-screen relative selection:bg-primary selection:text-black flex items-center justify-center">
+<div class="absolute inset-0 z-0 bg-navy-deep">
+<div class="absolute inset-0 bg-radial-glow pointer-events-none"></div>
+<div class="absolute top-[10%] left-[5%] w-1 h-1 bg-primary/40 rounded-full blur-[1px]"></div>
+<div class="absolute bottom-[20%] right-[10%] w-2 h-2 bg-primary/20 rounded-full blur-[2px]"></div>
+<div class="absolute inset-0 opacity-10 pointer-events-none bg-texture-pattern"></div>
+</div>
+<div class="relative w-full h-full max-w-[900px] max-h-[506px] md:aspect-[16/9] flex flex-col bg-navy-deep md:border md:border-primary/20 md:rounded-[2rem] md:shadow-2xl overflow-hidden z-10">
+<div class="absolute top-0 left-0 right-0 z-30 flex justify-between items-center p-4 md:p-6 pointer-events-none">
+<button class="pointer-events-auto flex items-center justify-center w-10 h-10 rounded-full bg-navy-light/80 text-primary border border-primary/20 hover:bg-primary hover:text-navy-deep transition-colors backdrop-blur-sm group">
+<span class="material-symbols-outlined text-[20px] group-hover:-translate-x-0.5 transition-transform">arrow_back</span>
+</button>
+<button class="pointer-events-auto flex items-center gap-2 px-4 h-10 rounded-full bg-navy-light/80 text-primary border border-primary/20 hover:bg-primary hover:text-navy-deep transition-colors backdrop-blur-sm group">
+<span class="text-xs font-sans font-bold uppercase tracking-wider">Thư viện</span>
+<span class="material-symbols-outlined text-[20px] group-hover:rotate-12 transition-transform">local_library</span>
+</button>
+</div>
+<div class="relative w-full h-full flex flex-col md:flex-row">
+<div class="w-full md:w-1/2 h-[45%] md:h-full relative overflow-hidden group">
+<div class="absolute inset-0 bg-navy-deep/20 z-10"></div>
+<img alt="Ô Quan Chưởng Historical Photo" class="w-full h-full object-cover sepia-filter opacity-90 transition-transform duration-1000 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiwN5uhZGlq_ZLIfRjwgnr5GY5zBGyAXnD5Ik8kLik-EL5eifDaRltNyhVqV554V4Nf29gQ8HaLmSjrZ2iRp07SZZ9HuPFrZ_sG04WgBZjvfpYrhP_sG8OICtrMUeZHbGMwZSCTuPRhWklKh07nLJIeux1Eur_YrKnJ9VVBtt_ZeLBksHBHXbfN_6_MyBCzot_zVtrYMnwr8qeFjXMpcmDEa7zMGl3gXlCgZpuZBhInIgIl1qGlLupjDDUU1tp7E-dQ8x5sJTa4sM4"/>
+<div class="absolute inset-0 bg-texture-pattern opacity-40 mix-blend-overlay z-20"></div>
+<div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-navy-deep via-navy-deep/40 to-transparent z-20"></div>
+<div class="absolute bottom-6 left-6 z-30 opacity-80">
+<div class="font-handwriting text-primary-dim text-sm italic font-serif">Hanoi, circa 1900</div>
+</div>
+</div>
+<div class="w-full md:w-1/2 h-[55%] md:h-full relative flex flex-col justify-center p-6 md:pr-12 md:pl-4 z-30">
+<div class="w-16 h-1 bg-gradient-to-r from-primary to-transparent mb-6 opacity-80"></div>
+<h1 class="text-4xl md:text-5xl text-primary font-bold mb-2 font-display tracking-tight drop-shadow-sm">
+                    Ô Quan Chưởng
+                </h1>
+<p class="text-primary/60 text-xs font-sans uppercase tracking-[0.2em] mb-6">Di sản ngàn năm</p>
+<div class="overflow-y-auto pr-2 scrollbar-hide space-y-5">
+<div>
+<h3 class="text-white/90 font-bold text-sm mb-2 flex items-center gap-2">
+<span class="w-1 h-1 bg-primary rounded-full"></span>
+                            Lịch sử hình thành
+                        </h3>
+<p class="text-gray-300 text-sm md:text-sm font-sans leading-relaxed text-justify opacity-90 border-l border-primary/20 pl-3">
+                            Ô Quan Chưởng (hay Ô Đông Hà) được xây dựng vào năm Cảnh Hưng thứ 10 (1749). Đây là cửa ô duy nhất còn sót lại của kinh thành Thăng Long xưa, chứng kiến bao thăng trầm của lịch sử thủ đô qua các cuộc kháng chiến chống Pháp.
+                        </p>
+</div>
+<div>
+<h3 class="text-white/90 font-bold text-sm mb-2 flex items-center gap-2">
+<span class="w-1 h-1 bg-primary rounded-full"></span>
+                            Dấu ấn văn hóa
+                        </h3>
+<p class="text-gray-300 text-sm md:text-sm font-sans leading-relaxed text-justify opacity-90 border-l border-primary/20 pl-3">
+                            Kiến trúc mang đậm nét đặc trưng thời Nguyễn với vọng lâu và mái vòm cong. Nơi đây không chỉ là di tích kiến trúc quân sự mà còn là biểu tượng cho tinh thần bất khuất của người Hà Nội, nơi lưu giữ hồn cốt của phố cổ.
+                        </p>
+</div>
+<div class="bg-white/5 p-4 rounded-lg border border-white/5 mt-2 relative">
+<span class="material-symbols-outlined absolute top-2 left-2 text-primary/20 text-2xl">format_quote</span>
+<p class="text-primary-dim text-xs italic text-center px-4 leading-relaxed font-serif">
+                            "Lối xưa xe ngựa hồn thu thảo,<br/>Nền cũ lâu đài bóng tịch dương."
+                        </p>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
+<div class="flex items-center gap-2 text-xs text-white/40">
+<span class="material-symbols-outlined text-sm">visibility</span>
+<span>Đã khám phá</span>
+</div>
+<button class="px-6 py-2 bg-gradient-to-r from-primary-dim to-primary text-navy-deep font-bold rounded-full text-xs uppercase tracking-widest shadow-lg shadow-primary/20 hover:shadow-primary/40 hover:scale-105 transition-all flex items-center gap-2">
+                        Tiếp tục
+                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<div class="absolute top-4 right-4 w-16 h-16 border-t border-r border-primary/10 rounded-tr-3xl pointer-events-none"></div>
+<div class="absolute bottom-4 left-4 w-16 h-16 border-b border-l border-primary/10 rounded-bl-3xl pointer-events-none"></div>
+</div>
+
+</body></html>

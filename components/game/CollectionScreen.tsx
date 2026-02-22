@@ -1,23 +1,19 @@
-'use client';
-
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useGame } from '@/app/[locale]/game/GameContext';
-
-const MEMORIES = [
-  { id: 'o-quan-chuong', title: 'Ô Quan Chưởng', date: 'Vùng ký ức #01' },
-  { id: 'hang-buom', title: 'Phố Hàng Buồm', date: 'Vùng ký ức #02' },
-  { id: 'hang-dong', title: 'Phố Hàng Đồng', date: 'Vùng ký ức #03' },
-  { id: 'hang-trong', title: 'Phố Hàng Trống', date: 'Vùng ký ức #04' },
-  { id: 'lan-ong', title: 'Phố Lãn Ông', date: 'Vùng ký ức #05' },
-  { id: 'dong-xuan', title: 'Chợ Đồng Xuân', date: 'Vùng ký ức #06' },
-  { id: 'hang-ma', title: 'Phố Hàng Mã', date: 'Vùng ký ức #07' },
-  { id: 'ho-guom', title: 'Hồ Hoàn Kiếm', date: 'Vùng ký ức #08' },
-];
+import { useTranslations } from 'next-intl';
 
 export default function CollectionScreen() {
-  const { setCurrentScreen, currentLocationId } = useGame();
+  const { setCurrentScreen, currentLocationId, unlockedMemories } = useGame();
+  const t = useTranslations('game');
 
-  const currentMemory = MEMORIES.find((m) => m.id === currentLocationId) || MEMORIES[0];
+  const info = useMemo(() => {
+    const locId = currentLocationId || 'o-quan-chuong';
+    try {
+      return t.raw(`locations.${locId}`);
+    } catch {
+      return t.raw('locations.o-quan-chuong');
+    }
+  }, [t, currentLocationId]);
 
   return (
     <div className="bg-navy-900 relative h-[100dvh] w-full overflow-hidden font-display text-white">
@@ -49,7 +45,7 @@ export default function CollectionScreen() {
       <div className="relative z-20 mx-auto flex h-full w-full max-w-md flex-col items-center justify-center p-6 pb-[calc(env(safe-area-inset-bottom)+1.5rem)] pt-[calc(env(safe-area-inset-top)+1rem)]">
         <div className="absolute top-10 w-full text-center">
           <h2 className="mb-2 font-sans text-xs font-bold uppercase tracking-[0.2em] text-primary/80">
-            Phần thưởng ký ức
+            {t('found_fragment')}
           </h2>
           <div className="mx-auto h-px w-12 bg-primary/40"></div>
         </div>
@@ -71,11 +67,9 @@ export default function CollectionScreen() {
               </div>
               <div className="absolute bottom-4 left-4 right-4 z-30">
                 <p className="mb-1 text-[10px] font-bold uppercase tracking-widest text-primary/80">
-                  Hà Nội 1920
+                  {info.year}
                 </p>
-                <h3 className="text-lg font-bold leading-tight text-white">
-                  {currentMemory.title}
-                </h3>
+                <h3 className="text-lg font-bold leading-tight text-white">{info.title}</h3>
               </div>
             </div>
           </div>
@@ -89,22 +83,26 @@ export default function CollectionScreen() {
               <div className="mb-1 flex h-10 w-10 items-center justify-center rounded-full border border-primary/30 bg-primary/10 text-primary">
                 <span className="material-symbols-outlined">folder_open</span>
               </div>
-              <h3 className="text-lg font-medium text-white">Bạn đã nhận được</h3>
-              <p className="font-sans text-sm font-light text-white/60">Tài liệu số hóa địa điểm</p>
+              <h3 className="text-lg font-medium text-white">{t('fact.add_to_collection')}</h3>
+              <p className="font-sans text-sm font-light text-white/60">{t('get_book')}</p>
             </div>
             <div className="my-2 h-px w-full bg-white/10"></div>
             <button className="text-navy-900 group relative w-full transform overflow-hidden rounded-lg bg-gradient-to-r from-primary to-[#ffe55c] px-6 py-3.5 font-bold shadow-[0_0_20px_rgba(249,212,6,0.3)] transition-all duration-300 hover:shadow-[0_0_30px_rgba(249,212,6,0.5)] active:scale-[0.98]">
               <span className="relative z-10 flex items-center justify-center gap-2">
                 <span className="material-symbols-outlined">download</span>
-                Tải xuống (PDF)
+                {t('download_pdf')}
               </span>
               <div className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-white/40 to-transparent"></div>
             </button>
             <button
-              onClick={() => setCurrentScreen('map')}
+              onClick={() =>
+                unlockedMemories.length === 8
+                  ? setCurrentScreen('completion')
+                  : setCurrentScreen('map')
+              }
               className="mt-2 font-sans text-xs font-bold uppercase tracking-widest text-white/40 transition-colors hover:text-white/80"
             >
-              Đóng và tiếp tục
+              {t('arrival.continue_btn')}
             </button>
           </div>
         </div>

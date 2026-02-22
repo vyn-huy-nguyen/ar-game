@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html class="dark" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Game Arrival Screen - Hà Nội – Những Mảnh Ghép Thời Gian</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f9d406",
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#23200f",
+                        "navy-deep": "#0f1420", 
+                    },
+                    fontFamily: {
+                        "display": ["Noto Serif", "serif"],
+                        "sans": ["Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+                    backgroundImage: {
+                        'radial-glow': 'radial-gradient(circle at center, rgba(249, 212, 6, 0.15) 0%, rgba(15, 20, 32, 0) 70%)',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0) translateX(0)', opacity: '0.4' },
+                            '50%': { transform: 'translateY(-20px) translateX(10px)', opacity: '0.8' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 15px 2px rgba(249, 212, 6, 0.3)' },
+                            '50%': { boxShadow: '0 0 25px 4px rgba(249, 212, 6, 0.5)' },
+                        }
+                    },
+                    animation: {
+                        'float-slow': 'float 8s ease-in-out infinite',
+                        'float-medium': 'float 6s ease-in-out infinite reverse',
+                        'float-fast': 'float 4s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 3s infinite',
+                    }
+                },
+            },
+        }
+    </script>
+<style>.particle {
+            position: absolute;
+            background-color: #f9d406;
+            border-radius: 50%;
+            opacity: 0.6;
+            filter: blur(1px);
+        }
+    </style>
+<style>
+        body {
+          min-height: max(884px, 100dvh);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-navy-deep text-white font-display overflow-hidden h-screen w-screen relative selection:bg-primary selection:text-black">
+<div class="pointer-events-none fixed inset-4 border border-primary/30 rounded-[2rem] z-20 shadow-[0_0_15px_rgba(249,212,6,0.1)]"></div>
+<div class="absolute inset-0 z-0 bg-navy-deep">
+<div class="absolute inset-0 bg-radial-glow pointer-events-none"></div>
+<div class="particle w-1 h-1 top-[20%] left-[15%] animate-float-slow"></div>
+<div class="particle w-2 h-2 top-[60%] left-[80%] animate-float-medium opacity-40"></div>
+<div class="particle w-1 h-1 top-[80%] left-[20%] animate-float-fast"></div>
+<div class="particle w-1.5 h-1.5 top-[30%] right-[25%] animate-float-slow opacity-50"></div>
+<div class="particle w-1 h-1 top-[10%] right-[10%] animate-float-medium"></div>
+<div class="particle w-0.5 h-0.5 bottom-[15%] left-[45%] animate-float-fast"></div>
+</div>
+<div class="relative z-10 flex flex-col h-full justify-between p-6 pb-12 pt-8">
+<div class="flex items-start justify-between w-full px-2 pt-2">
+<button aria-label="Map" class="group flex size-12 items-center justify-center rounded-full bg-navy-deep border border-primary/20 text-primary hover:bg-primary hover:text-navy-deep transition-all duration-300 shadow-lg hover:shadow-primary/20 active:scale-95">
+<span class="material-symbols-outlined !text-[24px]">map</span>
+</button>
+<div class="flex gap-4">
+<button aria-label="Library" class="group flex size-12 items-center justify-center rounded-full bg-navy-deep border border-primary/20 text-primary hover:bg-primary hover:text-navy-deep transition-all duration-300 shadow-lg hover:shadow-primary/20 active:scale-95">
+<span class="material-symbols-outlined !text-[24px]">inventory_2</span>
+</button>
+<button aria-label="Journal" class="group flex size-12 items-center justify-center rounded-full bg-navy-deep border border-primary/20 text-primary hover:bg-primary hover:text-navy-deep transition-all duration-300 shadow-lg hover:shadow-primary/20 active:scale-95">
+<span class="material-symbols-outlined !text-[24px]">book_2</span>
+</button>
+</div>
+</div>
+<div class="flex-1 flex flex-col items-center justify-center text-center space-y-8 -mt-10">
+<div class="w-px h-16 bg-gradient-to-b from-transparent via-primary to-transparent opacity-50"></div>
+<div class="relative px-4">
+<div class="absolute inset-0 blur-xl bg-primary/10 rounded-full scale-150"></div>
+<h1 class="relative text-3xl md:text-5xl font-bold leading-tight tracking-wide text-primary drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                Bạn đã đến<br/>
+<span class="text-white">Ô Quan Chưởng</span>
+</h1>
+<p class="mt-4 text-primary/60 text-sm tracking-widest uppercase font-sans">HÀ NỘI • 1749</p>
+</div>
+<div class="w-px h-16 bg-gradient-to-b from-transparent via-primary to-transparent opacity-50"></div>
+</div>
+<div class="flex flex-col items-center justify-end pb-8 w-full space-y-6">
+<button class="relative group w-full max-w-xs">
+<div class="absolute inset-0 bg-primary blur opacity-40 group-hover:opacity-60 transition-opacity duration-500 rounded-full animate-pulse-glow"></div>
+<div class="relative flex h-14 w-full items-center justify-center rounded-full bg-primary text-navy-deep text-lg font-bold tracking-wide shadow-xl transition-transform duration-200 active:scale-95 hover:-translate-y-0.5 overflow-hidden">
+<span class="material-symbols-outlined mr-2 animate-pulse">radar</span>
+                Quét manh mối
+                <div class="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12"></div>
+</div>
+</button>
+<p class="text-xs text-primary/40 font-sans tracking-wide">Chạm để khám phá không gian xung quanh</p>
+</div>
+</div>
+<style>
+        @keyframes shimmer {
+            100% {
+                transform: translateX(100%);
+            }
+        }
+    </style>
+
+</body></html>

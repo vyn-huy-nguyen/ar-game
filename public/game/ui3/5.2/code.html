@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html class="dark" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Hà Nội – Những Mảnh Ghép Thời Gian - Thư viện Ký ức</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f9d406",
+                        "primary-hover": "#dcb805",
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#0f172a","card-dark": "#1e293b",
+                    },
+                    fontFamily: {
+                        "display": ["Noto Serif", "serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse-slow 4s ease-in-out infinite',
+                        'particle-float': 'particle-float 10s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-5px)' },
+                        },
+                        'pulse-slow': {
+                            '0%, 100%': { opacity: 0.8 },
+                            '50%': { opacity: 0.4 },
+                        },
+                        'particle-float': {
+                            '0%': { transform: 'translateY(0) translateX(0)', opacity: 0 },
+                            '20%': { opacity: 0.5 },
+                            '80%': { opacity: 0.5 },
+                            '100%': { transform: 'translateY(-100px) translateX(20px)', opacity: 0 },
+                        }
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .gold-gradient-text {
+            background: linear-gradient(to bottom, #f9d406, #dcb805);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0px 2px 4px rgba(0,0,0,0.3);
+        }
+        .card-glass {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(249, 212, 6, 0.15);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        .card-locked {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }.custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(249, 212, 6, 0.3);
+            border-radius: 4px;
+        }
+        .particle {
+            position: absolute;
+            background-color: #f9d406;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            box-shadow: 0 0 4px #f9d406;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-dark font-display text-white overflow-hidden h-screen w-full relative">
+<div class="absolute inset-0 z-0 bg-background-dark bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-800 via-background-dark to-background-dark"></div>
+<div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
+<div class="particle w-1 h-1 left-[10%] top-[90%] animate-particle-float" style="animation-delay: 0s;"></div>
+<div class="particle w-1.5 h-1.5 left-[30%] top-[95%] animate-particle-float" style="animation-delay: 2s;"></div>
+<div class="particle w-0.5 h-0.5 left-[50%] top-[85%] animate-particle-float" style="animation-delay: 1s;"></div>
+<div class="particle w-1 h-1 left-[70%] top-[92%] animate-particle-float" style="animation-delay: 3s;"></div>
+<div class="particle w-2 h-2 left-[90%] top-[88%] animate-particle-float" style="animation-delay: 1.5s;"></div>
+<div class="particle w-0.5 h-0.5 left-[20%] top-[80%] animate-particle-float" style="animation-delay: 4s;"></div>
+</div>
+<div class="relative z-10 flex flex-col h-full max-w-md mx-auto md:max-w-full md:px-8">
+<header class="flex items-center justify-between px-6 pt-6 pb-2 shrink-0">
+<button class="flex items-center gap-2 text-white/80 hover:text-primary transition-colors group">
+<span class="material-symbols-outlined text-[24px] group-hover:-translate-x-1 transition-transform">arrow_back</span>
+<span class="text-sm font-medium tracking-wide hidden sm:inline">Quay lại bản đồ</span>
+</button>
+<h1 class="text-2xl md:text-3xl font-bold tracking-wide gold-gradient-text uppercase text-center flex-grow pl-0 sm:pl-4">
+                Thư viện Ký ức
+            </h1>
+<div class="w-8"></div>
+</header>
+<div class="w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent mb-4"></div>
+<main class="flex-grow overflow-y-auto custom-scrollbar px-6 pb-20 pt-2">
+<div class="grid grid-cols-2 gap-4 pb-8">
+<div class="card-glass rounded-xl p-4 flex flex-col items-center text-center gap-3 relative group overflow-hidden transition-all hover:border-primary/40 hover:shadow-[0_0_15px_rgba(249,212,6,0.1)]">
+<div class="absolute top-0 right-0 w-8 h-8 flex items-center justify-center bg-primary/10 rounded-bl-xl text-primary">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+</div>
+<div class="w-14 h-14 rounded-full bg-slate-800 border border-primary/30 flex items-center justify-center mb-1 group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined text-primary text-[28px]">castle</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<h3 class="text-white font-semibold text-sm">Phố Ô Quan Chưởng</h3>
+<span class="text-[10px] text-white/50 uppercase tracking-wider">Mảnh ghép #01</span>
+</div>
+<button class="mt-auto w-full py-2 px-3 bg-primary/10 hover:bg-primary text-primary hover:text-background-dark border border-primary/30 rounded-lg transition-all flex items-center justify-center gap-1.5 group/btn">
+<span class="material-symbols-outlined text-[16px]">download</span>
+<span class="text-xs font-bold">Tải PDF</span>
+</button>
+</div>
+<div class="card-locked rounded-xl p-4 flex flex-col items-center text-center gap-3 relative overflow-hidden opacity-75">
+<div class="w-14 h-14 rounded-full bg-slate-800/50 border border-white/10 flex items-center justify-center mb-1">
+<span class="material-symbols-outlined text-white/20 text-[24px]">lock</span>
+</div>
+<div class="flex flex-col gap-0.5 w-full">
+<h3 class="text-white/50 font-semibold text-sm">Phố Hàng Ngang</h3>
+<span class="text-[10px] text-white/30 uppercase tracking-wider">Chưa mở khóa</span>
+</div>
+<div class="mt-auto w-full h-8 bg-white/5 rounded-lg border border-dashed border-white/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-white/20 text-[16px]">lock</span>
+</div>
+</div>
+<div class="card-locked rounded-xl p-4 flex flex-col items-center text-center gap-3 relative overflow-hidden opacity-75">
+<div class="w-14 h-14 rounded-full bg-slate-800/50 border border-white/10 flex items-center justify-center mb-1">
+<span class="material-symbols-outlined text-white/20 text-[24px]">lock</span>
+</div>
+<div class="flex flex-col gap-0.5 w-full">
+<h3 class="text-white/50 font-semibold text-sm">Phố Hàng Buồm</h3>
+<span class="text-[10px] text-white/30 uppercase tracking-wider">Chưa mở khóa</span>
+</div>
+<div class="mt-auto w-full h-8 bg-white/5 rounded-lg border border-dashed border-white/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-white/20 text-[16px]">lock</span>
+</div>
+</div>
+<div class="card-locked rounded-xl p-4 flex flex-col items-center text-center gap-3 relative overflow-hidden opacity-75">
+<div class="w-14 h-14 rounded-full bg-slate-800/50 border border-white/10 flex items-center justify-center mb-1">
+<span class="material-symbols-outlined text-white/20 text-[24px]">lock</span>
+</div>
+<div class="flex flex-col gap-0.5 w-full">
+<h3 class="text-white/50 font-semibold text-sm">Phố Hàng Đồng</h3>
+<span class="text-[10px] text-white/30 uppercase tracking-wider">Chưa mở khóa</span>
+</div>
+<div class="mt-auto w-full h-8 bg-white/5 rounded-lg border border-dashed border-white/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-white/20 text-[16px]">lock</span>
+</div>
+</div>
+<div class="card-locked rounded-xl p-4 flex flex-col items-center text-center gap-3 relative overflow-hidden opacity-75">
+<div class="w-14 h-14 rounded-full bg-slate-800/50 border border-white/10 flex items-center justify-center mb-1">
+<span class="material-symbols-outlined text-white/20 text-[24px]">lock</span>
+</div>
+<div class="flex flex-col gap-0.5 w-full">
+<h3 class="text-white/50 font-semibold text-sm">Phố Hàng Bạc</h3>
+<span class="text-[10px] text-white/30 uppercase tracking-wider">Chưa mở khóa</span>
+</div>
+<div class="mt-auto w-full h-8 bg-white/5 rounded-lg border border-dashed border-white/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-white/20 text-[16px]">lock</span>
+</div>
+</div>
+<div class="card-locked rounded-xl p-4 flex flex-col items-center text-center gap-3 relative overflow-hidden opacity-75">
+<div class="w-14 h-14 rounded-full bg-slate-800/50 border border-white/10 flex items-center justify-center mb-1">
+<span class="material-symbols-outlined text-white/20 text-[24px]">lock</span>
+</div>
+<div class="flex flex-col gap-0.5 w-full">
+<h3 class="text-white/50 font-semibold text-sm">Phố Chợ Đồng Xuân</h3>
+<span class="text-[10px] text-white/30 uppercase tracking-wider">Chưa mở khóa</span>
+</div>
+<div class="mt-auto w-full h-8 bg-white/5 rounded-lg border border-dashed border-white/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-white/20 text-[16px]">lock</span>
+</div>
+</div>
+<div class="card-locked rounded-xl p-4 flex flex-col items-center text-center gap-3 relative overflow-hidden opacity-75">
+<div class="w-14 h-14 rounded-full bg-slate-800/50 border border-white/10 flex items-center justify-center mb-1">
+<span class="material-symbols-outlined text-white/20 text-[24px]">lock</span>
+</div>
+<div class="flex flex-col gap-0.5 w-full">
+<h3 class="text-white/50 font-semibold text-sm">Phố Hàng Trống</h3>
+<span class="text-[10px] text-white/30 uppercase tracking-wider">Chưa mở khóa</span>
+</div>
+<div class="mt-auto w-full h-8 bg-white/5 rounded-lg border border-dashed border-white/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-white/20 text-[16px]">lock</span>
+</div>
+</div>
+<div class="card-locked rounded-xl p-4 flex flex-col items-center text-center gap-3 relative overflow-hidden opacity-75">
+<div class="w-14 h-14 rounded-full bg-slate-800/50 border border-white/10 flex items-center justify-center mb-1">
+<span class="material-symbols-outlined text-white/20 text-[24px]">lock</span>
+</div>
+<div class="flex flex-col gap-0.5 w-full">
+<h3 class="text-white/50 font-semibold text-sm">Phố Lãn Ông</h3>
+<span class="text-[10px] text-white/30 uppercase tracking-wider">Chưa mở khóa</span>
+</div>
+<div class="mt-auto w-full h-8 bg-white/5 rounded-lg border border-dashed border-white/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-white/20 text-[16px]">lock</span>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

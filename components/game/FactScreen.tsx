@@ -1,32 +1,21 @@
 'use client';
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useGame } from '@/app/[locale]/game/GameContext';
 import { useTranslations } from 'next-intl';
-
-const FACT_DATA: Record<string, { title: string; fact: string; image: string }> = {
-  'o-quan-chuong': {
-    title: 'Đông Hà Môn',
-    fact: 'Mỗi viên gạch vồ đỏ tại đây đều mang trong mình hơi thở của lịch sử từ năm 1749. Tên gọi Ô Quan Chưởng vốn để vinh danh một viên Chưởng cơ đã cùng binh lính chiến đấu anh dũng chống Pháp tại đây năm 1873.',
-    image:
-      'https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&q=80&w=800',
-  },
-  default: {
-    title: 'Kiến trúc Phố Cổ',
-    fact: 'Những mái ngói thâm nâu, những bức tường vàng rêu phong không chỉ là nhà, mà là những trang sử sống động của Kẻ Chợ xưa, nơi mỗi con phố đều gắn liền với một nghề truyền thống đặc trưng.',
-    image:
-      'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&q=80&w=800',
-  },
-};
 
 export default function FactScreen() {
   const { setCurrentScreen, currentLocationId, unlockMemory } = useGame();
   const t = useTranslations('game');
 
-  const data =
-    currentLocationId && FACT_DATA[currentLocationId]
-      ? FACT_DATA[currentLocationId]
-      : FACT_DATA['default'];
+  const locId = currentLocationId || 'o-quan-chuong';
+  const data = useMemo(() => {
+    try {
+      return t.raw(`locations.${locId}`);
+    } catch {
+      return t.raw('locations.o-quan-chuong');
+    }
+  }, [t, locId]);
 
   const handleContinue = () => {
     if (currentLocationId) {
@@ -36,7 +25,7 @@ export default function FactScreen() {
   };
 
   return (
-    <div className="bg-background-dark font-display relative flex h-[100dvh] w-full flex-col overflow-hidden text-white">
+    <div className="relative flex h-[100dvh] w-full flex-col overflow-hidden bg-background-dark font-display text-white">
       {/* Background Hero Image with Simulation */}
       <div
         className="absolute inset-0 z-0 bg-cover bg-center"
@@ -48,7 +37,7 @@ export default function FactScreen() {
       {/* Historical Overlay Simulation */}
       <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center opacity-40">
         <svg
-          className="animate-pulse-glow h-full w-full max-w-4xl"
+          className="h-full w-full max-w-4xl animate-pulse-glow"
           fill="none"
           viewBox="0 0 800 600"
         >
@@ -66,13 +55,13 @@ export default function FactScreen() {
 
       {/* Particle System */}
       <div className="pointer-events-none absolute inset-0 z-10 overflow-hidden">
-        <div className="particle animate-particle-rise bg-primary absolute left-[20%] top-[60%] h-1 w-1 rounded-full"></div>
+        <div className="particle absolute left-[20%] top-[60%] h-1 w-1 animate-particle-rise rounded-full bg-primary"></div>
         <div
-          className="particle animate-particle-rise bg-primary absolute left-[50%] top-[50%] h-1.5 w-1.5 rounded-full"
+          className="particle absolute left-[50%] top-[50%] h-1.5 w-1.5 animate-particle-rise rounded-full bg-primary"
           style={{ animationDelay: '1.2s' }}
         ></div>
         <div
-          className="particle animate-particle-rise bg-primary absolute left-[70%] top-[55%] h-0.5 w-0.5 rounded-full"
+          className="particle absolute left-[70%] top-[55%] h-0.5 w-0.5 animate-particle-rise rounded-full bg-primary"
           style={{ animationDelay: '0.5s' }}
         ></div>
       </div>
@@ -89,7 +78,7 @@ export default function FactScreen() {
           </button>
           {/* Location Badge */}
           <div className="flex items-center gap-2 rounded-full border border-white/10 bg-black/20 px-3 py-1.5 backdrop-blur-md">
-            <span className="material-symbols-outlined text-primary text-[16px]">location_on</span>
+            <span className="material-symbols-outlined text-[16px] text-primary">location_on</span>
             <span className="text-xs font-medium uppercase leading-none tracking-wide text-white/90">
               {data.title}, 19-20th
             </span>
@@ -99,14 +88,14 @@ export default function FactScreen() {
         {/* Bottom Narrative Area */}
         <div className="w-full">
           <div className="glass-panel group relative w-full overflow-hidden rounded-xl p-6">
-            <div className="via-primary/50 absolute left-0 top-0 h-1 w-full bg-gradient-to-r from-transparent to-transparent opacity-50"></div>
+            <div className="absolute left-0 top-0 h-1 w-full bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-50"></div>
             <div className="flex flex-col gap-4">
               <div className="relative z-10">
                 <p className="text-glow text-xl font-light italic leading-relaxed text-white/95 md:text-2xl">
-                  &quot;{data.fact}&quot;
+                  &quot;{data.quiz.fact}&quot;
                 </p>
-                <p className="text-primary/80 mt-2 font-sans text-xs font-semibold uppercase tracking-widest">
-                  {t('fact.label')} • Đã khám phá
+                <p className="mt-2 font-sans text-xs font-semibold uppercase tracking-widest text-primary/80">
+                  {t('fact.label')} • {t('arrival.discovered')}
                 </p>
               </div>
 
@@ -118,8 +107,8 @@ export default function FactScreen() {
                   <span className="text-sm font-medium text-white/80 transition-colors group-hover/btn:text-white">
                     {t('continue')}
                   </span>
-                  <div className="bg-primary flex h-10 w-10 items-center justify-center rounded-full shadow-[0_0_15px_rgba(249,212,6,0.4)] transition-all group-hover/btn:shadow-[0_0_20px_rgba(249,212,6,0.6)]">
-                    <span className="material-symbols-outlined text-background-dark font-bold">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary shadow-[0_0_15px_rgba(249,212,6,0.4)] transition-all group-hover/btn:shadow-[0_0_20px_rgba(249,212,6,0.6)]">
+                    <span className="material-symbols-outlined font-bold text-background-dark">
                       arrow_forward
                     </span>
                   </div>

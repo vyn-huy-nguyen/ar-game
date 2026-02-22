@@ -26,9 +26,9 @@ export default function LandingScreen() {
   };
 
   return (
-    <div className="bg-background-dark font-display selection:bg-primary selection:text-background-dark relative h-[100dvh] w-full overflow-hidden text-white">
+    <div className="relative h-[100dvh] w-full overflow-hidden bg-background-dark font-display text-white selection:bg-primary selection:text-background-dark">
       {/* Cinematic Background Wrapper */}
-      <div className="bg-background-dark to-background-dark absolute inset-0 z-0 bg-gradient-to-b from-[#1a1c2e] opacity-95 mix-blend-multiply"></div>
+      <div className="absolute inset-0 z-0 bg-background-dark bg-gradient-to-b from-[#1a1c2e] to-background-dark opacity-95 mix-blend-multiply"></div>
 
       {/* Particle background simulation */}
       <div
@@ -46,7 +46,7 @@ export default function LandingScreen() {
       {[...Array(6)].map((_, i) => (
         <div
           key={i}
-          className="animate-float bg-primary absolute rounded-full opacity-30"
+          className="absolute animate-float rounded-full bg-primary opacity-30"
           style={{
             top: `${Math.random() * 80 + 10}%`,
             left: `${Math.random() * 80 + 10}%`,
@@ -61,23 +61,42 @@ export default function LandingScreen() {
       {/* Content Container */}
       <div className="relative z-10 mx-auto flex h-full w-full max-w-md flex-col justify-between px-6 pb-[calc(env(safe-area-inset-bottom)+1.5rem)] pt-[calc(env(safe-area-inset-top)+1rem)]">
         {/* Header: Utilities */}
-        <header className="flex items-center justify-between py-2 opacity-80 transition-opacity hover:opacity-100">
-          <button
-            onClick={toggleLanguage}
-            className="text-primary/80 hover:border-primary hover:text-primary border-b border-transparent pb-0.5 text-sm font-bold uppercase tracking-widest transition-colors"
-          >
-            {locale === 'vi' ? 'Tiếng Việt / English' : 'English / Tiếng Việt'}
-          </button>
-          <button className="text-primary/80 hover:text-primary flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-white/5">
-            <span className="material-symbols-outlined text-2xl">volume_up</span>
+        <header className="flex items-center justify-between py-2">
+          {/* Enhanced Language Switcher */}
+          <div className="relative flex items-center rounded-full border border-primary/20 bg-background-dark/40 p-1 backdrop-blur-md">
+            <div
+              className={`absolute h-[calc(100%-8px)] w-[calc(50%-4px)] rounded-full bg-primary/20 shadow-[0_0_15px_rgba(249,212,6,0.2)] ring-1 ring-primary/40 transition-all duration-300 ease-out ${
+                locale === 'vi' ? 'translate-x-0' : 'translate-x-full'
+              }`}
+            />
+            <button
+              onClick={() => locale !== 'vi' && toggleLanguage()}
+              className={`relative z-10 px-4 py-1.5 text-[10px] font-black uppercase tracking-widest transition-colors duration-300 ${
+                locale === 'vi' ? 'text-primary' : 'text-white/40 hover:text-white/70'
+              }`}
+            >
+              TIẾNG VIỆT
+            </button>
+            <button
+              onClick={() => locale !== 'en' && toggleLanguage()}
+              className={`relative z-10 px-4 py-1.5 text-[10px] font-black uppercase tracking-widest transition-colors duration-300 ${
+                locale === 'en' ? 'text-primary' : 'text-white/40 hover:text-white/70'
+              }`}
+            >
+              ENGLISH
+            </button>
+          </div>
+
+          <button className="flex h-10 w-10 items-center justify-center rounded-full text-primary/80 transition-colors hover:bg-white/5 hover:text-primary">
+            <span className="material-symbols-outlined drop-shadow-glow text-2xl">volume_up</span>
           </button>
         </header>
 
         {/* Main Content: Title & Imagery */}
         <main className="flex flex-grow flex-col items-center justify-center space-y-12 text-center">
           {/* Decorative Icon */}
-          <div className="animate-float border-primary/20 bg-primary/5 mb-4 flex h-20 w-20 items-center justify-center rounded-full border backdrop-blur-sm">
-            <span className="material-symbols-outlined text-primary text-4xl">temple_buddhist</span>
+          <div className="mb-4 flex h-20 w-20 animate-float items-center justify-center rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm">
+            <span className="material-symbols-outlined text-4xl text-primary">temple_buddhist</span>
           </div>
 
           <div className="space-y-8">
@@ -87,16 +106,16 @@ export default function LandingScreen() {
 
             {/* Divider */}
             <div className="flex items-center justify-center gap-4 px-8 opacity-80">
-              <div className="via-primary/60 h-[1px] w-16 bg-gradient-to-r from-transparent to-transparent"></div>
-              <div className="bg-background-dark border-primary h-2 w-2 rotate-45 border shadow-[0_0_10px_rgba(249,212,6,0.5)]"></div>
-              <div className="via-primary/60 h-[1px] w-16 bg-gradient-to-r from-transparent to-transparent"></div>
+              <div className="h-[1px] w-16 bg-gradient-to-r from-transparent via-primary/60 to-transparent"></div>
+              <div className="h-2 w-2 rotate-45 border border-primary bg-background-dark shadow-[0_0_10px_rgba(249,212,6,0.5)]"></div>
+              <div className="h-[1px] w-16 bg-gradient-to-r from-transparent via-primary/60 to-transparent"></div>
             </div>
 
-            <h2 className="text-primary text-5xl font-black uppercase leading-normal tracking-tight drop-shadow-[0_2px_10px_rgba(249,212,6,0.3)] md:text-6xl">
+            <h2 className="text-5xl font-black uppercase leading-normal tracking-tight text-primary drop-shadow-[0_2px_10px_rgba(249,212,6,0.3)] md:text-6xl">
               {t('subtitle')}
             </h2>
 
-            <p className="font-display mt-6 border-t border-white/5 pt-8 text-sm uppercase tracking-[0.3em] text-gray-400">
+            <p className="mt-6 border-t border-white/5 pt-8 font-display text-sm uppercase tracking-[0.3em] text-gray-400">
               {t('legend')}
             </p>
           </div>
@@ -107,7 +126,7 @@ export default function LandingScreen() {
           {/* Primary CTA Button */}
           <button
             onClick={handleStart}
-            className="animate-pulse-glow bg-primary text-background-dark shadow-primary/20 border-primary/50 group relative h-14 w-full max-w-[320px] overflow-hidden rounded-lg border shadow-lg transition-all hover:scale-[1.02] active:scale-[0.98]"
+            className="group relative h-14 w-full max-w-[320px] animate-pulse-glow overflow-hidden rounded-lg border border-primary/50 bg-primary text-background-dark shadow-lg shadow-primary/20 transition-all hover:scale-[1.02] active:scale-[0.98]"
           >
             <div className="absolute inset-0 flex translate-x-[-150%] items-center justify-center bg-gradient-to-r from-transparent via-white/40 to-transparent transition-transform duration-700 ease-in-out group-hover:translate-x-[150%]"></div>
             <div className="relative flex items-center justify-center gap-3 text-lg font-bold uppercase tracking-wide">

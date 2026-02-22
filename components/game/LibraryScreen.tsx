@@ -2,20 +2,22 @@
 
 import React from 'react';
 import { useGame } from '@/app/[locale]/game/GameContext';
+import { useTranslations } from 'next-intl';
 
 const MEMORIES = [
-  { id: 'o-quan-chuong', title: 'Ô Quan Chưởng', icon: 'castle', date: 'Mảnh ghép #01' },
-  { id: 'hang-buom', title: 'Hàng Buồm', icon: 'sailing', date: 'Mảnh ghép #02' },
-  { id: 'hang-dong', title: 'Hàng Đồng', icon: 'notifications', date: 'Mảnh ghép #03' },
-  { id: 'hang-trong', title: 'Hàng Trống', icon: 'image', date: 'Mảnh ghép #04' },
-  { id: 'lan-ong', title: 'Lãn Ông', icon: 'local_florist', date: 'Mảnh ghép #05' },
-  { id: 'dong-xuan', title: 'Đồng Xuân', icon: 'storefront', date: 'Mảnh ghép #06' },
-  { id: 'hang-ma', title: 'Hàng Mã', icon: 'local_fire_department', date: 'Mảnh ghép #07' },
-  { id: 'ho-guom', title: 'Hồ Hoàn Kiếm', icon: 'castle', date: 'Mảnh ghép #08' },
+  { id: 'ho-guom', icon: 'castle' },
+  { id: 'o-quan-chuong', icon: 'castle' },
+  { id: 'hang-buom', icon: 'sailing' },
+  { id: 'hang-dong', icon: 'notifications' },
+  { id: 'hang-trong', icon: 'image' },
+  { id: 'lan-ong', icon: 'local_florist' },
+  { id: 'dong-xuan', icon: 'storefront' },
+  { id: 'hang-ma', icon: 'local_fire_department' },
 ];
 
 export default function LibraryScreen() {
   const { setCurrentScreen, unlockedMemories } = useGame();
+  const t = useTranslations('game');
 
   return (
     <div className="relative h-[100dvh] w-full overflow-hidden bg-background-dark font-display text-white">
@@ -47,10 +49,12 @@ export default function LibraryScreen() {
             <span className="material-symbols-outlined text-[24px] transition-transform group-hover:-translate-x-1">
               arrow_back
             </span>
-            <span className="hidden text-sm font-medium tracking-wide sm:inline">Quay lại</span>
+            <span className="hidden text-sm font-medium tracking-wide sm:inline">
+              {t('navigation.back')}
+            </span>
           </button>
           <h1 className="gold-gradient-text flex-grow pr-8 text-center text-2xl font-bold uppercase tracking-wide md:text-3xl">
-            Thư viện Ký ức
+            {t('library_title')}
           </h1>
         </header>
 
@@ -59,7 +63,7 @@ export default function LibraryScreen() {
         {/* Scrollable Content */}
         <main className="custom-scrollbar flex-grow overflow-y-auto px-6 pb-24 pt-2">
           <div className="grid grid-cols-2 gap-4 pb-8">
-            {MEMORIES.map((memory) => {
+            {MEMORIES.map((memory, index) => {
               const isUnlocked = unlockedMemories.includes(memory.id);
               if (isUnlocked) {
                 return (
@@ -77,15 +81,15 @@ export default function LibraryScreen() {
                     </div>
                     <div className="flex flex-col gap-0.5">
                       <h3 className="line-clamp-1 text-sm font-semibold text-white">
-                        {memory.title}
+                        {t(`locations.${memory.id}.name`)}
                       </h3>
                       <span className="text-[10px] uppercase tracking-wider text-white/50">
-                        {memory.date}
+                        {t('found_fragment')} #{String(index + 1).padStart(2, '0')}
                       </span>
                     </div>
                     <button className="group/btn mt-auto flex w-full items-center justify-center gap-1.5 rounded-lg border border-primary/30 bg-primary/10 px-3 py-2 text-primary transition-all hover:bg-primary hover:text-background-dark">
                       <span className="material-symbols-outlined text-[16px]">download</span>
-                      <span className="text-xs font-bold">Tải PDF</span>
+                      <span className="text-xs font-bold">{t('download_pdf')}</span>
                     </button>
                   </div>
                 );
@@ -103,7 +107,7 @@ export default function LibraryScreen() {
                   <div className="flex w-full flex-col items-center gap-0.5">
                     <div className="mb-1 h-4 w-2/3 rounded bg-white/10"></div>
                     <span className="text-[10px] uppercase tracking-wider text-white/30">
-                      Chưa mở khóa
+                      {t('locked')}
                     </span>
                   </div>
                   <div className="mt-auto flex h-8 w-full items-center justify-center rounded-lg border border-dashed border-white/10 bg-white/5">

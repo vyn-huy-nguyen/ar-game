@@ -1,50 +1,98 @@
-'use client';
-
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useImperativeHandle, forwardRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import { useGame } from '@/app/[locale]/game/GameContext';
+
+export interface LeafletMapHandle {
+  zoomIn: () => void;
+  zoomOut: () => void;
+  centerOnUser: () => void;
+}
 
 interface LeafletMapProps {
   targetLat: number;
   targetLng: number;
   targetName: string;
+  interactive?: boolean;
 }
 
-export default function LeafletMap({ targetLat, targetLng, targetName }: LeafletMapProps) {
-  const mapRef = useRef<L.Map | null>(null);
-  const userMarkerRef = useRef<L.Marker | null>(null);
-  const targetMarkerRef = useRef<L.Marker | null>(null);
-  const polylineRef = useRef<L.Polyline | null>(null);
+const LeafletMap = forwardRef<LeafletMapHandle, LeafletMapProps>(
+  ({ targetLat, targetLng, targetName, interactive = true }, ref) => {
+    const { userLocation } = useGame();
+    const mapRef = useRef<L.Map | null>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const userMarkerRef = useRef<L.Marker | null>(null);
+    const targetMarkerRef = useRef<L.Marker | null>(null);
+    const polylineRef = useRef<L.Polyline | null>(null);
+    const [mounted, setMounted] = React.useState(false);
 
-  useEffect(() => {
-    if (!mapRef.current) {
+    React.useEffect(() => {
+      setMounted(true);
+    }, []);
+
+    useImperativeHandle(ref, () => ({
+      zoomIn: () => {
+        mapRef.current?.zoomIn();
+      },
+      zoomOut: () => {
+        mapRef.current?.zoomOut();
+      },
+      centerOnUser: () => {
+        if (userLocation && mapRef.current) {
+          mapRef.current.flyTo([userLocation.lat, userLocation.lng], 17);
+        }
+      },
+    }));
+
+    // Initialization Effect
+    useEffect(() => {
+      if (!mounted || !containerRef.current || mapRef.current) return;
+
+      const initialCenter: L.LatLngTuple =
+        targetLat && targetLng ? [targetLat, targetLng] : [21.0285, 105.8542];
+
       // Initialize map
-      mapRef.current = L.map('leaflet-map-container', {
+      const map = L.map(containerRef.current, {
         zoomControl: false,
         attributionControl: false,
-      }).setView([21.0285, 105.8542], 16);
+        dragging: interactive,
+        touchZoom: interactive,
+        scrollWheelZoom: interactive,
+        doubleClickZoom: interactive,
+        boxZoom: interactive,
+        keyboard: interactive,
+      }).setView(initialCenter, 16);
 
-      // Add stylized dark tiles (CartoDB Dark Matter is a good free dark theme)
+      mapRef.current = map;
+
+      // Add stylized dark tiles
       L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
         maxZoom: 19,
-      }).addTo(mapRef.current);
+      }).addTo(map);
+
+      // Force size update to handle layout shifts
+      setTimeout(() => {
+        map.invalidateSize();
+      }, 100);
 
       // Target Marker Icon
-      const targetIcon = L.divIcon({
-        className: 'custom-target-icon',
-        html: `<div class="relative flex items-center justify-center">
-                <div class="absolute inset-0 rounded-full bg-yellow-400 blur-md opacity-40 animate-pulse"></div>
-                <div class="relative bg-[#131a26] border-2 border-[#f9d406] rounded-full p-2 shadow-[0_0_15px_rgba(249,212,6,0.6)]">
-                  <span class="material-symbols-outlined text-[#f9d406] text-xl" style="font-size: 20px;">temple_buddhist</span>
-                </div>
-              </div>`,
-        iconSize: [40, 40],
-        iconAnchor: [20, 20],
-      });
+      if (targetLat && targetLng) {
+        const targetIcon = L.divIcon({
+          className: 'custom-target-icon',
+          html: `<div class="relative flex items-center justify-center">
+                  <div class="absolute inset-0 rounded-full bg-yellow-400 blur-md opacity-40 animate-pulse"></div>
+                  <div class="relative bg-[#131a26] border-2 border-[#f9d406] rounded-full p-2 shadow-[0_0_15px_rgba(249,212,6,0.6)]">
+                    <span class="material-symbols-outlined text-[#f9d406] text-xl" style="font-size: 20px;">temple_buddhist</span>
+                  </div>
+                </div>`,
+          iconSize: [40, 40],
+          iconAnchor: [20, 20],
+        });
 
-      targetMarkerRef.current = L.marker([targetLat, targetLng], { icon: targetIcon })
-        .addTo(mapRef.current)
-        .bindPopup(targetName);
+        targetMarkerRef.current = L.marker([targetLat, targetLng], { icon: targetIcon })
+          .addTo(map)
+          .bindPopup(targetName);
+      }
 
       // User Marker Icon
       const userIcon = L.divIcon({
@@ -57,9 +105,7 @@ export default function LeafletMap({ targetLat, targetLng, targetName }: Leaflet
         iconAnchor: [10, 10],
       });
 
-      userMarkerRef.current = L.marker([21.0285, 105.8542], { icon: userIcon }).addTo(
-        mapRef.current
-      );
+      userMarkerRef.current = L.marker([21.0285, 105.8542], { icon: userIcon }).addTo(map);
 
       // Polyline (Path)
       polylineRef.current = L.polyline([], {
@@ -67,61 +113,81 @@ export default function LeafletMap({ targetLat, targetLng, targetName }: Leaflet
         dashArray: '5, 10',
         weight: 3,
         opacity: 0.8,
-      }).addTo(mapRef.current);
-    }
+      }).addTo(map);
 
-    // Geolocation Tracking
-    if ('geolocation' in navigator) {
-      const watchId = navigator.geolocation.watchPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          const userLatLng: L.LatLngExpression = [latitude, longitude];
-
-          if (userMarkerRef.current) {
-            userMarkerRef.current.setLatLng(userLatLng);
-          }
-
-          if (polylineRef.current) {
-            polylineRef.current.setLatLngs([userLatLng, [targetLat, targetLng]]);
-          }
-
-          if (mapRef.current) {
-            // Smoothly pan to user
-            mapRef.current.panTo(userLatLng);
-          }
-        },
-        (error) => {
-          console.error('Error tracking position:', error);
-        },
-        {
-          enableHighAccuracy: true,
-          maximumAge: 0,
-          timeout: 5000,
-        }
-      );
-
+      // Cleanup map on unmount
       return () => {
-        navigator.geolocation.clearWatch(watchId);
         if (mapRef.current) {
           mapRef.current.remove();
           mapRef.current = null;
         }
       };
-    }
-  }, [targetLat, targetLng, targetName]);
+    }, [mounted, interactive, targetLat, targetLng, targetName]); // Run once when mounted
 
-  return (
-    <div id="leaflet-map-container" className="h-full w-full bg-[#0f172a]">
-      <style jsx global>{`
-        .leaflet-container {
-          background: #0f172a !important;
-        }
-        .custom-target-icon,
-        .custom-user-icon {
-          background: none !important;
-          border: none !important;
-        }
-      `}</style>
-    </div>
-  );
-}
+    // Update Target Marker if props change
+    useEffect(() => {
+      if (!mapRef.current || !targetLat || !targetLng) return;
+
+      const latlng: L.LatLngTuple = [targetLat, targetLng];
+      if (targetMarkerRef.current) {
+        targetMarkerRef.current.setLatLng(latlng);
+        targetMarkerRef.current.getPopup()?.setContent(targetName);
+      } else {
+        // Create it if it doesn't exist (e.g. if props were null at init)
+        const targetIcon = L.divIcon({
+          className: 'custom-target-icon',
+          html: `<div class="relative flex items-center justify-center">
+                  <div class="absolute inset-0 rounded-full bg-yellow-400 blur-md opacity-40 animate-pulse"></div>
+                  <div class="relative bg-[#131a26] border-2 border-[#f9d406] rounded-full p-2 shadow-[0_0_15px_rgba(249,212,6,0.6)]">
+                    <span class="material-symbols-outlined text-[#f9d406] text-xl" style="font-size: 20px;">temple_buddhist</span>
+                  </div>
+                </div>`,
+          iconSize: [40, 40],
+          iconAnchor: [20, 20],
+        });
+        targetMarkerRef.current = L.marker(latlng, { icon: targetIcon })
+          .addTo(mapRef.current)
+          .bindPopup(targetName);
+      }
+    }, [targetLat, targetLng, targetName]);
+
+    // Update User Location and Polyline
+    useEffect(() => {
+      if (!userLocation || !mapRef.current) return;
+
+      const userLatLng: L.LatLngTuple = [userLocation.lat, userLocation.lng];
+
+      if (userMarkerRef.current) {
+        userMarkerRef.current.setLatLng(userLatLng);
+      }
+
+      if (polylineRef.current && targetLat && targetLng) {
+        polylineRef.current.setLatLngs([userLatLng, [targetLat, targetLng]]);
+      }
+
+      // Smoothly pan to user if interactive
+      if (interactive) {
+        mapRef.current.panTo(userLatLng);
+      }
+    }, [userLocation, targetLat, targetLng, interactive]);
+
+    return (
+      <div ref={containerRef} className="h-full w-full bg-[#0f172a]">
+        <style jsx global>{`
+          .leaflet-container {
+            background: #0f172a !important;
+          }
+          .custom-target-icon,
+          .custom-user-icon {
+            background: none !important;
+            border: none !important;
+          }
+        `}</style>
+      </div>
+    );
+  }
+);
+
+LeafletMap.displayName = 'LeafletMap';
+
+export default LeafletMap;

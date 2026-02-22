@@ -1,52 +1,43 @@
-/* eslint-disable @next/next/no-img-element */
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useGame } from '@/app/[locale]/game/GameContext';
+import { useTranslations } from 'next-intl';
+import dynamic from 'next/dynamic';
 
-const LOCATION_INFO: Record<
-  string,
-  {
-    title: string;
-    subtitle: string;
-    history: string;
-    culture: string;
-    quote: string;
-    photo: string;
-    year: string;
-  }
-> = {
-  'o-quan-chuong': {
-    title: 'Ô Quan Chưởng',
-    subtitle: 'Di sản ngàn năm',
-    history:
-      'Ô Quan Chưởng (hay Ô Đông Hà) được xây dựng vào năm Cảnh Hưng thứ 10 (1749). Đây là cửa ô duy nhất còn sót lại của kinh thành Thăng Long xưa, chứng kiến bao thăng trầm của lịch sử thủ đô qua các cuộc kháng chiến.',
-    culture:
-      'Kiến trúc mang đậm nét đặc trưng thời Nguyễn với vọng lâu và mái vòm cong. Nơi đây không chỉ là di tích kiến trúc quân sự mà còn là biểu tượng cho tinh thần bất khuất của người Hà Nội.',
-    quote: 'Lối xưa xe ngựa hồn thu thảo, \nNền cũ lâu đài bóng tịch dương.',
-    photo:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuCiwN5uhZGlq_ZLIfRjwgnr5GY5zBGyAXnD5Ik8kLik-EL5eifDaRltNyhVqV554V4Nf29gQ8HaLmSjrZ2iRp07SZZ9HuPFrZ_sG04WgBZjvfpYrhP_sG8OICtrMUeZHbGMwZSCTuPRhWklKh07nLJIeux1Eur_YrKnJ9VVBtt_ZeLBksHBHXbfN_6_MyBCzot_zVtrYMnwr8qeFjXMpcmDEa7zMGl3gXlCgZpuZBhInIgIl1qGlLupjDDUU1tp7E-dQ8x5sJTa4sM4',
-    year: 'Hanoi, circa 1900',
-  },
-  default: {
-    title: 'Phố Cổ Hà Nội',
-    subtitle: 'Hồn cốt Kinh Kỳ',
-    history:
-      'Khu phố cổ Hà Nội là một di sản đô thị văn hóa độc đáo, nơi lưu giữ kiến trúc từ thế kỷ 19 with những ngôi nhà ống đặc trưng và hệ thống ngõ nhỏ đan xen.',
-    culture:
-      'Văn hóa phố nghề "Hàng" gắn liền với đời sống tâm linh và sinh hoạt cộng đồng của người dân thủ đô qua hàng trăm năm lịch sử giao thương rộn rã.',
-    quote: 'Hà Nội ba mươi sáu phố phường, \nHàng Buồm, Hàng Bạc, Hàng Ngang, Hàng Đào.',
-    photo:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuDkYYgAtSHck1GUzYNJCg7rS9rPKGfGzLoUvy1wZ422LNEoo_hSLKt0sbpMYoKdYvpHBJBW1E1lZvWLDNcPDnK9_2I0xz002BO-nP2e6RnXbn3Z-OHDqFw5bLSQ8WLVA1xln8A4zkPAuWLq4dE4US_lIvWr55USKSExWFZd2H3YacVa7U1I50S1I0N2L-mMFxBO70uhmXbEQHdjqd0xxr5JnzpsJjb-fh4JOkDOwgBFqaggPgQYGyqZeNqaGNPXpgSKRX4xTbD9R8ne',
-    year: 'Hanoi, Early 20th Century',
-  },
+const LeafletMap = dynamic(() => import('./LeafletMap'), {
+  ssr: false,
+  loading: () => <div className="h-full w-full bg-[#0f1420]/50" />,
+});
+
+const LOCATION_COORDS: Record<string, { lat: number; lng: number }> = {
+  'ho-guom': { lat: 21.0285, lng: 105.8542 },
+  'o-quan-chuong': { lat: 21.0366, lng: 105.8528 },
+  'hang-buom': { lat: 21.0355, lng: 105.8525 },
+  'hang-dong': { lat: 21.0345, lng: 105.852 },
+  'hang-trong': { lat: 21.0305, lng: 105.8505 },
+  'lan-ong': { lat: 21.035, lng: 105.849 },
+  'dong-xuan': { lat: 21.0375, lng: 105.8495 },
+  'hang-ma': { lat: 21.0365, lng: 105.8485 },
+  'hang-ngang': { lat: 21.034, lng: 105.851 },
 };
 
 export default function ArrivalScreen() {
   const { setCurrentScreen, currentLocationId } = useGame();
   const [view, setView] = useState<'splash' | 'info'>('splash');
+  const t = useTranslations('game');
 
-  const info = currentLocationId
-    ? LOCATION_INFO[currentLocationId] || LOCATION_INFO.default
-    : LOCATION_INFO.default;
+  const locId = currentLocationId || 'default';
+
+  const coords = useMemo(() => {
+    return LOCATION_COORDS[locId] || LOCATION_COORDS['ho-guom'];
+  }, [locId]);
+
+  const info = useMemo(() => {
+    try {
+      return t.raw(`locations.${locId}`);
+    } catch {
+      return t.raw('locations.o-quan-chuong'); // Fallback
+    }
+  }, [t, locId]);
 
   return (
     <div className="relative flex h-[100dvh] w-full flex-col overflow-hidden bg-navy-deep font-display text-white transition-colors duration-700 selection:bg-primary selection:text-black">
@@ -56,8 +47,18 @@ export default function ArrivalScreen() {
       )}
 
       {/* Background Effects */}
-      <div className="absolute inset-0 z-0">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(249,212,6,0.15)_0%,rgba(15,20,32,0)_70%)]"></div>
+      <div className="absolute inset-0 z-0 bg-[#0f1420]">
+        {/* Background Map Context - Screen 4 Map Requirement */}
+        <div className="pointer-events-none absolute inset-0 z-0 opacity-20 contrast-125 grayscale">
+          <LeafletMap
+            targetLat={coords.lat}
+            targetLng={coords.lng}
+            targetName={t(`locations.${locId}.name`)}
+            interactive={false}
+          />
+        </div>
+
+        <div className="pointer-events-none absolute inset-0 z-10 bg-[radial-gradient(circle_at_center,rgba(249,212,6,0.15)_0%,rgba(15,20,32,0)_70%)]"></div>
         <div
           className="pointer-events-none absolute inset-0 opacity-10"
           style={{
@@ -97,7 +98,7 @@ export default function ArrivalScreen() {
             onClick={() => setView('info')}
             className={`flex size-10 items-center justify-center rounded-full border shadow-lg backdrop-blur-sm transition-all duration-300 active:scale-95
               ${view === 'info' ? 'border-primary bg-primary text-navy-deep' : 'border-primary/20 bg-navy-light/60 text-primary hover:bg-primary hover:text-navy-deep'}`}
-            title={view === 'info' ? 'Đang xem' : 'Giới thiệu'}
+            title={t('arrival.info_title')}
           >
             <span className="material-symbols-outlined !text-[20px]">menu_book</span>
           </button>
@@ -105,7 +106,7 @@ export default function ArrivalScreen() {
           <button
             onClick={() => setCurrentScreen('library')}
             className="group flex size-10 items-center justify-center rounded-full border border-primary/20 bg-navy-light/60 text-primary shadow-lg backdrop-blur-sm transition-all duration-300 hover:bg-primary hover:text-navy-deep active:scale-95"
-            title="Thư viện"
+            title={t('arrival.library_hint')}
           >
             <span className="material-symbols-outlined !text-[20px]">inventory_2</span>
           </button>
@@ -123,12 +124,12 @@ export default function ArrivalScreen() {
               <div className="relative px-4">
                 <div className="absolute inset-0 scale-150 rounded-full bg-primary/10 blur-2xl"></div>
                 <h1 className="relative text-3xl font-bold leading-tight tracking-wide text-primary drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] md:text-5xl">
-                  Bạn đã đến
+                  {t('arrival.title')}
                   <br />
-                  <span className="text-white">vùng ký ức</span>
+                  <span className="text-white">{t('arrival.subtitle')}</span>
                 </h1>
                 <p className="mt-4 font-sans text-sm font-bold uppercase tracking-widest text-primary/60">
-                  Hà Nội • {currentLocationId?.replace('-', ' ') || 'Kinh kỳ'}
+                  Hà Nội • {t(`locations.${locId}.name`)}
                 </p>
               </div>
 
@@ -144,12 +145,12 @@ export default function ArrivalScreen() {
                 <div className="absolute inset-0 animate-pulse-glow rounded-full bg-primary opacity-40 blur transition-opacity duration-500 group-hover:opacity-60"></div>
                 <div className="relative flex h-14 w-full items-center justify-center overflow-hidden rounded-full bg-primary font-black tracking-widest text-navy-deep shadow-xl transition-all duration-300 hover:-translate-y-0.5 active:scale-95">
                   <span className="material-symbols-outlined mr-2 animate-pulse">radar</span>
-                  QUÉT MANH MỐI
+                  {t('arrival.scan_button')}
                   <div className="group-hover:animate-shimmer-fast absolute inset-0 -translate-x-full skew-x-12 bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
                 </div>
               </button>
               <p className="font-sans text-[10px] font-black uppercase tracking-[0.2em] text-primary/40">
-                Chạm để khám phá ký ức
+                {t('arrival.scan_hint')}
               </p>
             </div>
           </div>
@@ -163,7 +164,10 @@ export default function ArrivalScreen() {
                 <img
                   alt={`${info.title} Historical Photo`}
                   className="sepia-filter h-full w-full object-cover opacity-90 transition-transform duration-1000 group-hover:scale-105"
-                  src={info.photo}
+                  src={
+                    info.photo ||
+                    'https://lh3.googleusercontent.com/aida-public/AB6AXuDkYYgAtSHck1GUzYNJCg7rS9rPKGfGzLoUvy1wZ422LNEoo_hSLKt0sbpMYoKdYvpHBJBW1E1lZvWLDNcPDnK9_2I0xz002BO-nP2e6RnXbn3Z-OHDqFw5bLSQ8WLVA1xln8A4zkPAuWLq4dE4US_lIvWr55USKSExWFZd2H3YacVa7U1I50S1I0N2L-mMFxBO70uhmXbEQHdjqd0xxr5JnzpsJjb-fh4JOkDOwgBFqaggPgQYGyqZeNqaGNPXpgSKRX4xTbD9R8ne'
+                  }
                 />
                 <div className="absolute inset-0 z-20 bg-gradient-to-t from-navy-mid via-navy-mid/40 to-transparent md:bg-gradient-to-r"></div>
                 <div className="absolute bottom-2 left-5 z-30 opacity-80">
@@ -185,7 +189,7 @@ export default function ArrivalScreen() {
                   <div>
                     <h3 className="mb-1 flex items-center gap-2 text-[11px] font-bold text-white/90">
                       <span className="h-1 w-1 rounded-full bg-primary"></span>
-                      Lịch sử hình thành
+                      {t('arrival.history_label')}
                     </h3>
                     <p className="border-l border-primary/10 py-0.5 pl-3 text-justify font-sans text-[11px] leading-relaxed text-white/70">
                       {info.history}
@@ -195,7 +199,7 @@ export default function ArrivalScreen() {
                   <div>
                     <h3 className="mb-1 flex items-center gap-2 text-[11px] font-bold text-white/90">
                       <span className="h-1 w-1 rounded-full bg-primary"></span>
-                      Dấu ấn văn hóa
+                      {t('arrival.culture_label')}
                     </h3>
                     <p className="border-l border-primary/10 py-0.5 pl-3 text-justify font-sans text-[11px] leading-relaxed text-white/70">
                       {info.culture}
@@ -215,13 +219,13 @@ export default function ArrivalScreen() {
                 <div className="mt-5 flex shrink-0 items-center justify-between border-t border-white/5 pb-4 pt-5 md:pb-0">
                   <div className="xs:flex flex hidden items-center gap-2 text-[10px] text-white/30">
                     <span className="material-symbols-outlined text-sm">visibility</span>
-                    <span>Đã khám phá</span>
+                    <span>{t('arrival.discovered')}</span>
                   </div>
                   <button
                     onClick={() => setView('splash')}
                     className="xs:w-auto from-primary-dim flex w-full transform items-center justify-center gap-2 rounded-full bg-gradient-to-r to-primary px-8 py-3 text-[10px] font-black uppercase tracking-[0.15em] text-navy-deep shadow-xl transition-all hover:scale-105 hover:shadow-primary/20"
                   >
-                    TIẾP TỤC
+                    {t('arrival.continue_btn')}
                     <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
                   </button>
                 </div>

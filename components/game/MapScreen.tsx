@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-'use client';
-
 import React, { useEffect, useRef } from 'react';
 import { useGame } from '@/app/[locale]/game/GameContext';
 import { useTranslations } from 'next-intl';
@@ -166,6 +163,7 @@ export default function MapScreen() {
     <div className="font-body relative min-h-screen w-full overflow-hidden bg-background-dark text-white selection:bg-primary selection:text-background-dark">
       {/* Background Gradients */}
       <div className="pointer-events-none fixed inset-0 z-0 bg-gradient-to-b from-navy-mid via-background-dark to-black"></div>
+
       <div
         ref={firefliesRef}
         className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
@@ -176,10 +174,10 @@ export default function MapScreen() {
         <header className="relative flex-none px-6 pb-2 pt-[calc(env(safe-area-inset-top)+1.5rem)] text-center">
           <div className="pointer-events-none absolute left-0 top-0 z-0 h-full w-full bg-gradient-to-b from-black/60 to-transparent"></div>
           <div className="relative z-10">
-            <p className="mb-1 font-cinzel text-xs uppercase tracking-[0.2em] text-primary opacity-80">
+            <p className="mb-1 font-display text-xs uppercase tracking-widest text-primary opacity-80">
               {t('historical_puzzle')}
             </p>
-            <h1 className="inline-block border-b border-white/10 bg-gradient-to-r from-primary-glow via-primary to-primary-glow bg-clip-text pb-4 font-cinzel text-2xl font-bold leading-relaxed tracking-widest text-transparent drop-shadow-md md:text-3xl">
+            <h1 className="inline-block border-b border-white/10 bg-gradient-to-r from-primary-glow via-primary to-primary-glow bg-clip-text pb-4 font-display text-2xl font-bold leading-relaxed tracking-widest text-transparent drop-shadow-md md:text-3xl">
               GIẢI MÃ KINH KỲ
             </h1>
           </div>
@@ -239,8 +237,8 @@ export default function MapScreen() {
                         </span>
                         <div className="absolute -bottom-4 h-8 w-32 rounded-[100%] border-t border-primary/20 bg-blue-500/10 blur-sm"></div>
                       </div>
-                      <span className="mt-2 rounded border border-primary/20 bg-black/60 px-2 py-0.5 font-cinzel text-[9px] uppercase tracking-widest text-primary-glow backdrop-blur-md sm:mt-3 sm:text-[10px]">
-                        {loc.name}
+                      <span className="mt-2 rounded border border-primary/20 bg-black/60 px-2 py-0.5 font-display text-[9px] uppercase tracking-widest text-primary-glow backdrop-blur-md sm:mt-3 sm:text-[10px]">
+                        {t(`locations.${loc.id}.name`)}
                       </span>
                     </div>
                   </div>
@@ -255,7 +253,7 @@ export default function MapScreen() {
                     ${isUnlocked ? 'pointer-events-none cursor-default' : 'hover:scale-110 active:scale-95'}
                   `}
                   style={{ top: loc.top, left: loc.left }}
-                  aria-label={`Visit ${loc.name}`}
+                  aria-label={`Visit ${t(`locations.${loc.id}.name`)}`}
                 >
                   <div
                     className={`relative flex h-10 w-10 items-center justify-center rounded-full shadow-lg transition-all duration-300 sm:h-11 sm:w-11
@@ -330,7 +328,7 @@ export default function MapScreen() {
                       boxShadow: isSelected ? `0 4px 12px ${loc.color}40` : 'none',
                     }}
                   >
-                    {loc.name}
+                    {t(`locations.${loc.id}.name`)}
                   </span>
                 </button>
               );
@@ -352,8 +350,10 @@ export default function MapScreen() {
             ></div>
           </div>
           <div className="mt-2 flex justify-between text-[9px] font-bold uppercase tracking-wider text-white/40 sm:text-[10px]">
-            <span>Hành trình ký ức</span>
-            <span>{Math.round((unlockedMemories.length / 8) * 100)}% Hoàn thành</span>
+            <span>{t('journey')}</span>
+            <span>
+              {Math.round((unlockedMemories.length / 8) * 100)}% {t('progress')}
+            </span>
           </div>
 
           <button
@@ -368,10 +368,10 @@ export default function MapScreen() {
             `}
           >
             {unlockedMemories.length === 8
-              ? 'Nhận quyển sách ký ức'
+              ? t('get_book')
               : selectedId
-                ? 'Tiếp tục hành trình'
-                : 'Chọn địa điểm'}
+                ? t('continue')
+                : t('select_location')}
           </button>
         </footer>
 

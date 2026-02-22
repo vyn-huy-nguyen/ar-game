@@ -9,6 +9,212 @@
     "english": "English",
     "vietnamese": "Vietnamese"
   },
+  "game": {
+    "title": "Decipher",
+    "subtitle": "THE CAPITAL",
+    "legend": "HANOI LEGENDS",
+    "start": "Begin Journey",
+    "historical_puzzle": "Historical Puzzle Game",
+    "credits": "© 2026 Hanoi Memories Studio",
+    "progress": "Complete",
+    "journey": "Memory Journey",
+    "continue": "Continue Journey",
+    "select_location": "Select Location",
+    "get_book": "Get Memory Book",
+    "current_mission": "Current Mission",
+    "mission_desc": "Find your way to {location} to unlock next memory fragment.",
+    "distance": "Distance",
+    "meters": "Meters",
+    "start_walking": "Start Walking",
+    "current_location_label": "Current Position",
+    "back": "Back",
+    "library_title": "Memory Library",
+    "download_pdf": "Download PDF",
+    "locked": "Locked",
+    "found_fragment": "Memory Fragment Found!",
+    "scan_instructions": "Move camera to scan {span}",
+    "scan_target": "memory fragments",
+    "history_question": "History Question",
+    "quiz_step": "Question {current}/{total}",
+    "quiz_hint": "Observe the facade architecture and select the most accurate answer based on the clues found.",
+    "quiz": {
+      "challenge": "Challenge Question",
+      "correct": "Correct!",
+      "wrong": "Try again!"
+    },
+    "fact": {
+      "label": "Historical Knowledge",
+      "add_to_collection": "Add to Collection"
+    },
+    "arrival": {
+      "title": "You have arrived",
+      "subtitle": "memory region",
+      "instructions": "Find and scan the image on the book page to unlock the memory.",
+      "scan_button": "SCAN CLUES",
+      "scan_hint": "Touch to explore memory",
+      "info_title": "Introduction",
+      "library_hint": "Library",
+      "history_label": "Historical Origins",
+      "culture_label": "Cultural Imprints",
+      "discovered": "Discovered",
+      "continue_btn": "CONTINUE"
+    },
+    "completion": {
+      "title": "Journey Completed",
+      "subtitle": "Congratulations on finishing",
+      "legend": "Thang Long Legends",
+      "review_memories": "Review Memories",
+      "share": "Share Journey"
+    },
+    "locations": {
+      "ho-guom": {
+        "name": "Hoan Kiem Lake",
+        "title": "Hoan Kiem Lake",
+        "subtitle": "The Heart of the Capital",
+        "history": "Hoan Kiem Lake is associated with the legend of King Le Loi returning the magic sword to the Golden Turtle after defeating the Ming invaders. It is a sacred symbol of the nation's peace-loving spirit.",
+        "culture": "The ensemble of Ngoc Son Temple, The Huc Bridge, and Turtle Tower creates a unique spiritual cultural space, where the spiritual essence of Thang Long's thousand-year civilization converges.",
+        "quote": "Let's go see the Kiem Ho scenery,\nSee The Huc bridge, see Ngoc Sơn temple.",
+        "year": "Hanoi, 19th Century",
+        "quiz": {
+          "question": "Where is the Turtle Tower located in Hoan Kiem Lake?",
+          "options": [
+            "Middle of the lake",
+            "Next to Ngoc Son temple",
+            "Near The Huc bridge",
+            "At the lake shore"
+          ],
+          "fact": "The Turtle Tower was built on a small mound in the middle of the lake, serving as an iconic image associated with the poetic and ancient beauty of Hanoi."
+        }
+      },
+      "o-quan-chuong": {
+        "name": "O Quan Chuong",
+        "title": "O Quan Chuong",
+        "subtitle": "Thousand-year Heritage",
+        "history": "O Quan Chuong (or O Dong Ha) was built in the 10th year of Canh Hung (1749). It is the only remaining city gate of the ancient Thang Long citadel.",
+        "culture": "The architecture bears the characteristic features of the Nguyen dynasty with a watchtower and curved arches. It is a symbol of the indomitable spirit of Hanoi people.",
+        "quote": "Ancient paths where horse carriages once passed, \nOld palace foundations under the evening sun.",
+        "year": "Hanoi, circa 1900",
+        "quiz": {
+          "question": "Under which dynasty was O Quan Chuong built?",
+          "options": ["Ly", "Tran", "Le", "Nguyen"],
+          "fact": "O Quan Chuong was built in 1749 during the reign of King Le Hien Tong. It is the only remaining gate of the old Thang Long citadel."
+        }
+      },
+      "hang-buom": {
+        "name": "Hang Buom",
+        "title": "Hang Buom Street",
+        "subtitle": "Trading Port Imprint",
+        "history": "Formerly a gathering place for sail makers and water-related trade items. The street sits near the old Red River pier, making it a bustling gateway for commerce.",
+        "culture": "This area still preserves the Cantonese Assembly Hall and Bach Ma Temple - one of the four sacred guards of Thang Long protecting the citadel.",
+        "quote": "Hanoi has thirty-six streets,\nHang Buom, Hang Bac, Hang Ngang, Hang Dao.",
+        "year": "Hanoi, early 20th Century",
+        "quiz": {
+          "question": "Which famous destination is located on Hang Buom Street?",
+          "options": [
+            "Bach Ma Temple",
+            "Ngoc Son Temple",
+            "One Pillar Pagoda",
+            "Grand Opera House"
+          ],
+          "fact": "Bach Ma Temple, located at 76 Hang Buom, is the oldest temple among the four guards of Thang Long citadel."
+        }
+      },
+      "hang-dong": {
+        "name": "Hang Dong",
+        "title": "Hang Dong Street",
+        "subtitle": "Copper Resonance",
+        "history": "The street is a gathering place for famous copper smiths from Ngu Xa village and surrounding areas, specializing in ritual items, copper trays, and pots.",
+        "culture": "The sounds of chiseling and hammering day and night have created a unique rhythm for this traditional handicraft street of Hanoi.",
+        "quote": "Ngu Xa village for copper casting,\nHang Dong for selling in the morning light.",
+        "year": "Hanoi, circa 1920",
+        "quiz": {
+          "question": "What is the most famous handicraft product of Hang Dong Street?",
+          "options": ["Copper ritual items", "Silk paintings", "Pith helmets", "Ceramics"],
+          "fact": "Hang Dong Street has long been famous for copper products such as ritual items, trays, pots... crafted by Ngu Xa village artisans."
+        }
+      },
+      "hang-trong": {
+        "name": "Hang Trong",
+        "title": "Hang Trong Street",
+        "subtitle": "Soulful Strokes",
+        "history": "Famous for drum making and especially the Hang Trong folk painting style that was once renowned, serving spiritual and decoration needs for Tet.",
+        "culture": "Hang Trong paintings carry an elegant, refined beauty, expressing the depth of soul and high aesthetic sense of ancient Hanoi people.",
+        "quote": "Hang Trong paintings for the spring,\nHang Ngang couplets bright in the hall.",
+        "year": "Hanoi, late 19th Century",
+        "quiz": {
+          "question": "Which folk painting style is associated with Hang Trong Street?",
+          "options": [
+            "Hang Trong paintings",
+            "Dong Ho paintings",
+            "Kim Hoang paintings",
+            "Sinh Village paintings"
+          ],
+          "fact": "Hang Trong painting is one of Vietnam's typical folk painting styles, destacated for its sophisticated coloring techniques."
+        }
+      },
+      "lan-ong": {
+        "name": "Lan Ong",
+        "title": "Lan Ong Street",
+        "subtitle": "Herbal Scent",
+        "history": "The street is named after Hai Thuong Lan Ong - a brilliant physician. Since old times, this has been the hub for traditional oriental medicine shops.",
+        "culture": "The intense aroma of oriental herbs spreading throughout the street is an unmistakable characteristic, showing the preservation of national medical essence.",
+        "quote": "Lan Ong street with aromatic medicine,\nPulse diagnosis and prescriptions for a peaceful life.",
+        "year": "Hanoi, 1930s",
+        "quiz": {
+          "question": "Which traditional profession is Lan Ong Street famous for?",
+          "options": ["Oriental Medicine", "Bird cage making", "Knife forging", "Embroidery"],
+          "fact": "Lan Ong Street is the largest oriental medicine trading center in Hanoi, preserving the profession of medicine for generations."
+        }
+      },
+      "dong-xuan": {
+        "name": "Dong Xuan",
+        "title": "Dong Xuan Market",
+        "subtitle": "Bustling Marketplace",
+        "history": "Built by the French administration in 1889, this is the largest market in Hanoi, witnessing the heroic fight to protect the capital in winter 1946.",
+        "culture": "The market is not just a place for trade but also a cultural icon of Hanoi life with its characteristic 5-vaulted door structure.",
+        "quote": "The most joyful is Dong Xuan market,\nEverything is there, for people near and far.",
+        "year": "Hanoi, circa 1910",
+        "quiz": {
+          "question": "In what year was Dong Xuan Market built?",
+          "options": ["1889", "1902", "1946", "1954"],
+          "fact": "Dong Xuan Market was built in 1889 on the site of the old To Lich river pier, becoming a trade symbol of Thang Long."
+        }
+      },
+      "hang-ma": {
+        "name": "Hang Ma",
+        "title": "Hang Ma Street",
+        "subtitle": "Vibrant Colors",
+        "history": "The street specializes in votive paper items for rituals and folk toys for children during Mid-Autumn and Tet festivals.",
+        "culture": "This is always the most colorful and bustling street in the old quarter during festival seasons, preserving the childhood memories of many generations.",
+        "quote": "Mid-autumn lantern procession on Hang Ma,\nBright star lanterns, joyful streets.",
+        "year": "Hanoi, circa 1940",
+        "quiz": {
+          "question": "When is Hang Ma Street most bustling?",
+          "options": ["Mid-Autumn & Tet", "Summer", "Christmas", "National Day"],
+          "fact": "Hang Ma Street is the center of traditional festivals, providing decorations and folk toys in Hanoi."
+        }
+      },
+      "hang-ngang": {
+        "name": "Hang Ngang",
+        "title": "Hang Ngang Street",
+        "subtitle": "Historical Milestone",
+        "history": "Hang Ngang Street was once the wealthiest in the old quarter, famous for silk shops. House No. 48 is where Uncle Ho wrote the Declaration of Independence.",
+        "culture": "The intersection of architecture and commercial prosperity has turned Hang Ngang into a symbol of the capital's elegance and aristocracy.",
+        "quote": "No. 48 Hang Ngang, a new history page,\nShining independence, radiant country.",
+        "year": "Hanoi, 1945",
+        "quiz": {
+          "question": "Which major historical event is associated with Hang Ngang Street?",
+          "options": [
+            "Writing the Declaration of Independence",
+            "Establishing the Party",
+            "Capital Takeover Day",
+            "Lam Son Uprising"
+          ],
+          "fact": "House No. 48 Hang Ngang is where President Ho Chi Minh wrote the Declaration of Independence, founding the Democratic Republic of Vietnam."
+        }
+      }
+    }
+  },
   "qr": {
     "scanning": "Start AR Experience",
     "instructions": "Point your camera at the marker images on the book pages",
@@ -72,23 +278,5 @@
       "question": "Please tell me information about Bat Dan Street mentioned in the book",
       "error": "Sorry, I'm having connection issues. Please try again later!"
     }
-  },
-  "game": {
-    "title": "Decipher",
-    "subtitle": "THE CAPITAL",
-    "legend": "HANOI LEGENDS",
-    "start": "Begin Journey",
-    "historical_puzzle": "Historical Puzzle Game",
-    "credits": "© 2026 Hanoi Memories Studio",
-    "progress": "Complete",
-    "journey": "Memory Journey",
-    "continue": "Continue Journey",
-    "select_location": "Select Location",
-    "current_mission": "Current Mission",
-    "mission_desc": "Find your way to {location} to unlock next memory fragment.",
-    "distance": "Distance",
-    "meters": "Meters",
-    "start_walking": "Start Walking",
-    "current_location_label": "Current Position"
   }
 }

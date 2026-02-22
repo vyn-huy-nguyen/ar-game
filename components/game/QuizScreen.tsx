@@ -1,45 +1,20 @@
-'use client';
-
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useGame } from '@/app/[locale]/game/GameContext';
-
-const QUIZ_DATA: Record<
-  string,
-  {
-    question: string;
-    options: string[];
-    correctIndex: number;
-    fact: string;
-  }
-> = {
-  'o-quan-chuong': {
-    question: 'Ô Quan Chưởng được xây dựng dưới triều đại nào?',
-    options: ['Lý', 'Trần', 'Lê', 'Nguyễn'],
-    correctIndex: 2,
-    fact: 'Ô Quan Chưởng (hay Đông Hà Môn) được xây dựng vào năm 1749 thời vua Lê Hiển Tông. Đây là cửa ô duy nhất còn sót lại của kinh thành Thăng Long xưa.',
-  },
-  'hang-dong': {
-    question: 'Sản phẩm thủ công truyền thống nổi tiếng nhất của phố Hàng Đồng là gì?',
-    options: ['Đồ đồng thờ tự', 'Tranh lụa', 'Mũ cối', 'Gốm sứ'],
-    correctIndex: 0,
-    fact: 'Phố Hàng Đồng từ lâu đã nổi tiếng với các sản phẩm bằng đồng như đồ thờ, mâm, nồi... được chế tác bởi bàn tay tài hoa của các nghệ nhân làng nghề Ngũ Xã.',
-  },
-  default: {
-    question: 'Ngôi nhà cổ này được xây dựng vào năm nào?',
-    options: ['1906', '1946', '1920', '1930'],
-    correctIndex: 0,
-    fact: 'Kiến trúc Phố Cổ Hà Nội mang vẻ đẹp giao thoa giữa truyền thống Việt Nam và ảnh hưởng của kiến trúc thuộc địa Pháp thế kỷ 20.',
-  },
-};
+import { useTranslations } from 'next-intl';
 
 export default function QuizScreen() {
   const { setCurrentScreen, currentLocationId } = useGame();
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const t = useTranslations('game');
 
-  const quiz =
-    currentLocationId && QUIZ_DATA[currentLocationId]
-      ? QUIZ_DATA[currentLocationId]
-      : QUIZ_DATA['default'];
+  const quiz = useMemo(() => {
+    const locId = currentLocationId || 'o-quan-chuong';
+    try {
+      return t.raw(`locations.${locId}.quiz`);
+    } catch {
+      return t.raw('locations.o-quan-chuong.quiz');
+    }
+  }, [t, currentLocationId]);
 
   const handleSelect = (index: number) => {
     setSelectedIndex(index);
@@ -88,7 +63,7 @@ export default function QuizScreen() {
           <div className="flex items-center gap-2 rounded-full border border-primary/30 bg-black/30 px-4 py-1.5 shadow-[0_0_10px_rgba(249,212,6,0.2)] backdrop-blur-md">
             <span className="material-symbols-outlined text-[18px] text-primary">history_edu</span>
             <span className="whitespace-nowrap text-[10px] font-bold uppercase leading-none tracking-widest text-primary/90">
-              Câu hỏi lịch sử
+              {t('history_question')}
             </span>
           </div>
         </div>
@@ -100,19 +75,18 @@ export default function QuizScreen() {
 
             <div className="space-y-4 text-center">
               <div className="mb-1 inline-block rounded border border-primary/30 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-primary">
-                Câu hỏi 1/3
+                {t('quiz_step', { current: 1, total: 3 })}
               </div>
               <h2 className="gold-glow-text text-xl font-medium leading-tight text-primary sm:text-2xl md:text-3xl">
                 {quiz.question}
               </h2>
               <p className="font-sans text-xs font-light leading-relaxed text-white/70 sm:text-sm">
-                Hãy quan sát kiến trúc mặt tiền và chọn đáp án chính xác nhất dựa trên manh mối đã
-                tìm thấy.
+                {t('quiz_hint')}
               </p>
             </div>
 
             <div className="mt-2 grid w-full grid-cols-1 gap-3">
-              {quiz.options.map((option, idx) => (
+              {quiz.options.map((option: string, idx: number) => (
                 <button
                   key={idx}
                   onClick={() => handleSelect(idx)}

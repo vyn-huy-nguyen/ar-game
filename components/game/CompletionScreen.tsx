@@ -2,9 +2,11 @@
 
 import React from 'react';
 import { useGame } from '@/app/[locale]/game/GameContext';
+import { useTranslations } from 'next-intl';
 
 export default function CompletionScreen() {
   const { setCurrentScreen } = useGame();
+  const t = useTranslations('game');
 
   return (
     <div className="text-paper relative flex h-[100dvh] w-full flex-col items-center overflow-hidden bg-navy-deep font-serif">
@@ -52,15 +54,15 @@ export default function CompletionScreen() {
           <div className="border-gold-DEFAULT/30 bg-gold-DEFAULT/10 mb-2 inline-flex items-center justify-center rounded-full border p-2">
             <span className="material-symbols-outlined text-gold-DEFAULT mr-1 text-sm">stars</span>
             <span className="text-gold-light text-[10px] font-bold uppercase tracking-widest sm:text-xs">
-              Hoàn thành xuất sắc
+              {t('game.progress')}
             </span>
             <span className="material-symbols-outlined text-gold-DEFAULT ml-1 text-sm">stars</span>
           </div>
           <h1 className="from-gold-light via-gold-DEFAULT to-gold-dark bg-gradient-to-b bg-clip-text font-display text-3xl font-bold text-transparent drop-shadow-sm md:text-4xl">
-            Chúc mừng!
+            {t('completion.title')}
           </h1>
           <p className="text-paper/80 mx-auto max-w-[280px] text-sm font-light leading-relaxed md:text-base">
-            Bạn đã phục hồi toàn bộ ký ức về một Hà Nội vàng son.
+            {t('completion.subtitle')}
           </p>
         </div>
 
@@ -79,17 +81,19 @@ export default function CompletionScreen() {
                     auto_stories
                   </span>
                 </div>
-                <h2 className="text-gold-light mb-1 font-display text-2xl tracking-wide">KÝ ỨC</h2>
+                <h2 className="text-gold-light mb-1 font-display text-2xl tracking-wide">
+                  {t('game.title')}
+                </h2>
                 <h3 className="text-gold-DEFAULT font-display text-xl uppercase tracking-widest">
-                  HÀ NỘI
+                  {t('game.subtitle')}
                 </h3>
               </div>
               <div className="z-10 mb-4 text-center">
                 <p className="text-gold-DEFAULT/70 text-[10px] uppercase tracking-widest">
-                  Bộ sưu tập đặc biệt
+                  {t('completion.legend')}
                 </p>
                 <div className="bg-gold-DEFAULT/50 mx-auto my-2 h-[1px] w-8"></div>
-                <p className="text-gold-DEFAULT/50 font-serif text-[10px] italic">1900 - 2024</p>
+                <p className="text-gold-DEFAULT/50 font-serif text-[10px] italic">1900 - 2026</p>
               </div>
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent"></div>
             </div>
@@ -104,7 +108,7 @@ export default function CompletionScreen() {
                 download
               </span>
               <span className="text-gold-light font-display text-sm font-semibold tracking-wide md:text-base">
-                Nhận quyển sách Ký ức (PDF)
+                {t('get_book')}
               </span>
               <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[7px]">
                 <div className="animate-shine absolute left-0 top-0 h-full w-1/2 skew-x-[-20deg] bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
@@ -116,13 +120,14 @@ export default function CompletionScreen() {
               onClick={() => setCurrentScreen('library')}
               className="text-gold-DEFAULT/60 hover:text-gold-light flex items-center gap-1 text-xs uppercase tracking-widest transition-colors"
             >
-              <span className="material-symbols-outlined text-sm">share</span> Chia sẻ
+              <span className="material-symbols-outlined text-sm">share</span>{' '}
+              {t('completion.share')}
             </button>
             <button
               onClick={() => setCurrentScreen('landing')}
               className="text-gold-DEFAULT/60 hover:text-gold-light flex items-center gap-1 text-xs uppercase tracking-widest transition-colors"
             >
-              <span className="material-symbols-outlined text-sm">home</span> Về trang chủ
+              <span className="material-symbols-outlined text-sm">home</span> {t('navigation.home')}
             </button>
           </div>
         </div>
