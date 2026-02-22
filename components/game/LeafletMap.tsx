@@ -13,11 +13,12 @@ interface LeafletMapProps {
   targetLat: number;
   targetLng: number;
   targetName: string;
+  targetIconName?: string;
   interactive?: boolean;
 }
 
 const LeafletMap = forwardRef<LeafletMapHandle, LeafletMapProps>(
-  ({ targetLat, targetLng, targetName, interactive = true }, ref) => {
+  ({ targetLat, targetLng, targetName, targetIconName = 'temple_buddhist', interactive = true }, ref) => {
     const { userLocation } = useGame();
     const mapRef = useRef<L.Map | null>(null);
     const containerRef = useRef<HTMLDivElement>(null);
@@ -81,7 +82,7 @@ const LeafletMap = forwardRef<LeafletMapHandle, LeafletMapProps>(
           className: 'custom-target-icon',
           html: `<div class="relative flex flex-col items-center">
                   <div class="relative flex h-10 w-10 items-center justify-center rounded-full border border-[#f9d406] bg-[#0f1420] text-[#f9d406] shadow-[0_0_15px_rgba(249,212,6,0.5)]">
-                    <span class="material-symbols-outlined" style="font-size: 18px;">temple_buddhist</span>
+                    <span class="material-symbols-outlined" style="font-size: 18px;">${targetIconName}</span>
                   </div>
                   <div class="mt-2 w-max rounded-full border border-primary/30 bg-black/80 px-3 py-1 text-[9px] font-bold text-white shadow-lg backdrop-blur-sm">
                     ${targetName}
@@ -128,7 +129,7 @@ const LeafletMap = forwardRef<LeafletMapHandle, LeafletMapProps>(
           mapRef.current = null;
         }
       };
-    }, [mounted, interactive, targetLat, targetLng, targetName]); // Run once when mounted
+    }, [mounted, interactive, targetLat, targetLng, targetName, targetIconName]); // Run once when mounted
 
     // Update Target Marker if props change
     useEffect(() => {
@@ -145,7 +146,7 @@ const LeafletMap = forwardRef<LeafletMapHandle, LeafletMapProps>(
           html: `<div class="relative flex items-center justify-center">
                   <div class="absolute inset-0 rounded-full bg-yellow-400 blur-md opacity-40 animate-pulse"></div>
                   <div class="relative bg-[#131a26] border-2 border-[#f9d406] rounded-full p-2 shadow-[0_0_15px_rgba(249,212,6,0.6)]">
-                    <span class="material-symbols-outlined text-[#f9d406] text-xl" style="font-size: 20px;">temple_buddhist</span>
+                    <span class="material-symbols-outlined text-[#f9d406] text-xl" style="font-size: 20px;">${targetIconName}</span>
                   </div>
                 </div>`,
           iconSize: [40, 40],
@@ -155,7 +156,7 @@ const LeafletMap = forwardRef<LeafletMapHandle, LeafletMapProps>(
           .addTo(mapRef.current)
           .bindPopup(targetName);
       }
-    }, [targetLat, targetLng, targetName]);
+    }, [targetLat, targetLng, targetName, targetIconName]);
 
     // Update User Location and Polyline
     useEffect(() => {

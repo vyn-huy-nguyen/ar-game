@@ -3,7 +3,7 @@ import { useGame } from '@/app/[locale]/game/GameContext';
 import { useTranslations } from 'next-intl';
 
 // Hardcoded locations based on the HTML
-const LOCATIONS = [
+export const LOCATIONS = [
   {
     id: 'ho-guom',
     name: 'Hồ Hoàn Kiếm',
@@ -264,12 +264,11 @@ export default function MapScreen() {
                 >
                   <div
                     className={`relative flex h-10 w-10 items-center justify-center rounded-full shadow-lg transition-all duration-300 sm:h-11 sm:w-11
-                      ${
-                        isUnlocked
-                          ? 'scale-105'
-                          : isSelected
-                            ? 'scale-110'
-                            : 'opacity-70 group-hover:opacity-100'
+                      ${isUnlocked
+                        ? 'scale-105'
+                        : isSelected
+                          ? 'scale-110'
+                          : 'opacity-70 group-hover:opacity-100'
                       }
                     `}
                     style={{
@@ -316,12 +315,11 @@ export default function MapScreen() {
 
                   <span
                     className={`absolute left-1/2 top-full mt-1.5 w-max -translate-x-1/2 rounded border px-1.5 py-0.5 text-[9px] font-bold backdrop-blur-md transition-all sm:mt-2 sm:px-2 sm:py-1 sm:text-[10px]
-                      ${
-                        isUnlocked
-                          ? 'opacity-100'
-                          : isSelected
-                            ? '-translate-y-1 transform opacity-100 shadow-md'
-                            : 'opacity-75 group-hover:opacity-100'
+                      ${isUnlocked
+                        ? 'opacity-100'
+                        : isSelected
+                          ? '-translate-y-1 transform opacity-100 shadow-md'
+                          : 'opacity-75 group-hover:opacity-100'
                       }
                     `}
                     style={{
@@ -347,7 +345,6 @@ export default function MapScreen() {
         <footer className="relative z-20 flex-none bg-gradient-to-t from-black to-transparent px-6 pb-[calc(env(safe-area-inset-bottom)+1.5rem)] pt-2 md:pb-8">
           <div className="mb-3 text-center">
             <p className="font-display text-[10px] italic text-primary/80 sm:text-xs">
-              &quot;The bell echoes from the ancient guild...&quot;
             </p>
           </div>
           <div className="relative h-2.5 w-full overflow-hidden rounded-full border border-white/10 bg-navy-mid shadow-inner sm:h-3">
@@ -367,10 +364,9 @@ export default function MapScreen() {
             disabled={!selectedId && unlockedMemories.length < 8}
             onClick={handleContinue}
             className={`mt-4 w-full rounded-lg border py-3 font-display font-bold uppercase tracking-[0.15em] transition-all duration-300 sm:mt-6
-              ${
-                selectedId || unlockedMemories.length === 8
-                  ? 'shadow-glow scale-100 cursor-pointer border-primary bg-gradient-to-r from-primary/20 to-primary/30 text-primary hover:bg-primary hover:text-black'
-                  : 'scale-95 cursor-not-allowed border-white/10 bg-transparent text-white/20 opacity-50'
+              ${selectedId || unlockedMemories.length === 8
+                ? 'shadow-glow scale-100 cursor-pointer border-primary bg-gradient-to-r from-primary/20 to-primary/30 text-primary hover:bg-primary hover:text-black'
+                : 'scale-95 cursor-not-allowed border-white/10 bg-transparent text-white/20 opacity-50'
               }
             `}
           >

@@ -4,6 +4,7 @@ import { useGame } from '@/app/[locale]/game/GameContext';
 import { useTranslations } from 'next-intl';
 import dynamic from 'next/dynamic';
 import { LeafletMapHandle } from './LeafletMap';
+import { LOCATIONS } from './MapScreen';
 
 const LeafletMap = dynamic(() => import('./LeafletMap'), {
   ssr: false,
@@ -35,8 +36,19 @@ export default function MovingScreen() {
   } = useGame();
   const [distance, setDistance] = React.useState<number | null>(null);
   const [mounted, setMounted] = React.useState(false);
+  const [showInfoView, setShowInfoView] = React.useState(false);
   const t = useTranslations('game');
   const mapRef = useRef<LeafletMapHandle>(null);
+
+  const locId = currentLocationId || 'default';
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const info: any = useMemo(() => {
+    try {
+      return t.raw(`locations.${locId}`);
+    } catch {
+      return t.raw('locations.o-quan-chuong'); // Fallback
+    }
+  }, [t, locId]);
 
   React.useEffect(() => {
     setMounted(true);
@@ -110,7 +122,7 @@ export default function MovingScreen() {
 
         {movingMode === 'navigation' ? (
           <button
-            onClick={() => setCurrentScreen('library')}
+            onClick={() => setShowInfoView(true)}
             className="group relative flex h-12 w-12 items-center justify-center rounded-full border border-primary/30 bg-[#0f1420]/80 text-primary shadow-lg backdrop-blur-md transition-all hover:scale-110 active:scale-95"
           >
             <span className="material-symbols-outlined text-2xl">menu_book</span>
@@ -165,6 +177,7 @@ export default function MovingScreen() {
               targetLat={location.lat}
               targetLng={location.lng}
               targetName={currentLocationId ? t(`locations.${currentLocationId}.name`) : ''}
+              targetIconName={LOCATIONS.find(l => l.id === currentLocationId)?.icon || 'temple_buddhist'}
               interactive={movingMode === 'navigation'}
             />
           )}
@@ -316,20 +329,101 @@ export default function MovingScreen() {
                 onClick={() => setCurrentScreen('arrival')}
                 className="shadow-glow-strong flex w-full max-w-[240px] animate-pulse-glow items-center justify-center gap-3 rounded-2xl border border-primary/40 bg-primary py-3.5 font-display text-sm font-black uppercase tracking-[0.12em] text-black transition-all hover:scale-105 active:scale-95"
               >
-                <span>KHÁM PHÁ</span>
+                <span>{t('explore')}</span>
                 <span className="material-symbols-outlined text-xl font-black">explore</span>
               </button>
             ) : (
               // Navigation ongoing hint
               <div className="flex w-full justify-center">
                 <div className="animate-pulse rounded-full border border-primary/20 bg-black/80 px-8 py-4 text-[11px] font-black uppercase tracking-widest text-primary backdrop-blur-md">
-                  Tiến gần hơn để khám phá
+                  {t('move_closer')}
                 </div>
               </div>
             )}
           </div>
         )}
       </div>
+
+      {/* INFO VIEW OVERLAY */}
+      {showInfoView && (
+        <div className="fixed inset-0 z-[100] flex animate-fade-in flex-col bg-navy-deep/95 backdrop-blur-lg">
+          {/* Header */}
+          <div className="relative z-40 flex w-full shrink-0 items-start justify-between px-6 pb-4 pt-[calc(env(safe-area-inset-top)+1.5rem)]">
+            <button
+              onClick={() => setShowInfoView(false)}
+              className="group flex size-10 items-center justify-center rounded-full border border-primary/20 bg-navy-light/60 text-primary shadow-lg backdrop-blur-sm transition-all duration-300 hover:bg-primary hover:text-navy-deep active:scale-95"
+            >
+              <span className="material-symbols-outlined !text-[20px] transition-transform group-hover:-translate-x-0.5">
+                arrow_back
+              </span>
+            </button>
+          </div>
+
+          {/* Info View Content (Copied from ArrivalScreen) */}
+          <div className="animate-fade-in-up mx-auto flex min-h-0 w-full max-w-6xl flex-1 items-center justify-center overflow-hidden p-3 md:aspect-[16/9] md:p-8">
+            <div className="relative flex h-full w-full flex-col overflow-hidden rounded-[2rem] border border-primary/20 bg-navy-mid shadow-2xl md:flex-row md:rounded-[3.5rem]">
+              {/* Left Side: Photo */}
+              <div className="group relative h-40 w-full shrink-0 overflow-hidden md:h-full md:w-1/2">
+                <div className="absolute inset-0 z-10 bg-navy-deep/20"></div>
+                <img
+                  alt={`${info.title} Historical Photo`}
+                  className="sepia-filter h-full w-full object-cover opacity-90 transition-transform duration-1000 group-hover:scale-105"
+                  src={
+                    info.photo ||
+                    '/images/img1-2.jpeg'
+                  }
+                />
+                <div className="absolute inset-0 z-20 bg-gradient-to-t from-navy-mid via-navy-mid/40 to-transparent md:bg-gradient-to-r"></div>
+                <div className="absolute bottom-2 left-5 z-30 opacity-80">
+                  <div className="text-primary-dim font-display text-[9px] italic">{info.year}</div>
+                </div>
+              </div>
+
+              {/* Right Side: Text Details */}
+              <div className="scrollbar-hide relative z-30 flex min-h-0 w-full flex-1 flex-col overflow-y-auto overflow-x-hidden p-6 md:h-full md:w-1/2 md:p-12">
+                <div className="mb-3 h-1 w-10 bg-gradient-to-r from-primary to-transparent opacity-80"></div>
+                <h2 className="mb-0.5 font-display text-2xl font-bold tracking-tight text-primary drop-shadow-sm md:text-5xl">
+                  {info.title}
+                </h2>
+                <p className="font-body mb-4 text-[9px] uppercase tracking-[0.2em] text-primary/60">
+                  {info.subtitle}
+                </p>
+
+                <div className="min-h-0 flex-1 space-y-5">
+                  <div>
+                    <h3 className="mb-1 flex items-center gap-2 text-[11px] font-bold text-white/90">
+                      <span className="h-1 w-1 rounded-full bg-primary"></span>
+                      {t('arrival.history_label')}
+                    </h3>
+                    <p className="font-body border-l border-primary/10 py-0.5 pl-3 text-justify text-[11px] leading-relaxed text-white/70">
+                      {info.history}
+                    </p>
+                  </div>
+
+                  <div>
+                    <h3 className="mb-1 flex items-center gap-2 text-[11px] font-bold text-white/90">
+                      <span className="h-1 w-1 rounded-full bg-primary"></span>
+                      {t('arrival.culture_label')}
+                    </h3>
+                    <p className="font-body border-l border-primary/10 py-0.5 pl-3 text-justify text-[11px] leading-relaxed text-white/70">
+                      {info.culture}
+                    </p>
+                  </div>
+
+                  <div className="relative mt-1 rounded-xl border border-white/5 bg-white/5 p-4">
+                    <span className="material-symbols-outlined absolute left-1.5 top-1.5 text-lg text-primary/10">
+                      format_quote
+                    </span>
+                    <p className="whitespace-pre-line px-4 text-center font-display text-[10px] italic leading-relaxed text-primary/60">
+                      &quot;{info.quote}&quot;
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       <style jsx global>{`
         .map-grid {
@@ -358,6 +452,22 @@ export default function MovingScreen() {
         }
         .animate-pulse-glow {
           animation: pulseGlow 2s infinite;
+        }
+        @keyframes fade-in-up {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-fade-in-up {
+          animation: fade-in-up 0.5s ease-out forwards;
+        }
+        .sepia-filter {
+          filter: sepia(0.8) contrast(1.1) brightness(0.9);
         }
       `}</style>
     </div>

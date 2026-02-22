@@ -10,12 +10,12 @@
     "vietnamese": "Vietnamese"
   },
   "game": {
-    "title": "Decipher",
+    "title": "DECIPHER",
     "subtitle": "THE CAPITAL",
-    "legend": "HANOI LEGENDS",
+    "legend": "HANOI THOUSAND YEARS OF CULTURE",
     "start": "Begin Journey",
     "historical_puzzle": "Historical Puzzle Game",
-    "credits": "© 2026 Hanoi Memories Studio",
+    "credits": "",
     "progress": "Complete",
     "journey": "Memory Journey",
     "continue": "Continue Journey",
@@ -27,6 +27,8 @@
     "meters": "Meters",
     "start_walking": "Start Walking",
     "old_quarter": "Old Quarter",
+    "explore": "Explore",
+    "move_closer": "Move closer to explore",
     "unit_km": "KM",
     "unit_meters": "METERS",
     "current_location_label": "Current Position",
@@ -110,7 +112,11 @@
         "narrative": "Shadows of the ancient city gate bear the marks of time, where street vendors have come and gone since dawn and dusk...",
         "quiz": {
           "question": "O Quan Chuong is one of how many city gates built in 1749?",
-          "options": ["3", "5", "9"],
+          "options": [
+            "3",
+            "5",
+            "9"
+          ],
           "correctIndex": 1,
           "fact": "O Quan Chuong is one of 5 city gates built in 1749 during the reign of King Le Hien Tong. It is the only remaining gate of the old Thang Long citadel."
         }
@@ -149,7 +155,12 @@
         "narrative": "The steady rhythm of hammers echoes through the alley, where forge fires illuminate cold winter nights...",
         "quiz": {
           "question": "What is the most famous handicraft product of Hang Dong Street?",
-          "options": ["Copper ritual items", "Silk paintings", "Pith helmets", "Ceramics"],
+          "options": [
+            "Copper ritual items",
+            "Silk paintings",
+            "Pith helmets",
+            "Ceramics"
+          ],
           "correctIndex": 0,
           "fact": "Hang Dong Street has long been famous for copper products such as ritual items, trays, pots... crafted by Ngu Xa village artisans."
         }
@@ -188,7 +199,12 @@
         "narrative": "Herbal fragrances drift gently through the air, where ancestral remedies preserve the essence of ancient healing...",
         "quiz": {
           "question": "Which traditional profession is Lan Ong Street famous for?",
-          "options": ["Oriental Medicine", "Bird cage making", "Knife forging", "Embroidery"],
+          "options": [
+            "Oriental Medicine",
+            "Bird cage making",
+            "Knife forging",
+            "Embroidery"
+          ],
           "correctIndex": 0,
           "fact": "Lan Ong Street is the largest oriental medicine trading center in Hanoi, preserving the profession of medicine for generations."
         }
@@ -205,7 +221,12 @@
         "narrative": "Five-arched roofs stand tall amidst the streets, witnessing countless festive Tet market seasons...",
         "quiz": {
           "question": "In what year was Dong Xuan Market built?",
-          "options": ["1889", "1902", "1946", "1954"],
+          "options": [
+            "1889",
+            "1902",
+            "1946",
+            "1954"
+          ],
           "correctIndex": 0,
           "fact": "Dong Xuan Market was built in 1889 on the site of the old To Lich river pier, becoming a trade symbol of Thang Long."
         }
@@ -222,7 +243,12 @@
         "narrative": "Streets ablaze with colorful paper decorations, where generations of childhoods merge in festival laughter...",
         "quiz": {
           "question": "When is Hang Ma Street most bustling?",
-          "options": ["Mid-Autumn & Tet", "Summer", "Christmas", "National Day"],
+          "options": [
+            "Mid-Autumn & Tet",
+            "Summer",
+            "Christmas",
+            "National Day"
+          ],
           "correctIndex": 0,
           "fact": "Hang Ma Street is the center of traditional festivals, providing decorations and folk toys in Hanoi."
         }
@@ -261,7 +287,12 @@
         "narrative": "Silver gleams beneath artisan hands, where every thread of silver tells a century-old story...",
         "quiz": {
           "question": "Which traditional profession is Hang Bac Street famous for?",
-          "options": ["Silver carving", "Silk weaving", "Copper casting", "Hat making"],
+          "options": [
+            "Silver carving",
+            "Silk weaving",
+            "Copper casting",
+            "Hat making"
+          ],
           "correctIndex": 0,
           "fact": "Hang Bac Street is the most bustling jewelry center in the old quarter, famous for sophisticated silver engraving and filigree techniques."
         }

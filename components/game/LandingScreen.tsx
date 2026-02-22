@@ -65,23 +65,20 @@ export default function LandingScreen() {
           {/* Enhanced Language Switcher */}
           <div className="relative flex items-center rounded-full border border-primary/20 bg-background-dark/40 p-1 backdrop-blur-md">
             <div
-              className={`absolute h-[calc(100%-8px)] w-[calc(50%-4px)] rounded-full bg-primary/20 shadow-[0_0_15px_rgba(249,212,6,0.2)] ring-1 ring-primary/40 transition-all duration-300 ease-out ${
-                locale === 'vi' ? 'translate-x-0' : 'translate-x-full'
-              }`}
+              className={`absolute h-[calc(100%-8px)] w-[calc(50%-4px)] rounded-full bg-primary/20 shadow-[0_0_15px_rgba(249,212,6,0.2)] ring-1 ring-primary/40 transition-all duration-300 ease-out ${locale === 'vi' ? 'translate-x-0' : 'translate-x-full'
+                }`}
             />
             <button
               onClick={() => locale !== 'vi' && toggleLanguage()}
-              className={`relative z-10 px-4 py-1.5 text-[10px] font-black uppercase tracking-widest transition-colors duration-300 ${
-                locale === 'vi' ? 'text-primary' : 'text-white/40 hover:text-white/70'
-              }`}
+              className={`relative z-10 px-4 py-1.5 text-[10px] font-black uppercase tracking-widest transition-colors duration-300 ${locale === 'vi' ? 'text-primary' : 'text-white/40 hover:text-white/70'
+                }`}
             >
               TIẾNG VIỆT
             </button>
             <button
               onClick={() => locale !== 'en' && toggleLanguage()}
-              className={`relative z-10 px-4 py-1.5 text-[10px] font-black uppercase tracking-widest transition-colors duration-300 ${
-                locale === 'en' ? 'text-primary' : 'text-white/40 hover:text-white/70'
-              }`}
+              className={`relative z-10 px-4 py-1.5 text-[10px] font-black uppercase tracking-widest transition-colors duration-300 ${locale === 'en' ? 'text-primary' : 'text-white/40 hover:text-white/70'
+                }`}
             >
               ENGLISH
             </button>
@@ -136,11 +133,6 @@ export default function LandingScreen() {
               </span>
             </div>
           </button>
-
-          {/* Bottom Credits */}
-          <div className="text-[10px] font-medium uppercase tracking-[0.2em] text-gray-500/60">
-            {t('credits')}
-          </div>
         </footer>
       </div>
     </div>

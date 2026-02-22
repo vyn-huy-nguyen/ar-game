@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { useGame } from '@/app/[locale]/game/GameContext';
 import { useTranslations } from 'next-intl';
 import dynamic from 'next/dynamic';
+import { LOCATIONS } from './MapScreen';
 
 const LeafletMap = dynamic(() => import('./LeafletMap'), {
   ssr: false,
@@ -54,6 +55,7 @@ export default function ArrivalScreen() {
             targetLat={coords.lat}
             targetLng={coords.lng}
             targetName={t(`locations.${locId}.name`)}
+            targetIconName={LOCATIONS.find(l => l.id === locId)?.icon || 'temple_buddhist'}
             interactive={false}
           />
         </div>
@@ -166,7 +168,7 @@ export default function ArrivalScreen() {
                   className="sepia-filter h-full w-full object-cover opacity-90 transition-transform duration-1000 group-hover:scale-105"
                   src={
                     info.photo ||
-                    'https://lh3.googleusercontent.com/aida-public/AB6AXuCiwN5uhZGlq_ZLIfRjwgnr5GY5zBGyAXnD5Ik8kLik-EL5eifDaRltNyhVqV554V4Nf29gQ8HaLmSjrZ2iRp07SZZ9HuPFrZ_sG04WgBZjvfpYrhP_sG8OICtrMUeZHbGMwZSCTuPRhWklKh07nLJIeux1Eur_YrKnJ9VVBtt_ZeLBksHBHXbfN_6_MyBCzot_zVtrYMnwr8qeFjXMpcmDEa7zMGl3gXlCgZpuZBhInIgIl1qGlLupjDDUU1tp7E-dQ8x5sJTa4sM4'
+                    '/images/img1-2.jpeg'
                   }
                 />
                 <div className="absolute inset-0 z-20 bg-gradient-to-t from-navy-mid via-navy-mid/40 to-transparent md:bg-gradient-to-r"></div>

@@ -10,12 +10,12 @@
     "vietnamese": "Tiếng Việt"
   },
   "game": {
-    "title": "Giải mã",
+    "title": "GIẢI MÃ",
     "subtitle": "KINH KỲ",
-    "legend": "HUYỀN SỬ HÀ NỘI",
+    "legend": "HÀ NỘI NGHÌN NĂM VĂN HIẾN",
     "start": "Bắt đầu hành trình",
     "historical_puzzle": "Mảnh ghép thời gian",
-    "credits": "© 2026 Hanoi Memories Studio",
+    "credits": "",
     "progress": "Hoàn thành",
     "journey": "Hành trình ký ức",
     "continue": "Tiếp tục hành trình",
@@ -27,6 +27,8 @@
     "meters": "Mét",
     "start_walking": "Bắt đầu đi",
     "old_quarter": "Khu phố cổ",
+    "explore": "Khám phá",
+    "move_closer": "Tiến gần hơn để khám phá",
     "unit_km": "KM",
     "unit_meters": "MÉT",
     "current_location_label": "Vị trí hiện tại",
@@ -88,7 +90,12 @@
         "narrative": "Mặt hồ gương soi bóng tháp cổ, nơi huyền thoại gươm thần hòa quyện cùng sương khói ngàn năm...",
         "quiz": {
           "question": "Tháp Rùa nằm ở vị trí nào trong Hồ Hoàn Kiếm?",
-          "options": ["Giữa hồ", "Cạnh đền Ngọc Sơn", "Cần cầu Thê Húc", "Ven hồ"],
+          "options": [
+            "Giữa hồ",
+            "Cạnh đền Ngọc Sơn",
+            "Cần cầu Thê Húc",
+            "Ven hồ"
+          ],
           "correctIndex": 0,
           "fact": "Tháp Rùa được xây dựng trên một gò đất nhỏ giữa hồ, là hình ảnh biểu tượng gắn liền với vẻ đẹp thơ mộng và cổ kính của Hà Nội."
         }
@@ -105,7 +112,11 @@
         "narrative": "Bóng cổng thành xưa in hằn dấu ấn thời gian, nơi những gánh hàng rong đi về sớm tối...",
         "quiz": {
           "question": "Ô Quan Chưởng là một trong bao nhiêu cửa ô được xây dựng vào năm 1749?",
-          "options": ["3", "5", "9"],
+          "options": [
+            "3",
+            "5",
+            "9"
+          ],
           "correctIndex": 1,
           "fact": "Ô Quan Chưởng là một trong 5 cửa ô được xây dựng vào năm 1749 dưới thời vua Lê Hiển Tông. Đây là cửa ô duy nhất còn sót lại của kinh thành Thăng Long xưa."
         }
@@ -122,7 +133,12 @@
         "narrative": "Con phố nhỏ thơm mùi hương trầm, vọng tiếng chuông chùa giữa phố phường tấp nập...",
         "quiz": {
           "question": "Địa danh nổi tiếng nào nằm trên phố Hàng Buồm?",
-          "options": ["Đền Bạch Mã", "Đền Ngọc Sơn", "Chùa Một Cột", "Nhà hát Lớn"],
+          "options": [
+            "Đền Bạch Mã",
+            "Đền Ngọc Sơn",
+            "Chùa Một Cột",
+            "Nhà hát Lớn"
+          ],
           "correctIndex": 0,
           "fact": "Đền Bạch Mã tọa lạc tại số 76 Hàng Buồm, là ngôi đền cổ nhất trong tứ trấn của kinh thành Thăng Long."
         }
@@ -139,7 +155,12 @@
         "narrative": "Tiếng búa gõ đều đặn vang vọng ngõ phố, nơi lửa lò rèn thắp sáng những đêm đông giá rét...",
         "quiz": {
           "question": "Sản phẩm thủ công nổi tiếng nhất của phố Hàng Đồng là gì?",
-          "options": ["Đồ đồng thờ tự", "Tranh lụa", "Mũ cối", "Gốm sứ"],
+          "options": [
+            "Đồ đồng thờ tự",
+            "Tranh lụa",
+            "Mũ cối",
+            "Gốm sứ"
+          ],
           "correctIndex": 0,
           "fact": "Phố Hàng Đồng từ lâu đã nổi tiếng với các sản phẩm bằng đồng như đồ thờ, mâm, nồi... được chế tác bởi các nghệ nhân làng nghề Ngũ Xã."
         }
@@ -156,7 +177,12 @@
         "narrative": "Từng nét bút tài hoa in dấu hồn dân tộc, nơi sắc màu dân gian hòa quyện cùng tiếng trống thiêng...",
         "quiz": {
           "question": "Dòng tranh dân gian nào gắn liền với phố Hàng Trống?",
-          "options": ["Tranh Hàng Trống", "Tranh Đông Hồ", "Tranh Kim Hoàng", "Tranh Làng Sình"],
+          "options": [
+            "Tranh Hàng Trống",
+            "Tranh Đông Hồ",
+            "Tranh Kim Hoàng",
+            "Tranh Làng Sình"
+          ],
           "correctIndex": 0,
           "fact": "Tranh Hàng Trống là một trong những dòng tranh dân gian tiêu biểu của Việt Nam, nổi bật với kỹ thuật tô màu tinh xảo."
         }
@@ -173,7 +199,12 @@
         "narrative": "Hương thảo dược thoang thoảng bay, nơi những bài thuốc gia truyền lưu giữ tinh hoa y học ngàn đời...",
         "quiz": {
           "question": "Phố Lãn Ông nổi tiếng với nghề truyền thống nào?",
-          "options": ["Thuốc Đông y", "Làm lồng chim", "Rèn dao kéo", "Thêu ren"],
+          "options": [
+            "Thuốc Đông y",
+            "Làm lồng chim",
+            "Rèn dao kéo",
+            "Thêu ren"
+          ],
           "correctIndex": 0,
           "fact": "Phố Lãn Ông là trung tâm kinh doanh thuốc Đông y lớn nhất Hà Nội, nơi lưu giữ nghề bốc thuốc cứu người từ bao đời nay."
         }
@@ -190,7 +221,12 @@
         "narrative": "Mái vòm năm cửa sừng sững giữa phố phường, chứng nhân bao mùa xuân chợ Tết rộn ràng...",
         "quiz": {
           "question": "Chợ Đồng Xuân được xây dựng vào năm nào?",
-          "options": ["1889", "1902", "1946", "1954"],
+          "options": [
+            "1889",
+            "1902",
+            "1946",
+            "1954"
+          ],
           "correctIndex": 0,
           "fact": "Chợ Đồng Xuân được xây dựng năm 1889 trên khu vực bến sông Tô Lịch cũ, trở thành biểu tượng giao thương của Thăng Long."
         }
@@ -207,7 +243,12 @@
         "narrative": "Phố phường rực rỡ sắc màu giấy hoa, nơi tuổi thơ bao thế hệ hòa trong tiếng cười đêm hội...",
         "quiz": {
           "question": "Phố Hàng Mã nhộn nhịp nhất vào dịp nào?",
-          "options": ["Trung thu & Tết", "Mùa hè", "Giáng sinh", "Quốc khánh"],
+          "options": [
+            "Trung thu & Tết",
+            "Mùa hè",
+            "Giáng sinh",
+            "Quốc khánh"
+          ],
           "correctIndex": 0,
           "fact": "Phố Hàng Mã là tâm điểm của các lễ hội truyền thống, nơi cung cấp đồ trang trí và đồ chơi dân gian lớn nhất Hà Nội."
         }
@@ -246,7 +287,12 @@
         "narrative": "Ánh bạc lấp lánh dưới bàn tay nghệ nhân, nơi từng sợi chỉ bạc kể câu chuyện trăm năm...",
         "quiz": {
           "question": "Phố Hàng Bạc nổi tiếng với nghề truyền thống nào?",
-          "options": ["Chạm khắc bạc", "Dệt lụa", "Đúc đồng", "Làm nón"],
+          "options": [
+            "Chạm khắc bạc",
+            "Dệt lụa",
+            "Đúc đồng",
+            "Làm nón"
+          ],
           "correctIndex": 0,
           "fact": "Phố Hàng Bạc là trung tâm kim hoàn sầm uất nhất phố cổ, nổi tiếng với kỹ thuật xối (chạm nổi) và đậu (kéo sợi) bạc tinh xảo."
         }
